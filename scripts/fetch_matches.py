@@ -7,8 +7,12 @@ for the FIFA World Cup 2026.
 import os
 import json
 import requests
+import urllib3
 from datetime import datetime
 from pathlib import Path
+
+# Disable SSL warnings (if you're using verify=False)
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Configuration
 API_BASE_URL = 'https://worldcup26.ir'
@@ -27,22 +31,36 @@ def fetch_matches():
     print(f'🔄 Fetching match data from {url}...')
     
     try:
-        response = requests.get(url, timeout=10)
+        # Try with SSL verification disabled
+        response = requests.get(url, timeout=10, verify=False)
         response.raise_for_status()
         
         data = response.json()
-        
-        # The API returns an object with a 'games' key
         matches = data.get('games', [])
         
         if not matches:
             print('⚠️ No matches found in response')
-            print(f'📡 Full response: {json.dumps(data, indent=2)[:500]}...')
             return []
         
         print(f'✓ Successfully fetched {len(matches)} matches')
         return matches
         
+    except requests.exceptions.SSLError as e:
+        print(f'❌ SSL Error: {e}')
+        print('💡 Trying with HTTP instead...')
+        # Try HTTP as fallback
+        try:
+            http_url = f'http://worldcup26.ir{DATA_ENDPOINT}'
+            response = requests.get(http_url, timeout=10)
+            response.raise_for_status()
+            data = response.json()
+            matches = data.get('games', [])
+            print(f'✓ Successfully fetched {len(matches)} matches via HTTP')
+            return matches
+        except Exception as http_e:
+            print(f'❌ HTTP also failed: {http_e}')
+            return None
+            
     except requests.exceptions.RequestException as e:
         print(f'❌ Request failed: {e}')
         return None

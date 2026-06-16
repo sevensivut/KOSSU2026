@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOSSU 2026 - Jalkapallon MM Vetämispeli</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8B4513 0%, #D2B48C 50%, #8B4513 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 35px,
+                    rgba(139, 69, 19, 0.1) 35px,
+                    rgba(139, 69, 19, 0.1) 70px
+                );
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2C1810 0%, #5C3D2E 100%);
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+            text-align: center;
+            border: 3px solid #D2B48C;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '🍾';
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 3em;
+            opacity: 0.2;
+        }
+
+        header::after {
+            content: '🍾';
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            font-size: 3em;
+            opacity: 0.2;
+        }
+
+        header h1 {
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+
+        header .subtitle {
+            color: #E8C547;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        header .bottle-info {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 15px 25px;
+            border-radius: 10px;
+            border: 2px solid #FFD700;
+            color: #E8C547;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #2C1810;
+            border: 2px solid #8B6914;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: #FFD700;
+            border: 2px solid #D2B48C;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+            transform: translateY(-3px);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #2C1810 0%, #5C3D2E 100%);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-align: center;
+            border: 2px solid #D2B48C;
+            position: relative;
+        }
+
+        .stat-card h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        .stat-card .value {
+            font-size: 2.5em;
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card .details {
+            font-size: 0.9em;
+            color: #D2B48C;
+            margin-top: 10px;
+        }
+
+        .leaderboard {
+            background: linear-gradient(135deg, #2C1810 0%, #5C3D2E 100%);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 3px solid #D2B48C;
+        }
+
+        .leaderboard-header {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #2C1810;
+            padding: 25px;
+            font-size: 1.5em;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .leaderboard-table tr {
+            border-bottom: 1px solid rgba(210, 180, 140, 0.3);
+        }
+
+        .leaderboard-table tr:hover {
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .leaderboard-table tr:first-child {
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .leaderboard-table tr:nth-child(2) {
+            background: rgba(192, 192, 192, 0.05);
+        }
+
+        .leaderboard-table tr:nth-child(3) {
+            background: rgba(205, 127, 50, 0.05);
+        }
+
+        .leaderboard-table td {
+            padding: 18px 20px;
+            color: #E8C547;
+        }
+
+        .leaderboard-table .rank {
+            font-weight: 900;
+            color: #FFD700;
+            min-width: 50px;
+            font-size: 1.2em;
+        }
+
+        .leaderboard-table .rank.gold::before {
+            content: '🥇 ';
+        }
+
+        .leaderboard-table .rank.silver::before {
+            content: '🥈 ';
+        }
+
+        .leaderboard-table .rank.bronze::before {
+            content: '🥉 ';
+        }
+
+        .leaderboard-table .player-name {
+            font-weight: 700;
+            color: #FFD700;
+            font-size: 1.1em;
+        }
+
+        .leaderboard-table .points {
+            text-align: right;
+            font-size: 1.3em;
+            font-weight: 900;
+            color: #FFD700;
+        }
+
+        .leaderboard-table .winnings {
+            text-align: right;
+            font-size: 1em;
+            color: #E8C547;
+            font-weight: 600;
+        }
+
+        .matches-section {
+            background: linear-gradient(135deg, #2C1810 0%, #5C3D2E 100%);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 3px solid #D2B48C;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #2C1810;
+            padding: 25px;
+            font-size: 1.5em;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .matches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            padding: 25px;
+        }
+
+        .match-card {
+            background: linear-gradient(135deg, #5C3D2E 0%, #8B5A3C 100%);
+            border: 2px solid #D2B48C;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .match-card:hover {
+            border-color: #FFD700;
+            box-shadow: 0 6px 16px rgba(255, 215, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .match-date {
+            color: #D2B48C;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .match-teams {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 15px 0;
+        }
+
+        .team {
+            flex: 1;
+            text-align: center;
+        }
+
+        .team-name {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            color: #E8C547;
+        }
+
+        .vs-text {
+            color: #D2B48C;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .match-predictions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: space-around;
+        }
+
+        .prediction {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 5px;
+            font-size: 0.9em;
+            color: #D2B48C;
+            border: 2px solid transparent;
+        }
+
+        .prediction.selected {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #2C1810;
+            border-color: #8B6914;
+            font-weight: 700;
+        }
+
+        .result {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #E8C547;
+            border: 2px solid #D2B48C;
+        }
+
+        .result.played {
+            background: linear-gradient(135deg, #2d5016 0%, #3d7e1a 100%);
+            color: #90EE90;
+            border-color: #90EE90;
+        }
+
+        .result.not-played {
+            background: rgba(255, 165, 0, 0.1);
+            color: #FFD700;
+            border-color: #FFD700;
+        }
+
+        .medals-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .medal-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            border: 3px solid;
+        }
+
+        .medal-card.gold {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            border-color: #8B6914;
+        }
+
+        .medal-card.silver {
+            background: linear-gradient(135deg, #E8E8E8 0%, #C0C0C0 100%);
+            border-color: #696969;
+        }
+
+        .medal-card.bronze {
+            background: linear-gradient(135deg, #CD7F32 0%, #8B4513 100%);
+            border-color: #5C3D2E;
+        }
+
+        .medal-card-content {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .medal-card.gold .medal-card-content {
+            color: #2C1810;
+        }
+
+        .medal-card.silver .medal-card-content {
+            color: #2C1810;
+        }
+
+        .medal-card.bronze .medal-card-content {
+            color: #FFF;
+        }
+
+        .medal-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+
+        .medal-card .prize {
+            font-size: 1.4em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .medal-winners {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .medal-winner {
+            padding: 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1em;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .medal-card.gold .medal-winner {
+            background: rgba(44, 24, 16, 0.3);
+            color: #2C1810;
+        }
+
+        .medal-card.silver .medal-winner {
+            background: rgba(44, 24, 16, 0.2);
+            color: #2C1810;
+        }
+
+        .medal-card.bronze .medal-winner {
+            background: rgba(255, 255, 255, 0.2);
+            color: #FFF;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #FFD700;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .error {
+            background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+            color: #FFE4E1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #FFD700;
+            font-weight: 600;
+        }
+
+        .api-status {
+            text-align: center;
+            color: #D2B48C;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            border: 2px solid #D2B48C;
+            font-weight: 600;
+        }
+
+        .api-status.connected {
+            color: #90EE90;
+            background: rgba(45, 94, 22, 0.2);
+            border-color: #90EE90;
+        }
+
+        .api-status.error {
+            color: #FFB6C1;
+            background: rgba(139, 0, 0, 0.2);
+            border-color: #FFB6C1;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            header .bottle-info {
+                font-size: 0.95em;
+            }
+
+            .matches-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        .filter-section {
+            background: linear-gradient(135deg, #2C1810 0%, #5C3D2E 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+            border: 2px solid #D2B48C;
+        }
+
+        .filter-section label {
+            font-weight: 700;
+            color: #FFD700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filter-section select {
+            padding: 10px 15px;
+            border: 2px solid #D2B48C;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            background: linear-gradient(135deg, #5C3D2E 0%, #8B5A3C 100%);
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        .filter-section select:focus {
+            outline: none;
+            border-color: #FFD700;
+        }
+
+        .bottle-emoji {
+            display: inline-block;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍾 KOSSU VEIKKA 2026 🍾</h1>
+            <p class="subtitle">Jalkapallon MM Vetämispeli - Koskenkorva Edition</p>
+            <div class="bottle-info">
+                Potti: <span id="totalPot">0€</span> • 12 pulloa Koskenkorvaa • Voittaja saa puolet, 2. sija 1/3, 3. sija loput
+            </div>
+        </header>
+
+        <div class="api-status" id="apiStatus">
+            <span id="apiStatusText">🔄 Yhdistetään API:iin...</span>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" onclick="loadData()">🔄 Lataa Tiedot</button>
+            <button class="btn btn-secondary" onclick="toggleView()">📊 Vaihda Näkymää</button>
+            <button class="btn btn-secondary" onclick="exportData()">📥 Vie Tiedot</button>
+        </div>
+
+        <div id="errorContainer"></div>
+
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <h3>Pelejä yhteensä</h3>
+                <div class="value" id="totalMatches">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Pelejä pelattu</h3>
+                <div class="value" id="playedMatches">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Pelejä jäljellä</h3>
+                <div class="value" id="remainingMatches">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Osallistujia</h3>
+                <div class="value" id="playerCount">0</div>
+            </div>
+        </div>
+
+        <div class="leaderboard">
+            <div class="leaderboard-header">🏆 Pistelista & Voitot</div>
+            <table class="leaderboard-table" id="leaderboard">
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 40px;" class="loading">Ladataan...</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="medals-section" id="medalsSection" style="display: none;">
+            <div class="medal-card gold">
+                <div class="medal-card-content">
+                    <h3>🥇 Voittaja</h3>
+                    <div class="prize">Voittaa: 50% potista (~8,90€ + ½ pullo)</div>
+                    <div class="medal-winners" id="goldWinners"></div>
+                </div>
+            </div>
+            <div class="medal-card silver">
+                <div class="medal-card-content">
+                    <h3>🥈 2. sija</h3>
+                    <div class="prize">Voittaa: 33% potista (~5,93€ + ⅓ pullo)</div>
+                    <div class="medal-winners" id="silverWinners"></div>
+                </div>
+            </div>
+            <div class="medal-card bronze">
+                <div class="medal-card-content">
+                    <h3>🥉 3. sija</h3>
+                    <div class="prize">Voittaa: 17% potista (~2,96€ + ⅙ pullo)</div>
+                    <div class="medal-winners" id="bronzeWinners"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <label for="statusFilter">Näytä pelit:</label>
+            <select id="statusFilter" onchange="filterMatches()">
+                <option value="all">Kaikki</option>
+                <option value="played">Pelatut</option>
+                <option value="upcoming">Tulevat</option>
+            </select>
+        </div>
+
+        <div class="matches-section">
+            <div class="section-header">📅 Ottelut</div>
+            <div class="matches-grid" id="matchesGrid">
+                <div style="grid-column: 1 / -1; text-align: center; padding: 40px;" class="loading">Ladataan...</div>
+            </div>
+        </div>
+
+        <div class="api-status">
+            <p>Viimeksi päivitetty: <span id="lastUpdate">-</span></p>
+        </div>
+    </div>
+
+    <script>
+        const FOOTBALL_API_KEY = 'YOUR_FOOTBALL_DATA_ORG_API_KEY'; // Replace with your key
+        const COMPETITION_ID = 2180; // FIFA World Cup 2026
+        const TOTAL_PLAYERS = 12;
+        const BET_AMOUNT = 17.79; // 0.5L Koskenkorva price
+        const TOTAL_POT = TOTAL_PLAYERS * BET_AMOUNT;
+        
+        // Prize distribution
+        const PRIZES = {
+            gold: TOTAL_POT * 0.5,    // 50%
+            silver: TOTAL_POT * 0.333, // 33%
+            bronze: TOTAL_POT * 0.167  // 17%
+        };
+        
+        let allData = {
+            matches: [],
+            players: [],
+            medals: { gold: [], silver: [], bronze: [] },
+            playerScores: {}
+        };
+
+        let currentView = 'all';
+
+        async function initializeData() {
+            try {
+                // Load CSV data
+                loadCSVData();
+                
+                // Fetch real-time match data
+                await fetchMatchData();
+                
+                // Update UI
+                renderLeaderboard();
+                renderMatches();
+                updateStats();
+                updateAPIStatus(true);
+                updatePotDisplay();
+            } catch (error) {
+                console.error('Error initializing data:', error);
+                updateAPIStatus(false, error.message);
+            }
+        }
+
+        function loadCSVData() {
+            // Player names from CSV header
+            const players = ['Markus', 'Juuso', 'Pera', 'Lari', 'Erno', 'Elmo', 'Petri', 'Tommi', 'Severi', 'Matti H', 'Pasi', 'Matti K'];
+            allData.players = players;
+            
+            // Initialize player scores
+            players.forEach(player => {
+                allData.playerScores[player] = 0;
+            });
+
+            // Medals from CSV (example data - update with actual CSV parsing if needed)
+            allData.medals = {
+                gold: ['Saksa', 'Espanja', 'Brasilia'],
+                silver: ['Brasilia', 'Ranska', 'Portugali'],
+                bronze: ['Englanti', 'Englanti', 'Espanja']
+            };
+        }
+
+        async function fetchMatchData() {
+            try {
+                const response = await fetch(`https://api.football-data.org/v4/competitions/${COMPETITION_ID}/matches`, {
+                    headers: { 'X-Auth-Token': FOOTBALL_API_KEY }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 403) {
+                        throw new Error('API key ei kelvollinen. Ole hyvä ja päivitä API-avain.');
+                    }
+                    throw new Error(`API-virhe: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                allData.matches = data.matches.map(match => ({
+                    id: match.id,
+                    date: match.utcDate,
+                    homeTeam: match.homeTeam.name,
+                    awayTeam: match.awayTeam.name,
+                    status: match.status,
+                    score: match.score.fullTime,
+                    result: getResult(match.score.fullTime)
+                }));
+
+                allData.matches.sort((a, b) => new Date(a.date) - new Date(b.date));
+            } catch (error) {
+                console.error('Virhe ladattaessa otteluita:', error);
+                // Continue with offline data if API fails
+            }
+        }
+
+        function getResult(score) {
+            if (score.home === null || score.away === null) return null;
+            if (score.home > score.away) return '1';
+            if (score.away > score.home) return '2';
+            return 'X';
+        }
+
+        function renderLeaderboard() {
+            const tbody = document.getElementById('leaderboard');
+            
+            const sortedPlayers = allData.players
+                .map(player => ({
+                    name: player,
+                    points: allData.playerScores[player] || 0,
+                    winnings: calculateWinnings(allData.playerScores[player] || 0)
+                }))
+                .sort((a, b) => b.points - a.points);
+
+            tbody.innerHTML = sortedPlayers
+                .map((player, index) => {
+                    let rankClass = '';
+                    let rankText = `#${index + 1}`;
+                    
+                    if (index === 0) rankClass = 'gold';
+                    else if (index === 1) rankClass = 'silver';
+                    else if (index === 2) rankClass = 'bronze';
+
+                    return `
+                        <tr>
+                            <td class="rank ${rankClass}">${rankText}</td>
+                            <td class="player-name">${player.name}</td>
+                            <td class="points">${player.points} pistettä</td>
+                            <td class="winnings">🍾 ${player.winnings}</td>
+                        </tr>
+                    `;
+                })
+                .join('');
+        }
+
+        function calculateWinnings(points) {
+            // This would be calculated based on actual tournament results
+            // For now, returning placeholder
+            return '?';
+        }
+
+        function renderMatches() {
+            const grid = document.getElementById('matchesGrid');
+            
+            if (allData.matches.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 40px;" class="loading">Otteluja ei ladattu. Tarkista API-avain.</div>';
+                return;
+            }
+
+            grid.innerHTML = allData.matches
+                .map(match => {
+                    const isPlayed = match.status === 'FINISHED';
+                    const date = new Date(match.date);
+                    const dateStr = date.toLocaleDateString('fi-FI', { 
+                        weekday: 'short', 
+                        year: 'numeric', 
+                        month: 'numeric', 
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+
+                    return `
+                        <div class="match-card" data-status="${isPlayed ? 'played' : 'upcoming'}">
+                            <div class="match-date">${dateStr}</div>
+                            <div class="match-teams">
+                                <div class="team">
+                                    <div class="team-name">${match.homeTeam}</div>
+                                    ${isPlayed ? `<div style="font-size: 1.8em; font-weight: bold; color: #FFD700;">${match.score.home}</div>` : ''}
+                                </div>
+                                <div class="vs-text">vs</div>
+                                <div class="team">
+                                    <div class="team-name">${match.awayTeam}</div>
+                                    ${isPlayed ? `<div style="font-size: 1.8em; font-weight: bold; color: #FFD700;">${match.score.away}</div>` : ''}
+                                </div>
+                            </div>
+                            ${isPlayed ? `
+                                <div class="result played">
+                                    ${match.result === '1' ? '🏠 Koti' : match.result === '2' ? '🚗 Vieras' : '🤝 Tasapeli'}
+                                </div>
+                            ` : `
+                                <div class="result not-played">⏳ Tulevaisuudessa</div>
+                            `}
+                        </div>
+                    `;
+                })
+                .join('');
+        }
+
+        function updateStats() {
+            const total = allData.matches.length;
+            const played = allData.matches.filter(m => m.status === 'FINISHED').length;
+            const remaining = total - played;
+
+            document.getElementById('totalMatches').textContent = total;
+            document.getElementById('playedMatches').textContent = played;
+            document.getElementById('remainingMatches').textContent = remaining;
+            document.getElementById('playerCount').textContent = allData.players.length;
+        }
+
+        function updatePotDisplay() {
+            document.getElementById('totalPot').textContent = TOTAL_POT.toFixed(2) + '€';
+        }
+
+        function filterMatches() {
+            const filter = document.getElementById('statusFilter').value;
+            const cards = document.querySelectorAll('.match-card');
+
+            cards.forEach(card => {
+                const status = card.getAttribute('data-status');
+                if (filter === 'all' || filter === status) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleView() {
+            currentView = currentView === 'all' ? 'medals' : 'all';
+            document.getElementById('medalsSection').style.display = currentView === 'medals' ? 'grid' : 'none';
+        }
+
+        function updateAPIStatus(connected, error = null) {
+            const statusEl = document.getElementById('apiStatus');
+            const statusText = document.getElementById('apiStatusText');
+
+            if (connected) {
+                statusEl.className = 'api-status connected';
+                statusText.textContent = '✓ Yhdistetty API:iin - Tiedot päivitetty';
+            } else {
+                statusEl.className = 'api-status error';
+                statusText.textContent = `✗ API-virhe: ${error || 'Tuntematon virhe'}`;
+            }
+
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString('fi-FI');
+        }
+
+        function loadData() {
+            document.getElementById('matchesGrid').innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 40px;" class="loading">Ladataan...</div>';
+            initializeData();
+        }
+
+        function exportData() {
+            const data = JSON.stringify(allData, null, 2);
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `kossu-2026-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializeData);
+    </script>
+</body>
+</html>

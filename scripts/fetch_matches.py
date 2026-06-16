@@ -15,6 +15,59 @@ API_KEY = os.getenv('RAPIDAPI_KEY')
 API_BASE_URL = 'https://v3.football.api-sports.io'
 OUTPUT_FILE = Path('data/matches.json')
 
+# Team name mapping (Finnish -> English)
+TEAM_MAPPING = {
+    'Meksiko': 'Mexico',
+    'Etelä-Afrikka': 'South Africa',
+    'Etelä-Korea': 'South Korea',
+    'Tšekki': 'Czech Republic',
+    'Kanada': 'Canada',
+    'Bosnia ja Hertsegovina': 'Bosnia and Herzegovina',
+    'USA': 'United States',
+    'Paraguay': 'Paraguay',
+    'Qatar': 'Qatar',
+    'Sveitsi': 'Switzerland',
+    'Brasilia': 'Brazil',
+    'Marokko': 'Morocco',
+    'Haiti': 'Haiti',
+    'Skotlanti': 'Scotland',
+    'Australia': 'Australia',
+    'Turkki': 'Turkey',
+    'Saksa': 'Germany',
+    'Curaçao': 'Curacao',
+    'Hollanti': 'Netherlands',
+    'Japani': 'Japan',
+    'Norsunluurannikko': 'Ivory Coast',
+    'Ecuador': 'Ecuador',
+    'Ruotsi': 'Sweden',
+    'Tunisia': 'Tunisia',
+    'Espanja': 'Spain',
+    'Kap Verde': 'Cape Verde',
+    'Belgia': 'Belgium',
+    'Egypti': 'Egypt',
+    'Saudi-Arabia': 'Saudi Arabia',
+    'Uruguay': 'Uruguay',
+    'Iran': 'Iran',
+    'Uusi-Seelanti': 'New Zealand',
+    'Ranska': 'France',
+    'Senegal': 'Senegal',
+    'Irak': 'Iraq',
+    'Norja': 'Norway',
+    'Argentiina': 'Argentina',
+    'Algeria': 'Algeria',
+    'Itävalta': 'Austria',
+    'Jordania': 'Jordan',
+    'Portugali': 'Portugal',
+    'Kongon dem. tasavalta': 'Congo DR',
+    'Englanti': 'England',
+    'Kroatia': 'Croatia',
+    'Ghana': 'Ghana',
+    'Panama': 'Panama',
+    'Uzbekistan': 'Uzbekistan',
+    'Kolumbia': 'Colombia',
+    'Kongon dem. tv': 'Congo DR',
+}
+
 def find_csv_file():
     """Find the KOSSU CSV file"""
     possible_names = [
@@ -93,7 +146,7 @@ def parse_csv(csv_file):
                     day, month, year = date_part.split('.')
                     date_iso = f"{year}-{month}-{day}T{time_part}:00Z"
                     
-                    # IMPORTANT: Column 1 = Home team, Column 3 = Away team (column 2 is empty)
+                    # Column 1 = Home team, Column 3 = Away team
                     home_team = row[1].strip() if len(row) > 1 else ''
                     away_team = row[3].strip() if len(row) > 3 else ''
                     
@@ -103,11 +156,10 @@ def parse_csv(csv_file):
                     # Column 4 = Result
                     result = row[4].strip() if len(row) > 4 else ''
                     
-                    # Player predictions start at column 6 (index 6)
-                    # Columns: 0=date, 1=home, 2=empty, 3=away, 4=result, 5=points, 6+=predictions
+                    # Player predictions start at column 6
                     player_preds = {}
                     for i, player in enumerate(players):
-                        col_idx = 6 + i  # Start at column 6
+                        col_idx = 6 + i
                         if col_idx < len(row):
                             pred = row[col_idx].strip()
                             if pred and pred.upper() in ['1', '2', 'X']:
@@ -117,14 +169,16 @@ def parse_csv(csv_file):
                         'id': len(matches) + 1,
                         'date': date_iso,
                         'homeTeam': home_team,
+                        'homeTeamEn': TEAM_MAPPING.get(home_team, home_team),
                         'awayTeam': away_team,
+                        'awayTeamEn': TEAM_MAPPING.get(away_team, away_team),
                         'result': result.upper() if result.upper() in ['1', '2', 'X'] else None,
                         'predictions': player_preds,
                         'score': {'home': None, 'away': None},
                         'status': 'SCHEDULED'
                     }
                     matches.append(match)
-                    print(f"  ✅ Parsed: {home_team} vs {away_team} ({date_str})")
+                    print(f"  ✅ Parsed: {home_team} vs {away_team} (EN: {match['homeTeamEn']} vs {match['awayTeamEn']})")
                     
                 except Exception as e:
                     print(f"⚠️ Error parsing row: {e}")
@@ -171,6 +225,12 @@ def fetch_live_matches():
                 if data.get('response'):
                     all_matches.extend(data['response'])
                     print(f"  ✅ Found {len(data['response'])} matches")
+                    # Print first match to debug
+                    if data['response']:
+                        first = data['response'][0]
+                        home = first.get('teams', {}).get('home', {}).get('name', '')
+                        away = first.get('teams', {}).get('away', {}).get('name', '')
+                        print(f"  📊 First API match: {home} vs {away}")
                 else:
                     print(f"  ℹ️ No matches for {date}")
             else:
@@ -193,18 +253,29 @@ def merge_data(csv_matches, api_matches):
         
         key = f"{home}_{away}_{date}"
         api_map[key] = m
+        # Also add with swapped teams
         api_map[f"{away}_{home}_{date}"] = m
     
     merged = []
+    matched_count = 0
+    
     for csv_match in csv_matches:
-        home = csv_match['homeTeam']
-        away = csv_match['awayTeam']
+        # Use English names for matching
+        home_en = csv_match['homeTeamEn']
+        away_en = csv_match['awayTeamEn']
         date = csv_match['date'][:10]
-        key = f"{home}_{away}_{date}"
         
+        # Try to find match with English names
+        key = f"{home_en}_{away_en}_{date}"
         api_match = api_map.get(key)
         
+        # If not found, try with original Finnish names
+        if not api_match:
+            key_fi = f"{csv_match['homeTeam']}_{csv_match['awayTeam']}_{date}"
+            api_match = api_map.get(key_fi)
+        
         if api_match:
+            matched_count += 1
             goals = api_match.get('goals', {})
             score_home = goals.get('home')
             score_away = goals.get('away')
@@ -235,6 +306,7 @@ def merge_data(csv_matches, api_matches):
         
         merged.append(csv_match)
     
+    print(f"\n🔗 Matched {matched_count} of {len(csv_matches)} matches with API data")
     return merged
 
 def calculate_scores(matches, players):
@@ -294,6 +366,13 @@ def main():
     if live_matches:
         print(f"\n🔴 LIVE MATCHES ({len(live_matches)}):")
         for m in live_matches:
+            print(f"  {m['homeTeam']} {m['score']['home']} - {m['score']['away']} {m['awayTeam']}")
+    
+    # Show finished matches with scores
+    finished_matches = [m for m in merged_matches if m['status'] == 'FINISHED' and m['score']['home'] is not None]
+    if finished_matches:
+        print(f"\n✅ FINISHED MATCHES ({len(finished_matches)}):")
+        for m in finished_matches[:5]:  # Show first 5
             print(f"  {m['homeTeam']} {m['score']['home']} - {m['score']['away']} {m['awayTeam']}")
     
     # Show scores

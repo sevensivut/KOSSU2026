@@ -29,6 +29,8 @@ jobs:
           pip install requests
 
       - name: Fetch match data
+        env:
+          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
         run: |
           python scripts/fetch_matches.py
 
@@ -37,11 +39,11 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # Add the file
-          git add data/matches.json
+          # Force add the file (even if gitignore says no)
+          git add -f data/matches.json
           
           # Commit if there are changes
-          if git diff --staged --quiet; then
+          if git diff --cached --quiet; then
             echo "No changes to commit"
           else
             git commit -m "Update match data - $(date -u +'%Y-%m-%d %H:%M:%S')"

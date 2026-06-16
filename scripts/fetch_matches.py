@@ -98,7 +98,7 @@ def find_csv_file():
     return None
 
 def parse_csv(csv_file):
-    """Parse the CSV file and extract match data with weights"""
+    """Parse the CSV file and extract match data with proper weights"""
     players = ['Markus', 'Juuso', 'Pera', 'Lari', 'Erno', 'Elmo', 
                'Petri', 'Tommi', 'Severi', 'Matti H', 'Pasi', 'Matti K']
     
@@ -109,6 +109,34 @@ def parse_csv(csv_file):
             reader = csv.reader(f, delimiter=',')
             rows = list(reader)
             
+            # First, find the header row to locate weight columns
+            header_row = None
+            for i, row in enumerate(rows):
+                if row and len(row) > 0:
+                    # Look for the header that contains column names
+                    if 'Pvm ja klo' in str(row) or 'Peli' in str(row):
+                        header_row = i
+                        print(f"✅ Found header at row {i+1}")
+                        break
+            
+            # Find weight column indices
+            weight_1_idx = None
+            weight_2_idx = None
+            weight_x_idx = None
+            
+            if header_row is not None:
+                header = rows[header_row]
+                for i, cell in enumerate(header):
+                    if cell and 'painoarvo 1' in str(cell).lower():
+                        weight_1_idx = i
+                    elif cell and 'painoarvo 2' in str(cell).lower():
+                        weight_2_idx = i
+                    elif cell and 'painoarvo x' in str(cell).lower():
+                        weight_x_idx = i
+                
+                print(f"✅ Weight columns found - 1:{weight_1_idx}, 2:{weight_2_idx}, X:{weight_x_idx}")
+            
+            # Find where data starts (row with a date)
             data_start_row = None
             for i, row in enumerate(rows):
                 if row and len(row) > 0:
@@ -120,6 +148,7 @@ def parse_csv(csv_file):
             if data_start_row is None:
                 return [], players
             
+            # Process data rows
             for row in rows[data_start_row:]:
                 if not row or len(row) < 5:
                     continue
@@ -146,45 +175,28 @@ def parse_csv(csv_file):
                     # Column 4 = Result (Oikea)
                     result = row[4].strip() if len(row) > 4 else ''
                     
-                    # Column 5 = Points (Painotetut pisteet oikeasta) - keeping for reference
-                    points = 0
-                    if len(row) > 5:
+                    # Get the weights from the correct columns
+                    weight_1 = 0.0
+                    weight_2 = 0.0
+                    weight_x = 0.0
+                    
+                    if weight_1_idx is not None and weight_1_idx < len(row):
                         try:
-                            points = float(row[5].strip()) if row[5].strip() else 0
+                            weight_1 = float(row[weight_1_idx].strip()) if row[weight_1_idx].strip() else 0.0
                         except:
-                            points = 0
+                            weight_1 = 0.0
                     
-                    # Find the weight columns
-                    # They are usually somewhere after the predictions
-                    # Looking for columns that contain weight values
-                    weight_1 = 0
-                    weight_2 = 0
-                    weight_x = 0
+                    if weight_2_idx is not None and weight_2_idx < len(row):
+                        try:
+                            weight_2 = float(row[weight_2_idx].strip()) if row[weight_2_idx].strip() else 0.0
+                        except:
+                            weight_2 = 0.0
                     
-                    # Search for weight columns (they appear later in the row)
-                    for i, cell in enumerate(row):
-                        if cell and 'painoarvo' in str(cell).lower():
-                            # This is a header, the next rows will have the values
-                            pass
-                    
-                    # The weights are stored in specific columns after the predictions
-                    # Based on your CSV structure, the weights are in columns after the predictions
-                    # Let's scan the row for numeric values that look like weights
-                    for i, cell in enumerate(row):
-                        if i > 10:  # Skip early columns
-                            try:
-                                val = float(cell.strip()) if cell.strip() else 0
-                                if val > 0 and val < 10:  # Weight values are typically 1-3
-                                    # Try to determine which weight this is based on position
-                                    if len(row) > i + 1:
-                                        # Check if nearby cells contain weight labels
-                                        pass
-                            except:
-                                pass
-                    
-                    # For now, use the points value from column 5 as the weight
-                    # This will match what's in your CSV
-                    weight = points if points > 0 else 1.0
+                    if weight_x_idx is not None and weight_x_idx < len(row):
+                        try:
+                            weight_x = float(row[weight_x_idx].strip()) if row[weight_x_idx].strip() else 0.0
+                        except:
+                            weight_x = 0.0
                     
                     player_preds = {}
                     for i, player in enumerate(players):
@@ -202,15 +214,18 @@ def parse_csv(csv_file):
                         'homeTeamEn': TEAM_MAPPING.get(home_team, home_team),
                         'awayTeamEn': TEAM_MAPPING.get(away_team, away_team),
                         'result': result.upper() if result.upper() in ['1', '2', 'X'] else None,
-                        'weight': weight,  # The weight from column 5
-                        'points_1': weight_1,
-                        'points_2': weight_2,
-                        'points_x': weight_x,
+                        'weight_1': weight_1,
+                        'weight_2': weight_2,
+                        'weight_x': weight_x,
                         'predictions': player_preds,
                         'score': {'home': None, 'away': None},
                         'status': 'SCHEDULED'
                     }
                     matches.append(match)
+                    
+                    # Debug: print first few matches
+                    if len(matches) <= 5:
+                        print(f"  📊 Match {len(matches)}: {home_team} vs {away_team} - W1:{weight_1}, W2:{weight_2}, WX:{weight_x}")
                     
                 except Exception as e:
                     print(f"⚠️ Error parsing row: {e}")
@@ -343,18 +358,28 @@ def merge_data(csv_matches, api_matches):
 def calculate_scores(matches, players):
     """
     Calculate player scores based on correct predictions.
-    Uses the weight from the CSV (column 5: Painotetut pisteet oikeasta)
+    Uses the specific weight for each result (1, 2, or X).
     """
     scores = {p: 0.0 for p in players}
     
     for match in matches:
         # Only count if match is finished and has a result
         if match['status'] == 'FINISHED' and match['result']:
-            # Get the weight for this match
-            weight = match.get('weight', 1.0)
+            result = match['result']
             
+            # Get the correct weight for this result
+            if result == '1':
+                weight = match.get('weight_1', 0.0)
+            elif result == '2':
+                weight = match.get('weight_2', 0.0)
+            elif result == 'X':
+                weight = match.get('weight_x', 0.0)
+            else:
+                weight = 0.0
+            
+            # Add weight to players who predicted correctly
             for player, pred in match.get('predictions', {}).items():
-                if pred == match['result']:
+                if pred == result:
                     scores[player] = scores.get(player, 0.0) + weight
     
     return scores

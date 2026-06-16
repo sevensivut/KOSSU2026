@@ -2,7 +2,7 @@ name: Update Match Data
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '*/2 * * * *'  # Run every 2 minutes for live scores
   workflow_dispatch:
   push:
     branches:
@@ -30,6 +30,8 @@ jobs:
           pip install requests
 
       - name: Run script
+        env:
+          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
         run: |
           python scripts/fetch_matches.py
 

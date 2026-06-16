@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-16T21:23:47.893191Z",
+  "updatedAt": "2026-06-16T21:29:16.842277Z",
   "matchCount": 72,
   "players": [
     "Markus",
@@ -34,9 +34,7 @@
       "id": 1,
       "date": "2026-06-11T22:00:00Z",
       "homeTeam": "Meksiko",
-      "homeTeamEn": "Mexico",
       "awayTeam": "Etelä-Afrikka",
-      "awayTeamEn": "South Africa",
       "result": "1",
       "predictions": {
         "Markus": "1",
@@ -62,9 +60,7 @@
       "id": 2,
       "date": "2026-06-12T05:00:00Z",
       "homeTeam": "Etelä-Korea",
-      "homeTeamEn": "South Korea",
       "awayTeam": "Tšekki",
-      "awayTeamEn": "Czech Republic",
       "result": "1",
       "predictions": {
         "Markus": "2",
@@ -90,9 +86,7 @@
       "id": 3,
       "date": "2026-06-12T22:00:00Z",
       "homeTeam": "Kanada",
-      "homeTeamEn": "Canada",
       "awayTeam": "Bosnia ja Hertsegovina",
-      "awayTeamEn": "Bosnia and Herzegovina",
       "result": "X",
       "predictions": {
         "Markus": "1",
@@ -118,9 +112,7 @@
       "id": 4,
       "date": "2026-06-13T04:00:00Z",
       "homeTeam": "USA",
-      "homeTeamEn": "United States",
       "awayTeam": "Paraguay",
-      "awayTeamEn": "Paraguay",
       "result": "1",
       "predictions": {
         "Markus": "X",
@@ -146,9 +138,7 @@
       "id": 5,
       "date": "2026-06-13T22:00:00Z",
       "homeTeam": "Qatar",
-      "homeTeamEn": "Qatar",
       "awayTeam": "Sveitsi",
-      "awayTeamEn": "Switzerland",
       "result": "X",
       "predictions": {
         "Markus": "2",
@@ -174,9 +164,7 @@
       "id": 6,
       "date": "2026-06-14T01:00:00Z",
       "homeTeam": "Brasilia",
-      "homeTeamEn": "Brazil",
       "awayTeam": "Marokko",
-      "awayTeamEn": "Morocco",
       "result": "X",
       "predictions": {
         "Markus": "1",
@@ -202,9 +190,7 @@
       "id": 7,
       "date": "2026-06-14T04:00:00Z",
       "homeTeam": "Haiti",
-      "homeTeamEn": "Haiti",
       "awayTeam": "Skotlanti",
-      "awayTeamEn": "Scotland",
       "result": "2",
       "predictions": {
         "Markus": "2",
@@ -230,9 +216,7 @@
       "id": 8,
       "date": "2026-06-14T07:00:00Z",
       "homeTeam": "Australia",
-      "homeTeamEn": "Australia",
       "awayTeam": "Turkki",
-      "awayTeamEn": "Turkey",
       "result": "1",
       "predictions": {
         "Markus": "X",
@@ -258,9 +242,7 @@
       "id": 9,
       "date": "2026-06-14T20:00:00Z",
       "homeTeam": "Saksa",
-      "homeTeamEn": "Germany",
       "awayTeam": "Curaçao",
-      "awayTeamEn": "Curacao",
       "result": "1",
       "predictions": {
         "Markus": "1",
@@ -286,9 +268,7 @@
       "id": 10,
       "date": "2026-06-14T23:00:00Z",
       "homeTeam": "Hollanti",
-      "homeTeamEn": "Netherlands",
       "awayTeam": "Japani",
-      "awayTeamEn": "Japan",
       "result": "X",
       "predictions": {
         "Markus": "1",
@@ -314,9 +294,7 @@
       "id": 11,
       "date": "2026-06-15T02:00:00Z",
       "homeTeam": "Norsunluurannikko",
-      "homeTeamEn": "Ivory Coast",
       "awayTeam": "Ecuador",
-      "awayTeamEn": "Ecuador",
       "result": "1",
       "predictions": {
         "Markus": "2",
@@ -342,9 +320,7 @@
       "id": 12,
       "date": "2026-06-15T05:00:00Z",
       "homeTeam": "Ruotsi",
-      "homeTeamEn": "Sweden",
       "awayTeam": "Tunisia",
-      "awayTeamEn": "Tunisia",
       "result": "1",
       "predictions": {
         "Markus": "X",
@@ -370,9 +346,7 @@
       "id": 13,
       "date": "2026-06-15T19:00:00Z",
       "homeTeam": "Espanja",
-      "homeTeamEn": "Spain",
       "awayTeam": "Kap Verde",
-      "awayTeamEn": "Cape Verde",
       "result": "X",
       "predictions": {
         "Markus": "1",
@@ -398,9 +372,7 @@
       "id": 14,
       "date": "2026-06-15T22:00:00Z",
       "homeTeam": "Belgia",
-      "homeTeamEn": "Belgium",
       "awayTeam": "Egypti",
-      "awayTeamEn": "Egypt",
       "result": "X",
       "predictions": {
         "Markus": "X",
@@ -426,9 +398,7 @@
       "id": 15,
       "date": "2026-06-16T01:00:00Z",
       "homeTeam": "Saudi-Arabia",
-      "homeTeamEn": "Saudi Arabia",
       "awayTeam": "Uruguay",
-      "awayTeamEn": "Uruguay",
       "result": "X",
       "predictions": {
         "Markus": "2",
@@ -454,9 +424,7 @@
       "id": 16,
       "date": "2026-06-16T04:00:00Z",
       "homeTeam": "Iran",
-      "homeTeamEn": "Iran",
       "awayTeam": "Uusi-Seelanti",
-      "awayTeamEn": "New Zealand",
       "result": "X",
       "predictions": {
         "Markus": "X",
@@ -482,9 +450,7 @@
       "id": 17,
       "date": "2026-06-16T22:00:00Z",
       "homeTeam": "Ranska",
-      "homeTeamEn": "France",
       "awayTeam": "Senegal",
-      "awayTeamEn": "Senegal",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -510,9 +476,7 @@
       "id": 18,
       "date": "2026-06-17T01:00:00Z",
       "homeTeam": "Irak",
-      "homeTeamEn": "Iraq",
       "awayTeam": "Norja",
-      "awayTeamEn": "Norway",
       "result": null,
       "predictions": {
         "Markus": "2",
@@ -538,9 +502,7 @@
       "id": 19,
       "date": "2026-06-17T04:00:00Z",
       "homeTeam": "Argentiina",
-      "homeTeamEn": "Argentina",
       "awayTeam": "Algeria",
-      "awayTeamEn": "Algeria",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -566,9 +528,7 @@
       "id": 20,
       "date": "2026-06-17T07:00:00Z",
       "homeTeam": "Itävalta",
-      "homeTeamEn": "Austria",
       "awayTeam": "Jordania",
-      "awayTeamEn": "Jordan",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -594,9 +554,7 @@
       "id": 21,
       "date": "2026-06-17T20:00:00Z",
       "homeTeam": "Portugali",
-      "homeTeamEn": "Portugal",
       "awayTeam": "Kongon dem. tv",
-      "awayTeamEn": "Congo DR",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -622,9 +580,7 @@
       "id": 22,
       "date": "2026-06-17T23:00:00Z",
       "homeTeam": "Englanti",
-      "homeTeamEn": "England",
       "awayTeam": "Kroatia",
-      "awayTeamEn": "Croatia",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -650,9 +606,7 @@
       "id": 23,
       "date": "2026-06-18T02:00:00Z",
       "homeTeam": "Ghana",
-      "homeTeamEn": "Ghana",
       "awayTeam": "Panama",
-      "awayTeamEn": "Panama",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -678,9 +632,7 @@
       "id": 24,
       "date": "2026-06-18T05:00:00Z",
       "homeTeam": "Uzbekistan",
-      "homeTeamEn": "Uzbekistan",
       "awayTeam": "Kolumbia",
-      "awayTeamEn": "Colombia",
       "result": null,
       "predictions": {
         "Markus": "2",
@@ -706,9 +658,7 @@
       "id": 25,
       "date": "2026-06-18T19:00:00Z",
       "homeTeam": "Tšekki",
-      "homeTeamEn": "Czech Republic",
       "awayTeam": "Etelä-Afrikka",
-      "awayTeamEn": "South Africa",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -734,9 +684,7 @@
       "id": 26,
       "date": "2026-06-18T22:00:00Z",
       "homeTeam": "Sveitsi",
-      "homeTeamEn": "Switzerland",
       "awayTeam": "Bosnia ja Hertsegovina",
-      "awayTeamEn": "Bosnia and Herzegovina",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -762,9 +710,7 @@
       "id": 27,
       "date": "2026-06-19T01:00:00Z",
       "homeTeam": "Kanada",
-      "homeTeamEn": "Canada",
       "awayTeam": "Qatar",
-      "awayTeamEn": "Qatar",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -790,9 +736,7 @@
       "id": 28,
       "date": "2026-06-19T04:00:00Z",
       "homeTeam": "Meksiko",
-      "homeTeamEn": "Mexico",
       "awayTeam": "Etelä-Korea",
-      "awayTeamEn": "South Korea",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -818,9 +762,7 @@
       "id": 29,
       "date": "2026-06-19T22:00:00Z",
       "homeTeam": "USA",
-      "homeTeamEn": "United States",
       "awayTeam": "Australia",
-      "awayTeamEn": "Australia",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -846,9 +788,7 @@
       "id": 30,
       "date": "2026-06-20T01:00:00Z",
       "homeTeam": "Skotlanti",
-      "homeTeamEn": "Scotland",
       "awayTeam": "Marokko",
-      "awayTeamEn": "Morocco",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -874,9 +814,7 @@
       "id": 31,
       "date": "2026-06-20T03:30:00Z",
       "homeTeam": "Brasilia",
-      "homeTeamEn": "Brazil",
       "awayTeam": "Haiti",
-      "awayTeamEn": "Haiti",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -902,9 +840,7 @@
       "id": 32,
       "date": "2026-06-20T06:00:00Z",
       "homeTeam": "Turkki",
-      "homeTeamEn": "Turkey",
       "awayTeam": "Paraguay",
-      "awayTeamEn": "Paraguay",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -930,9 +866,7 @@
       "id": 33,
       "date": "2026-06-20T20:00:00Z",
       "homeTeam": "Hollanti",
-      "homeTeamEn": "Netherlands",
       "awayTeam": "Ruotsi",
-      "awayTeamEn": "Sweden",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -958,9 +892,7 @@
       "id": 34,
       "date": "2026-06-20T23:00:00Z",
       "homeTeam": "Saksa",
-      "homeTeamEn": "Germany",
       "awayTeam": "Norsunluurannikko",
-      "awayTeamEn": "Ivory Coast",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -986,9 +918,7 @@
       "id": 35,
       "date": "2026-06-21T03:00:00Z",
       "homeTeam": "Ecuador",
-      "homeTeamEn": "Ecuador",
       "awayTeam": "Curaçao",
-      "awayTeamEn": "Curacao",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1014,9 +944,7 @@
       "id": 36,
       "date": "2026-06-21T07:00:00Z",
       "homeTeam": "Tunisia",
-      "homeTeamEn": "Tunisia",
       "awayTeam": "Japani",
-      "awayTeamEn": "Japan",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -1042,9 +970,7 @@
       "id": 37,
       "date": "2026-06-21T19:00:00Z",
       "homeTeam": "Espanja",
-      "homeTeamEn": "Spain",
       "awayTeam": "Saudi-Arabia",
-      "awayTeamEn": "Saudi Arabia",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1070,9 +996,7 @@
       "id": 38,
       "date": "2026-06-21T22:00:00Z",
       "homeTeam": "Belgia",
-      "homeTeamEn": "Belgium",
       "awayTeam": "Iran",
-      "awayTeamEn": "Iran",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1098,9 +1022,7 @@
       "id": 39,
       "date": "2026-06-22T01:00:00Z",
       "homeTeam": "Uruguay",
-      "homeTeamEn": "Uruguay",
       "awayTeam": "Kap Verde",
-      "awayTeamEn": "Cape Verde",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1126,9 +1048,7 @@
       "id": 40,
       "date": "2026-06-22T04:00:00Z",
       "homeTeam": "Uusi-Seelanti",
-      "homeTeamEn": "New Zealand",
       "awayTeam": "Egypti",
-      "awayTeamEn": "Egypt",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -1154,9 +1074,7 @@
       "id": 41,
       "date": "2026-06-22T20:00:00Z",
       "homeTeam": "Argentiina",
-      "homeTeamEn": "Argentina",
       "awayTeam": "Itävalta",
-      "awayTeamEn": "Austria",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1182,9 +1100,7 @@
       "id": 42,
       "date": "2026-06-23T00:00:00Z",
       "homeTeam": "Ranska",
-      "homeTeamEn": "France",
       "awayTeam": "Irak",
-      "awayTeamEn": "Iraq",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1210,9 +1126,7 @@
       "id": 43,
       "date": "2026-06-23T03:00:00Z",
       "homeTeam": "Norja",
-      "homeTeamEn": "Norway",
       "awayTeam": "Senegal",
-      "awayTeamEn": "Senegal",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1238,9 +1152,7 @@
       "id": 44,
       "date": "2026-06-23T06:00:00Z",
       "homeTeam": "Jordania",
-      "homeTeamEn": "Jordan",
       "awayTeam": "Algeria",
-      "awayTeamEn": "Algeria",
       "result": null,
       "predictions": {
         "Markus": "2",
@@ -1266,9 +1178,7 @@
       "id": 45,
       "date": "2026-06-23T20:00:00Z",
       "homeTeam": "Portugali",
-      "homeTeamEn": "Portugal",
       "awayTeam": "Uzbekistan",
-      "awayTeamEn": "Uzbekistan",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1294,9 +1204,7 @@
       "id": 46,
       "date": "2026-06-23T23:00:00Z",
       "homeTeam": "Englanti",
-      "homeTeamEn": "England",
       "awayTeam": "Ghana",
-      "awayTeamEn": "Ghana",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1322,9 +1230,7 @@
       "id": 47,
       "date": "2026-06-24T02:00:00Z",
       "homeTeam": "Panama",
-      "homeTeamEn": "Panama",
       "awayTeam": "Kroatia",
-      "awayTeamEn": "Croatia",
       "result": null,
       "predictions": {
         "Markus": "2",
@@ -1350,9 +1256,7 @@
       "id": 48,
       "date": "2026-06-24T05:00:00Z",
       "homeTeam": "Kolumbia",
-      "homeTeamEn": "Colombia",
       "awayTeam": "Kongon dem. tasavalta",
-      "awayTeamEn": "Congo DR",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1378,9 +1282,7 @@
       "id": 49,
       "date": "2026-06-24T22:00:00Z",
       "homeTeam": "Sveitsi",
-      "homeTeamEn": "Switzerland",
       "awayTeam": "Kanada",
-      "awayTeamEn": "Canada",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1406,9 +1308,7 @@
       "id": 50,
       "date": "2026-06-24T22:00:00Z",
       "homeTeam": "Bosnia ja Hertsegovina",
-      "homeTeamEn": "Bosnia and Herzegovina",
       "awayTeam": "Qatar",
-      "awayTeamEn": "Qatar",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1434,9 +1334,7 @@
       "id": 51,
       "date": "2026-06-25T01:00:00Z",
       "homeTeam": "Skotlanti",
-      "homeTeamEn": "Scotland",
       "awayTeam": "Brasilia",
-      "awayTeamEn": "Brazil",
       "result": null,
       "predictions": {
         "Markus": "2",
@@ -1462,9 +1360,7 @@
       "id": 52,
       "date": "2026-06-25T01:00:00Z",
       "homeTeam": "Marokko",
-      "homeTeamEn": "Morocco",
       "awayTeam": "Haiti",
-      "awayTeamEn": "Haiti",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1490,9 +1386,7 @@
       "id": 53,
       "date": "2026-06-25T04:00:00Z",
       "homeTeam": "Tšekki",
-      "homeTeamEn": "Czech Republic",
       "awayTeam": "Meksiko",
-      "awayTeamEn": "Mexico",
       "result": null,
       "predictions": {
         "Markus": "2",
@@ -1518,9 +1412,7 @@
       "id": 54,
       "date": "2026-06-25T04:00:00Z",
       "homeTeam": "Etelä-Afrikka",
-      "homeTeamEn": "South Africa",
       "awayTeam": "Etelä-Korea",
-      "awayTeamEn": "South Korea",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -1546,9 +1438,7 @@
       "id": 55,
       "date": "2026-06-25T23:00:00Z",
       "homeTeam": "Curaçao",
-      "homeTeamEn": "Curacao",
       "awayTeam": "Norsunluurannikko",
-      "awayTeamEn": "Ivory Coast",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -1574,9 +1464,7 @@
       "id": 56,
       "date": "2026-06-25T23:00:00Z",
       "homeTeam": "Ecuador",
-      "homeTeamEn": "Ecuador",
       "awayTeam": "Saksa",
-      "awayTeamEn": "Germany",
       "result": null,
       "predictions": {
         "Markus": "2",
@@ -1602,9 +1490,7 @@
       "id": 57,
       "date": "2026-06-26T02:00:00Z",
       "homeTeam": "Japani",
-      "homeTeamEn": "Japan",
       "awayTeam": "Ruotsi",
-      "awayTeamEn": "Sweden",
       "result": null,
       "predictions": {
         "Markus": "2",
@@ -1630,9 +1516,7 @@
       "id": 58,
       "date": "2026-06-26T02:00:00Z",
       "homeTeam": "Tunisia",
-      "homeTeamEn": "Tunisia",
       "awayTeam": "Hollanti",
-      "awayTeamEn": "Netherlands",
       "result": null,
       "predictions": {
         "Markus": "2",
@@ -1658,9 +1542,7 @@
       "id": 59,
       "date": "2026-06-26T05:00:00Z",
       "homeTeam": "Turkki",
-      "homeTeamEn": "Turkey",
       "awayTeam": "USA",
-      "awayTeamEn": "United States",
       "result": null,
       "predictions": {
         "Markus": "2",
@@ -1686,9 +1568,7 @@
       "id": 60,
       "date": "2026-06-26T05:00:00Z",
       "homeTeam": "Paraguay",
-      "homeTeamEn": "Paraguay",
       "awayTeam": "Australia",
-      "awayTeamEn": "Australia",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -1714,9 +1594,7 @@
       "id": 61,
       "date": "2026-06-26T22:00:00Z",
       "homeTeam": "Norja",
-      "homeTeamEn": "Norway",
       "awayTeam": "Ranska",
-      "awayTeamEn": "France",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -1742,9 +1620,7 @@
       "id": 62,
       "date": "2026-06-26T22:00:00Z",
       "homeTeam": "Senegal",
-      "homeTeamEn": "Senegal",
       "awayTeam": "Irak",
-      "awayTeamEn": "Iraq",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1770,9 +1646,7 @@
       "id": 63,
       "date": "2026-06-27T03:00:00Z",
       "homeTeam": "Kap Verde",
-      "homeTeamEn": "Cape Verde",
       "awayTeam": "Saudi-Arabia",
-      "awayTeamEn": "Saudi Arabia",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -1798,9 +1672,7 @@
       "id": 64,
       "date": "2026-06-27T03:00:00Z",
       "homeTeam": "Uruguay",
-      "homeTeamEn": "Uruguay",
       "awayTeam": "Espanja",
-      "awayTeamEn": "Spain",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -1826,9 +1698,7 @@
       "id": 65,
       "date": "2026-06-27T06:00:00Z",
       "homeTeam": "Egypti",
-      "homeTeamEn": "Egypt",
       "awayTeam": "Iran",
-      "awayTeamEn": "Iran",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -1854,9 +1724,7 @@
       "id": 66,
       "date": "2026-06-27T06:00:00Z",
       "homeTeam": "Uusi-Seelanti",
-      "homeTeamEn": "New Zealand",
       "awayTeam": "Belgia",
-      "awayTeamEn": "Belgium",
       "result": null,
       "predictions": {
         "Markus": "2",
@@ -1882,9 +1750,7 @@
       "id": 67,
       "date": "2026-06-28T00:00:00Z",
       "homeTeam": "Panama",
-      "homeTeamEn": "Panama",
       "awayTeam": "Englanti",
-      "awayTeamEn": "England",
       "result": null,
       "predictions": {
         "Markus": "2",
@@ -1910,9 +1776,7 @@
       "id": 68,
       "date": "2026-06-28T00:00:00Z",
       "homeTeam": "Kroatia",
-      "homeTeamEn": "Croatia",
       "awayTeam": "Ghana",
-      "awayTeamEn": "Ghana",
       "result": null,
       "predictions": {
         "Markus": "1",
@@ -1938,9 +1802,7 @@
       "id": 69,
       "date": "2026-06-28T02:30:00Z",
       "homeTeam": "Kolumbia",
-      "homeTeamEn": "Colombia",
       "awayTeam": "Portugali",
-      "awayTeamEn": "Portugal",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -1966,9 +1828,7 @@
       "id": 70,
       "date": "2026-06-28T02:30:00Z",
       "homeTeam": "Kongon dem. tasavalta",
-      "homeTeamEn": "Congo DR",
       "awayTeam": "Uzbekistan",
-      "awayTeamEn": "Uzbekistan",
       "result": null,
       "predictions": {
         "Markus": "X",
@@ -1994,9 +1854,7 @@
       "id": 71,
       "date": "2026-06-28T05:00:00Z",
       "homeTeam": "Algeria",
-      "homeTeamEn": "Algeria",
       "awayTeam": "Itävalta",
-      "awayTeamEn": "Austria",
       "result": null,
       "predictions": {
         "Markus": "2",
@@ -2022,9 +1880,7 @@
       "id": 72,
       "date": "2026-06-28T05:00:00Z",
       "homeTeam": "Jordania",
-      "homeTeamEn": "Jordan",
       "awayTeam": "Argentiina",
-      "awayTeamEn": "Argentina",
       "result": null,
       "predictions": {
         "Markus": "2",

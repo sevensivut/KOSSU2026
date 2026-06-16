@@ -2,7 +2,7 @@ name: Update Match Data
 
 on:
   schedule:
-    - cron: '*/2 * * * *'
+    - cron: '*/2 * * * *'  # Run every 2 minutes for live scores
   workflow_dispatch:
   push:
     branches:
@@ -29,12 +29,6 @@ jobs:
         run: |
           pip install requests
 
-      - name: Test API connection
-        env:
-          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
-        run: |
-          python scripts/test_api.py
-
       - name: Run script
         env:
           RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
@@ -45,8 +39,20 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          
+          # Stash any local changes
+          git stash --include-untracked
+          
+          # Pull latest changes
           git pull origin main --no-rebase
+          
+          # Pop the stash (restore local changes)
+          git stash pop || true
+          
+          # Add the file
           git add -f data/matches.json
+          
+          # Commit if there are changes
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else

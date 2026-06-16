@@ -1,1 +1,78 @@
-
+{
+  "updatedAt": "2026-06-16T20:25:11.725295Z",
+  "competitionName": "FIFA World Cup 2026",
+  "matchCount": 4,
+  "playedCount": 0,
+  "inPlayCount": 0,
+  "upcomingCount": 4,
+  "matches": [
+    {
+      "id": 1,
+      "date": "2026-06-11T16:00:00Z",
+      "homeTeam": "USA",
+      "homeTeamId": 1,
+      "awayTeam": "Mexico",
+      "awayTeamId": 2,
+      "status": "SCHEDULED",
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "stage": "group",
+      "group": "A",
+      "stadium": "Stadium A",
+      "matchday": "Group Stage"
+    },
+    {
+      "id": 2,
+      "date": "2026-06-11T18:00:00Z",
+      "homeTeam": "Brazil",
+      "homeTeamId": 3,
+      "awayTeam": "Argentina",
+      "awayTeamId": 4,
+      "status": "SCHEDULED",
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "stage": "group",
+      "group": "B",
+      "stadium": "Stadium B",
+      "matchday": "Group Stage"
+    },
+    {
+      "id": 3,
+      "date": "2026-06-12T16:00:00Z",
+      "homeTeam": "Germany",
+      "homeTeamId": 5,
+      "awayTeam": "France",
+      "awayTeamId": 6,
+      "status": "SCHEDULED",
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "stage": "group",
+      "group": "C",
+      "stadium": "Stadium C",
+      "matchday": "Group Stage"
+    },
+    {
+      "id": 4,
+      "date": "2026-06-12T18:00:00Z",
+      "homeTeam": "England",
+      "homeTeamId": 7,
+      "awayTeam": "Spain",
+      "awayTeamId": 8,
+      "status": "SCHEDULED",
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "stage": "group",
+      "group": "D",
+      "stadium": "Stadium D",
+      "matchday": "Group Stage"
+    }
+  ]
+}

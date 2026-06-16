@@ -98,7 +98,7 @@ def find_csv_file():
     return None
 
 def parse_csv(csv_file):
-    """Parse the CSV file and extract match data with proper weights"""
+    """Parse the CSV file and extract match data with weights"""
     players = ['Markus', 'Juuso', 'Pera', 'Lari', 'Erno', 'Elmo', 
                'Petri', 'Tommi', 'Severi', 'Matti H', 'Pasi', 'Matti K']
     
@@ -109,28 +109,13 @@ def parse_csv(csv_file):
             reader = csv.reader(f, delimiter=',')
             rows = list(reader)
             
-            print(f"\n🔍 CSV has {len(rows)} rows")
-            
-            # First, find the header row to locate weight columns
+            # Find header row to locate weight columns
             header_row = None
             for i, row in enumerate(rows):
                 if row and len(row) > 0:
-                    # Look for the header that contains column names
                     if 'Pvm ja klo' in str(row) or 'Peli' in str(row):
                         header_row = i
-                        print(f"✅ Found header at row {i+1}")
-                        print(f"📋 Header: {row[:10]}...")
                         break
-            
-            # If no header found, look for the data start
-            if header_row is None:
-                for i, row in enumerate(rows):
-                    if row and len(row) > 0:
-                        cell = str(row[0]).strip()
-                        if '.' in cell and '2026' in cell:
-                            header_row = i - 1
-                            print(f"✅ Found header at row {i-1} (guessed)")
-                            break
             
             # Find weight column indices
             weight_1_idx = None
@@ -139,21 +124,17 @@ def parse_csv(csv_file):
             
             if header_row is not None and header_row < len(rows):
                 header = rows[header_row]
-                print(f"\n📋 Looking for weight columns in header:")
                 for i, cell in enumerate(header):
                     if cell:
                         cell_lower = str(cell).lower()
                         if 'painoarvo 1' in cell_lower or 'painoarvo1' in cell_lower:
                             weight_1_idx = i
-                            print(f"  ✅ Found 'painoarvo 1' at column {i}")
                         elif 'painoarvo 2' in cell_lower or 'painoarvo2' in cell_lower:
                             weight_2_idx = i
-                            print(f"  ✅ Found 'painoarvo 2' at column {i}")
                         elif 'painoarvo x' in cell_lower or 'painoarvox' in cell_lower:
                             weight_x_idx = i
-                            print(f"  ✅ Found 'painoarvo x' at column {i}")
             
-            print(f"\n📊 Weight column indices: 1={weight_1_idx}, 2={weight_2_idx}, X={weight_x_idx}")
+            print(f"📊 Weight columns: 1={weight_1_idx}, 2={weight_2_idx}, X={weight_x_idx}")
             
             # Find where data starts (row with a date)
             data_start_row = None
@@ -165,13 +146,9 @@ def parse_csv(csv_file):
                         break
             
             if data_start_row is None:
-                print("❌ No data rows found!")
                 return [], players
             
-            print(f"📊 Data starts at row {data_start_row+1}")
-            
             # Process data rows
-            processed = 0
             for row in rows[data_start_row:]:
                 if not row or len(row) < 5:
                     continue
@@ -195,10 +172,10 @@ def parse_csv(csv_file):
                     if not home_team or not away_team:
                         continue
                     
-                    # Column 4 = Result (Oikea)
-                    result = row[4].strip() if len(row) > 4 else ''
+                    # CSV result (from column 4) - used as fallback only
+                    csv_result = row[4].strip() if len(row) > 4 else ''
                     
-                    # Get the weights from the correct columns
+                    # Get weights from correct columns
                     weight_1 = 0.0
                     weight_2 = 0.0
                     weight_x = 0.0
@@ -209,7 +186,7 @@ def parse_csv(csv_file):
                             if val:
                                 weight_1 = float(val)
                         except:
-                            weight_1 = 0.0
+                            pass
                     
                     if weight_2_idx is not None and weight_2_idx < len(row):
                         try:
@@ -217,7 +194,7 @@ def parse_csv(csv_file):
                             if val:
                                 weight_2 = float(val)
                         except:
-                            weight_2 = 0.0
+                            pass
                     
                     if weight_x_idx is not None and weight_x_idx < len(row):
                         try:
@@ -225,7 +202,7 @@ def parse_csv(csv_file):
                             if val:
                                 weight_x = float(val)
                         except:
-                            weight_x = 0.0
+                            pass
                     
                     player_preds = {}
                     for i, player in enumerate(players):
@@ -242,7 +219,7 @@ def parse_csv(csv_file):
                         'awayTeam': away_team,
                         'homeTeamEn': TEAM_MAPPING.get(home_team, home_team),
                         'awayTeamEn': TEAM_MAPPING.get(away_team, away_team),
-                        'result': result.upper() if result.upper() in ['1', '2', 'X'] else None,
+                        'csv_result': csv_result.upper() if csv_result.upper() in ['1', '2', 'X'] else None,  # Store as fallback
                         'weight_1': weight_1,
                         'weight_2': weight_2,
                         'weight_x': weight_x,
@@ -251,19 +228,12 @@ def parse_csv(csv_file):
                         'status': 'SCHEDULED'
                     }
                     matches.append(match)
-                    processed += 1
-                    
-                    # Debug: print first 3 matches with weights
-                    if processed <= 3:
-                        print(f"\n  📊 Match {processed}: {home_team} vs {away_team}")
-                        print(f"     Result: {result}, W1: {weight_1}, W2: {weight_2}, WX: {weight_x}")
-                        print(f"     Predictions: {player_preds}")
                     
                 except Exception as e:
                     print(f"⚠️ Error parsing row: {e}")
                     continue
         
-        print(f"\n✅ Parsed {len(matches)} matches from CSV")
+        print(f"✅ Parsed {len(matches)} matches from CSV")
         return matches, players
         
     except Exception as e:
@@ -282,38 +252,43 @@ def fetch_live_matches():
         'x-rapidapi-host': 'v3.football.api-sports.io'
     }
     
-    today = datetime.utcnow().strftime('%Y-%m-%d')
+    # Check today and last 7 days
     all_matches = []
+    dates_to_check = []
     
-    print(f"\n🔄 Searching for matches on {today}...")
+    for i in range(7):
+        date = (datetime.utcnow() - timedelta(days=i)).strftime('%Y-%m-%d')
+        dates_to_check.append(date)
     
-    try:
-        response = requests.get(f'{API_BASE_URL}/fixtures', 
-                               headers=headers, 
-                               params={'date': today}, 
-                               timeout=10)
-        
-        if response.status_code == 200:
-            data = response.json()
-            matches = data.get('response', [])
+    print(f"🔄 Checking {len(dates_to_check)} days for matches...")
+    
+    for date in dates_to_check:
+        try:
+            response = requests.get(f'{API_BASE_URL}/fixtures', 
+                                   headers=headers, 
+                                   params={'date': date}, 
+                                   timeout=10)
             
-            if matches:
-                print(f"✅ Found {len(matches)} matches today")
+            if response.status_code == 200:
+                data = response.json()
+                matches = data.get('response', [])
                 
-                for match in matches:
-                    league_name = match.get('league', {}).get('name', '')
-                    if 'world cup' in league_name.lower() or 'worldcup' in league_name.lower():
-                        all_matches.append(match)
-                        home = match.get('teams', {}).get('home', {}).get('name', '')
-                        away = match.get('teams', {}).get('away', {}).get('name', '')
-                        print(f"  📊 Found World Cup match: {home} vs {away}")
+                if matches:
+                    # Filter for World Cup matches
+                    for match in matches:
+                        league_name = match.get('league', {}).get('name', '')
+                        if 'world cup' in league_name.lower() or 'worldcup' in league_name.lower():
+                            all_matches.append(match)
+                    
+                    if all_matches:
+                        print(f"  ✅ Found {len(all_matches)} World Cup matches so far")
             else:
-                print(f"ℹ️ No matches found for today")
-        else:
-            print(f"⚠️ API error: {response.status_code}")
-    except Exception as e:
-        print(f"⚠️ Request failed: {e}")
+                print(f"  ⚠️ API error for {date}: {response.status_code}")
+                
+        except Exception as e:
+            print(f"  ⚠️ Request failed for {date}: {e}")
     
+    print(f"✅ Found {len(all_matches)} World Cup matches in total")
     return all_matches
 
 def merge_data(csv_matches, api_matches):
@@ -330,6 +305,7 @@ def merge_data(csv_matches, api_matches):
     
     merged = []
     matched_count = 0
+    api_used_count = 0
     
     for csv_match in csv_matches:
         home_en = csv_match['homeTeamEn']
@@ -345,6 +321,8 @@ def merge_data(csv_matches, api_matches):
         
         if api_match:
             matched_count += 1
+            api_used_count += 1
+            
             goals = api_match.get('goals', {})
             score_home = goals.get('home')
             score_away = goals.get('away')
@@ -364,6 +342,7 @@ def merge_data(csv_matches, api_matches):
                 'away': score_away if score_away is not None else 0
             }
             csv_match['status'] = status
+            csv_match['result'] = None  # Will be calculated below if finished
             
             if status == 'FINISHED' and score_home is not None and score_away is not None:
                 if score_home > score_away:
@@ -373,8 +352,11 @@ def merge_data(csv_matches, api_matches):
                 else:
                     csv_match['result'] = 'X'
         else:
-            if csv_match['result']:
+            # No API match found - use CSV result as fallback
+            if csv_match.get('csv_result'):
+                csv_match['result'] = csv_match['csv_result']
                 csv_match['status'] = 'FINISHED'
+                # Set score based on result
                 if csv_match['result'] == '1':
                     csv_match['score'] = {'home': 1, 'away': 0}
                 elif csv_match['result'] == '2':
@@ -385,21 +367,17 @@ def merge_data(csv_matches, api_matches):
         merged.append(csv_match)
     
     print(f"\n🔗 Matched {matched_count} of {len(csv_matches)} matches with API data")
+    print(f"📊 Using API for {api_used_count} matches, CSV fallback for {len(csv_matches) - api_used_count} matches")
     return merged
 
 def calculate_scores(matches, players):
-    """
-    Calculate player scores based on correct predictions.
-    Uses the specific weight for each result (1, 2, or X).
-    """
+    """Calculate player scores based on correct predictions using weights"""
     scores = {p: 0.0 for p in players}
     
     for match in matches:
-        # Only count if match is finished and has a result
         if match['status'] == 'FINISHED' and match['result']:
             result = match['result']
             
-            # Get the correct weight for this result
             if result == '1':
                 weight = match.get('weight_1', 0.0)
             elif result == '2':
@@ -409,7 +387,6 @@ def calculate_scores(matches, players):
             else:
                 weight = 0.0
             
-            # Add weight to players who predicted correctly
             for player, pred in match.get('predictions', {}).items():
                 if pred == result:
                     scores[player] = scores.get(player, 0.0) + weight

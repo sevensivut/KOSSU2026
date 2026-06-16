@@ -355,6 +355,20 @@
             font-size: 0.9rem;
         }
 
+        .debug-info {
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #8a7a6a;
+            overflow-x: auto;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             body {
@@ -489,6 +503,9 @@
             </div>
         </div>
 
+        <!-- DEBUG INFO -->
+        <div class="debug-info" id="debugInfo"></div>
+
         <!-- FOOTER -->
         <div style="text-align: center; padding: 30px 0 10px; color: #3a2a1a; font-size: 0.75rem; border-top: 1px solid rgba(210, 180, 140, 0.05);">
             KOSSU 2026 &bull; Koskenkorva &bull; Jalkapallon MM-kisat
@@ -516,37 +533,103 @@
         const lastUpdate = $('lastUpdate');
         const statusText = $('statusText');
         const statusDot = $('statusDot');
+        const debugInfo = $('debugInfo');
+
+        // ===== DEBUG HELPER =====
+        function debugLog(message, data = null) {
+            console.log(`[DEBUG] ${message}`, data || '');
+            if (debugInfo) {
+                debugInfo.style.display = 'block';
+                const entry = document.createElement('div');
+                entry.textContent = typeof message === 'string' ? message : JSON.stringify(message);
+                if (data) {
+                    entry.textContent += ' ' + (typeof data === 'string' ? data : JSON.stringify(data, null, 2));
+                }
+                debugInfo.appendChild(entry);
+                // Keep only last 20 entries
+                while (debugInfo.children.length > 20) {
+                    debugInfo.removeChild(debugInfo.firstChild);
+                }
+            }
+        }
 
         // ===== LOAD DATA =====
         async function loadData() {
+            debugLog('🔄 Loading data...');
+            
             try {
                 const timestamp = new Date().getTime();
                 const response = await fetch(`data/matches.json?t=${timestamp}`);
+
+                debugLog(`📡 Response status: ${response.status}`);
 
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}`);
                 }
 
-                const data = await response.json();
+                const rawText = await response.text();
+                debugLog(`📄 Raw data length: ${rawText.length} characters`);
+                
+                // Show first 200 chars for debugging
+                debugLog(`📄 First 200 chars: ${rawText.substring(0, 200)}...`);
 
-                // Check if we have real data
-                if (!data.matches || data.matches.length === 0) {
-                    throw new Error('Ei otteluita datassa');
+                // Parse JSON
+                let data;
+                try {
+                    data = JSON.parse(rawText);
+                    debugLog('✅ JSON parsed successfully');
+                } catch (e) {
+                    debugLog('❌ JSON parse error:', e.message);
+                    throw new Error(`JSON parse error: ${e.message}`);
                 }
 
+                // Check data structure
+                debugLog('📊 Data keys:', Object.keys(data));
+                
+                if (!data.matches) {
+                    debugLog('❌ No "matches" key found in data');
+                    throw new Error('Data missing "matches" field');
+                }
+
+                if (!Array.isArray(data.matches)) {
+                    debugLog('❌ "matches" is not an array:', typeof data.matches);
+                    throw new Error('"matches" is not an array');
+                }
+
+                debugLog(`📊 Matches count: ${data.matches.length}`);
+
+                if (data.matches.length === 0) {
+                    debugLog('⚠️ No matches in data');
+                    throw new Error('No matches in data');
+                }
+
+                // Log first match structure
+                debugLog('📊 First match keys:', Object.keys(data.matches[0]));
+                debugLog('📊 First match sample:', data.matches[0]);
+
                 // Map the data to our format
-                allMatches = data.matches.map(match => ({
-                    id: match.id || Math.random(),
-                    date: match.date || new Date().toISOString(),
-                    homeTeam: match.homeTeam || 'Tuntematon',
-                    awayTeam: match.awayTeam || 'Tuntematon',
-                    status: match.status || 'SCHEDULED',
-                    score: {
-                        home: match.score?.home ?? null,
-                        away: match.score?.away ?? null
-                    },
-                    result: match.result || null
-                }));
+                allMatches = data.matches.map((match, index) => {
+                    // Handle different possible field names
+                    const mapped = {
+                        id: match.id || index + 1,
+                        date: match.date || match.utcDate || new Date().toISOString(),
+                        homeTeam: match.homeTeam || match.homeTeamName || match.home_team_name || 'Tuntematon',
+                        awayTeam: match.awayTeam || match.awayTeamName || match.away_team_name || 'Tuntematon',
+                        status: match.status || 'SCHEDULED',
+                        score: {
+                            home: match.score?.home ?? match.homeScore ?? match.home_score ?? null,
+                            away: match.score?.away ?? match.awayScore ?? match.away_score ?? null
+                        },
+                        result: match.result || null
+                    };
+                    
+                    // Debug first few matches
+                    if (index < 3) {
+                        debugLog(`Match ${index + 1} mapped:`, mapped);
+                    }
+                    
+                    return mapped;
+                });
 
                 dataLoaded = true;
 
@@ -563,24 +646,22 @@
 
                 // Update status
                 setStatus(true, `${allMatches.length} ottelua ladattu`);
+                debugLog(`✅ Successfully loaded ${allMatches.length} matches`);
 
                 // Render everything
                 renderStats();
                 renderMatches(currentFilter);
 
-                console.log(`✅ Ladattu ${allMatches.length} ottelua datasta`);
-
             } catch (error) {
+                debugLog('❌ Error loading data:', error.message);
                 console.error('Virhe ladattaessa dataa:', error);
                 setStatus(false, error.message);
                 
-                // Show error but DON'T use sample data - show empty state instead
+                // Show error
                 allMatches = [];
                 dataLoaded = false;
                 renderStats();
-                renderMatches(currentFilter);
                 
-                // Show error message in grid
                 matchesGrid.innerHTML = `
                     <div class="empty-state">
                         <div class="icon">⚠️</div>
@@ -596,8 +677,8 @@
         function renderStats() {
             const total = allMatches.length;
             const played = allMatches.filter(m => m.status === 'FINISHED').length;
-            const upcoming = allMatches.filter(m => m.status === 'SCHEDULED' || m.status === 'SCHEDULED').length;
             const live = allMatches.filter(m => m.status === 'IN_PLAY' || m.status === 'LIVE').length;
+            const upcoming = allMatches.filter(m => m.status === 'SCHEDULED' || m.status === 'TIMED').length;
 
             totalMatches.textContent = total;
             playedMatches.textContent = played;
@@ -608,6 +689,8 @@
 
         // ===== RENDER MATCHES =====
         function renderMatches(filter) {
+            debugLog(`🔄 Rendering matches with filter: "${filter}", dataLoaded: ${dataLoaded}, count: ${allMatches.length}`);
+            
             if (!dataLoaded || allMatches.length === 0) {
                 matchesGrid.innerHTML = `
                     <div class="empty-state">
@@ -623,9 +706,11 @@
                 if (filter === 'all') return true;
                 if (filter === 'live') return m.status === 'IN_PLAY' || m.status === 'LIVE';
                 if (filter === 'finished') return m.status === 'FINISHED';
-                if (filter === 'upcoming') return m.status === 'SCHEDULED';
+                if (filter === 'upcoming') return m.status === 'SCHEDULED' || m.status === 'TIMED';
                 return true;
             });
+
+            debugLog(`📊 Filtered matches: ${filtered.length} of ${allMatches.length}`);
 
             if (filtered.length === 0) {
                 matchesGrid.innerHTML = `
@@ -637,82 +722,90 @@
                 return;
             }
 
-            matchesGrid.innerHTML = filtered.map(m => {
-                const date = new Date(m.date);
-                const dateStr = date.toLocaleString('fi-FI', {
-                    day: 'numeric', month: 'short',
-                    hour: '2-digit', minute: '2-digit'
-                });
+            // Build HTML
+            let html = '';
+            filtered.forEach((m, index) => {
+                try {
+                    const date = new Date(m.date);
+                    const dateStr = date.toLocaleString('fi-FI', {
+                        day: 'numeric', month: 'short',
+                        hour: '2-digit', minute: '2-digit'
+                    });
 
-                const isFinished = m.status === 'FINISHED';
-                const isLive = m.status === 'IN_PLAY' || m.status === 'LIVE';
-                const isScheduled = m.status === 'SCHEDULED';
+                    const isFinished = m.status === 'FINISHED';
+                    const isLive = m.status === 'IN_PLAY' || m.status === 'LIVE';
+                    const isScheduled = m.status === 'SCHEDULED' || m.status === 'TIMED';
 
-                let statusClass = 'scheduled';
-                let statusLabel = '📅 Tulossa';
-                if (isFinished) { statusClass = 'finished'; statusLabel = '✅ Pelattu'; }
-                if (isLive) { statusClass = 'live'; statusLabel = '🔴 Live'; }
+                    let statusClass = 'scheduled';
+                    let statusLabel = '📅 Tulossa';
+                    if (isFinished) { statusClass = 'finished'; statusLabel = '✅ Pelattu'; }
+                    if (isLive) { statusClass = 'live'; statusLabel = '🔴 Live'; }
 
-                // Result
-                let resultHtml = '';
-                if (isFinished && m.score.home !== null && m.score.away !== null) {
-                    const home = m.score.home;
-                    const away = m.score.away;
-                    let resultClass = 'draw';
-                    let resultLabel = '🤝 Tasapeli';
-                    if (home > away) { resultClass = 'home'; resultLabel = '🏠 Koti voitto'; }
-                    if (away > home) { resultClass = 'away'; resultLabel = '✈️ Vieras voitto'; }
-                    resultHtml = `<span class="result-badge ${resultClass}">${resultLabel}</span>`;
-                }
+                    // Result
+                    let resultHtml = '';
+                    if (isFinished && m.score.home !== null && m.score.home !== undefined && m.score.away !== null && m.score.away !== undefined) {
+                        const home = m.score.home;
+                        const away = m.score.away;
+                        let resultClass = 'draw';
+                        let resultLabel = '🤝 Tasapeli';
+                        if (home > away) { resultClass = 'home'; resultLabel = '🏠 Koti voitto'; }
+                        if (away > home) { resultClass = 'away'; resultLabel = '✈️ Vieras voitto'; }
+                        resultHtml = `<span class="result-badge ${resultClass}">${resultLabel}</span>`;
+                    }
 
-                // Score display
-                let scoreHtml = '';
-                if (isFinished || isLive) {
-                    const h = m.score.home !== null && m.score.home !== undefined ? m.score.home : '-';
-                    const a = m.score.away !== null && m.score.away !== undefined ? m.score.away : '-';
-                    scoreHtml = `
-                        <div class="score">
-                            ${h}<span class="dash">–</span>${a}
+                    // Score display
+                    let scoreHtml = '';
+                    if (isFinished || isLive) {
+                        const h = m.score.home !== null && m.score.home !== undefined ? m.score.home : '-';
+                        const a = m.score.away !== null && m.score.away !== undefined ? m.score.away : '-';
+                        scoreHtml = `
+                            <div class="score">
+                                ${h}<span class="dash">–</span>${a}
+                            </div>
+                        `;
+                    } else {
+                        scoreHtml = `<div class="score" style="color:#4a3a2a; font-size:0.9rem;">vs</div>`;
+                    }
+
+                    // Clean team names (remove flags if they exist)
+                    let homeName = String(m.homeTeam || 'Tuntematon').replace(/[🇦-🇿]/g, '').trim();
+                    let awayName = String(m.awayTeam || 'Tuntematon').replace(/[🇦-🇿]/g, '').trim();
+                    
+                    // If names are empty, use original
+                    if (!homeName) homeName = String(m.homeTeam || 'Tuntematon');
+                    if (!awayName) awayName = String(m.awayTeam || 'Tuntematon');
+
+                    html += `
+                        <div class="match-card" data-status="${m.status}">
+                            <div class="date">${dateStr}</div>
+                            <div class="teams">
+                                <div class="team">
+                                    <div class="name">${homeName}</div>
+                                </div>
+                                <div class="vs">vs</div>
+                                <div class="team">
+                                    <div class="name">${awayName}</div>
+                                </div>
+                            </div>
+                            ${scoreHtml}
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+                                <span class="status-badge ${statusClass}">${statusLabel}</span>
+                                ${resultHtml}
+                            </div>
                         </div>
                     `;
-                } else {
-                    scoreHtml = `<div class="score" style="color:#4a3a2a; font-size:0.9rem;">vs</div>`;
+                } catch (err) {
+                    debugLog(`❌ Error rendering match ${index}:`, err.message);
                 }
+            });
 
-                // Clean team names (remove flags if they exist)
-                let homeName = m.homeTeam.replace(/[🇦-🇿]/g, '').trim();
-                let awayName = m.awayTeam.replace(/[🇦-🇿]/g, '').trim();
-                
-                // If names are empty, use original
-                if (!homeName) homeName = m.homeTeam;
-                if (!awayName) awayName = m.awayTeam;
-
-                return `
-                    <div class="match-card" data-status="${m.status}">
-                        <div class="date">${dateStr}</div>
-                        <div class="teams">
-                            <div class="team">
-                                <div class="name">${homeName}</div>
-                            </div>
-                            <div class="vs">vs</div>
-                            <div class="team">
-                                <div class="name">${awayName}</div>
-                            </div>
-                        </div>
-                        ${scoreHtml}
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-                            <span class="status-badge ${statusClass}">${statusLabel}</span>
-                            ${resultHtml}
-                        </div>
-                    </div>
-                `;
-            }).join('');
+            matchesGrid.innerHTML = html;
+            debugLog(`✅ Rendered ${filtered.length} matches`);
         }
 
         // ===== FILTER =====
         function filterMatches(filter) {
             currentFilter = filter;
-            // Update active button
             document.querySelectorAll('.filter-group button').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.filter === filter);
             });
@@ -739,11 +832,14 @@
             if (refreshInterval) clearInterval(refreshInterval);
             refreshInterval = setInterval(() => {
                 loadData();
-            }, 2 * 60 * 1000); // 2 minutes
+            }, 2 * 60 * 1000);
         }
 
         // ===== INIT =====
         document.addEventListener('DOMContentLoaded', () => {
+            // Show debug info
+            debugInfo.style.display = 'block';
+            debugLog('🚀 KOSSU 2026 initialized');
             loadData();
             startAutoRefresh();
         });

@@ -1,4 +1,4 @@
-name: Fetch Match Data
+name: Update Match Data
 
 on:
   schedule:
@@ -12,14 +12,13 @@ permissions:
   contents: write
 
 jobs:
-  fetch-matches:
+  update-data:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
@@ -28,24 +27,18 @@ jobs:
         run: |
           pip install requests
 
-      - name: Fetch match data
-        env:
-          FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
+      - name: Run script
         run: |
           python scripts/fetch_matches.py
 
-      - name: Commit and push changes
+      - name: Commit and push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
-          # Force add the file (this is the key fix)
           git add -f data/matches.json
-          
-          # Check if there are changes
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
+          if git diff --staged --quiet; then
+            echo "No changes"
           else
-            git commit -m "Update match data - $(date -u +'%Y-%m-%d %H:%M:%S')"
+            git commit -m "Update data $(date -u +'%Y-%m-%d %H:%M:%S')"
             git push
           fi

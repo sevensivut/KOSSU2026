@@ -11,14 +11,43 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # Configuration
-CSV_FILE = Path('Kossu 2026 jalkapallon MM (Taulukko).csv')
+API_KEY = os.getenv('RAPIDAPI_KEY')
+API_BASE_URL = 'https://v3.football.api-sports.io'
 OUTPUT_FILE = Path('data/matches.json')
 
-# API-Football configuration
-API_KEY = os.getenv('RAPIDAPI_KEY')  # Make sure this is set in GitHub Secrets!
-API_BASE_URL = 'https://v3.football.api-sports.io'
+def find_csv_file():
+    """Find the CSV file in common locations"""
+    possible_names = [
+        'Kossu 2026 jalkapallon MM (Taulukko).csv',
+        'Kossu_2026_jalkapallon_MM_Taulukko.csv',
+        'kossu_2026.csv',
+        'Kossu2026.csv'
+    ]
+    
+    possible_paths = [
+        Path('.'),
+        Path('data'),
+        Path('scripts'),
+        Path('..')
+    ]
+    
+    for path in possible_paths:
+        for name in possible_names:
+            full_path = path / name
+            if full_path.exists():
+                print(f"✅ Found CSV at: {full_path}")
+                return full_path
+    
+    # Try to find any .csv file
+    for path in possible_paths:
+        if path.exists():
+            for file in path.glob('*.csv'):
+                print(f"✅ Found CSV at: {file}")
+                return file
+    
+    return None
 
-def parse_csv():
+def parse_csv(csv_file):
     """Parse the CSV file and extract match data"""
     players = ['Markus', 'Juuso', 'Pera', 'Lari', 'Erno', 'Elmo', 
                'Petri', 'Tommi', 'Severi', 'Matti H', 'Pasi', 'Matti K']
@@ -26,7 +55,7 @@ def parse_csv():
     matches = []
     
     try:
-        with open(CSV_FILE, 'r', encoding='utf-8-sig') as f:
+        with open(csv_file, 'r', encoding='utf-8-sig') as f:
             reader = csv.reader(f, delimiter=',')
             rows = list(reader)
             
@@ -86,6 +115,7 @@ def fetch_live_matches():
     
     if not API_KEY:
         print('⚠️ No RAPIDAPI_KEY found in environment variables!')
+        print('💡 Make sure to set RAPIDAPI_KEY in GitHub Secrets')
         return []
     
     headers = {
@@ -93,7 +123,7 @@ def fetch_live_matches():
         'x-rapidapi-host': 'v3.football.api-sports.io'
     }
     
-    # Get matches from today and yesterday (to catch live matches)
+    # Get matches from today and yesterday
     today = datetime.utcnow().strftime('%Y-%m-%d')
     yesterday = (datetime.utcnow() - timedelta(days=1)).strftime('%Y-%m-%d')
     
@@ -120,6 +150,8 @@ def fetch_live_matches():
                     print(f"  ℹ️ No matches for {date}")
             else:
                 print(f"  ⚠️ API error: {response.status_code}")
+                if response.status_code == 401:
+                    print("  🔑 Invalid API key! Check your RAPIDAPI_KEY secret.")
                 
         except Exception as e:
             print(f"  ⚠️ Request failed: {e}")
@@ -129,18 +161,17 @@ def fetch_live_matches():
 def merge_data(csv_matches, api_matches):
     """Merge CSV predictions with live API data"""
     
-    # Create map of API matches by team+date
+    # Create map of API matches
     api_map = {}
     for m in api_matches:
         home = m.get('teams', {}).get('home', {}).get('name', '')
         away = m.get('teams', {}).get('away', {}).get('name', '')
         date = m.get('fixture', {}).get('date', '')[:10]
         
-        # Try different team name variations
         key = f"{home}_{away}_{date}"
         api_map[key] = m
         
-        # Also add with swapped teams (in case CSV has them reversed)
+        # Also add reversed version
         key_swapped = f"{away}_{home}_{date}"
         api_map[key_swapped] = m
     
@@ -163,7 +194,6 @@ def merge_data(csv_matches, api_matches):
             status_obj = api_match.get('status', {})
             status_short = status_obj.get('short', '')
             
-            # Map status
             if status_short in ['FT', 'AET', 'PEN']:
                 status = 'FINISHED'
             elif status_short in ['LIVE', '1H', '2H', 'HT', 'ET']:
@@ -177,7 +207,6 @@ def merge_data(csv_matches, api_matches):
             }
             csv_match['status'] = status
             
-            # Update result if match is finished
             if status == 'FINISHED' and score_home is not None and score_away is not None:
                 if score_home > score_away:
                     csv_match['result'] = '1'
@@ -206,13 +235,20 @@ def main():
     print('🏆 KOSSU 2026 - Live Match Data Fetcher')
     print('=' * 50)
     
+    # Find CSV file
+    csv_file = find_csv_file()
+    if not csv_file:
+        print('❌ Could not find CSV file!')
+        print('💡 Make sure "Kossu 2026 jalkapallon MM (Taulukko).csv" is in the repository')
+        return False
+    
     # Parse CSV
-    csv_matches, players = parse_csv()
+    csv_matches, players = parse_csv(csv_file)
     if not csv_matches:
         print('❌ No data found in CSV!')
         return False
     
-    # Fetch live matches from API
+    # Fetch live matches
     api_matches = fetch_live_matches()
     
     # Merge data
@@ -236,14 +272,14 @@ def main():
     
     print(f"\n✅ Saved {len(merged_matches)} matches to {OUTPUT_FILE}")
     
-    # Print live matches
+    # Show live matches
     live_matches = [m for m in merged_matches if m['status'] == 'IN_PLAY']
     if live_matches:
         print(f"\n🔴 LIVE MATCHES ({len(live_matches)}):")
         for m in live_matches:
             print(f"  {m['homeTeam']} {m['score']['home']} - {m['score']['away']} {m['awayTeam']}")
     
-    # Print scores
+    # Show scores
     print("\n📊 Player Scores:")
     sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
     for i, (player, score) in enumerate(sorted_scores, 1):

@@ -109,6 +109,8 @@ def parse_csv(csv_file):
             reader = csv.reader(f, delimiter=',')
             rows = list(reader)
             
+            print(f"\n🔍 CSV has {len(rows)} rows")
+            
             # First, find the header row to locate weight columns
             header_row = None
             for i, row in enumerate(rows):
@@ -117,24 +119,41 @@ def parse_csv(csv_file):
                     if 'Pvm ja klo' in str(row) or 'Peli' in str(row):
                         header_row = i
                         print(f"✅ Found header at row {i+1}")
+                        print(f"📋 Header: {row[:10]}...")
                         break
+            
+            # If no header found, look for the data start
+            if header_row is None:
+                for i, row in enumerate(rows):
+                    if row and len(row) > 0:
+                        cell = str(row[0]).strip()
+                        if '.' in cell and '2026' in cell:
+                            header_row = i - 1
+                            print(f"✅ Found header at row {i-1} (guessed)")
+                            break
             
             # Find weight column indices
             weight_1_idx = None
             weight_2_idx = None
             weight_x_idx = None
             
-            if header_row is not None:
+            if header_row is not None and header_row < len(rows):
                 header = rows[header_row]
+                print(f"\n📋 Looking for weight columns in header:")
                 for i, cell in enumerate(header):
-                    if cell and 'painoarvo 1' in str(cell).lower():
-                        weight_1_idx = i
-                    elif cell and 'painoarvo 2' in str(cell).lower():
-                        weight_2_idx = i
-                    elif cell and 'painoarvo x' in str(cell).lower():
-                        weight_x_idx = i
-                
-                print(f"✅ Weight columns found - 1:{weight_1_idx}, 2:{weight_2_idx}, X:{weight_x_idx}")
+                    if cell:
+                        cell_lower = str(cell).lower()
+                        if 'painoarvo 1' in cell_lower or 'painoarvo1' in cell_lower:
+                            weight_1_idx = i
+                            print(f"  ✅ Found 'painoarvo 1' at column {i}")
+                        elif 'painoarvo 2' in cell_lower or 'painoarvo2' in cell_lower:
+                            weight_2_idx = i
+                            print(f"  ✅ Found 'painoarvo 2' at column {i}")
+                        elif 'painoarvo x' in cell_lower or 'painoarvox' in cell_lower:
+                            weight_x_idx = i
+                            print(f"  ✅ Found 'painoarvo x' at column {i}")
+            
+            print(f"\n📊 Weight column indices: 1={weight_1_idx}, 2={weight_2_idx}, X={weight_x_idx}")
             
             # Find where data starts (row with a date)
             data_start_row = None
@@ -146,9 +165,13 @@ def parse_csv(csv_file):
                         break
             
             if data_start_row is None:
+                print("❌ No data rows found!")
                 return [], players
             
+            print(f"📊 Data starts at row {data_start_row+1}")
+            
             # Process data rows
+            processed = 0
             for row in rows[data_start_row:]:
                 if not row or len(row) < 5:
                     continue
@@ -182,19 +205,25 @@ def parse_csv(csv_file):
                     
                     if weight_1_idx is not None and weight_1_idx < len(row):
                         try:
-                            weight_1 = float(row[weight_1_idx].strip()) if row[weight_1_idx].strip() else 0.0
+                            val = row[weight_1_idx].strip()
+                            if val:
+                                weight_1 = float(val)
                         except:
                             weight_1 = 0.0
                     
                     if weight_2_idx is not None and weight_2_idx < len(row):
                         try:
-                            weight_2 = float(row[weight_2_idx].strip()) if row[weight_2_idx].strip() else 0.0
+                            val = row[weight_2_idx].strip()
+                            if val:
+                                weight_2 = float(val)
                         except:
                             weight_2 = 0.0
                     
                     if weight_x_idx is not None and weight_x_idx < len(row):
                         try:
-                            weight_x = float(row[weight_x_idx].strip()) if row[weight_x_idx].strip() else 0.0
+                            val = row[weight_x_idx].strip()
+                            if val:
+                                weight_x = float(val)
                         except:
                             weight_x = 0.0
                     
@@ -222,16 +251,19 @@ def parse_csv(csv_file):
                         'status': 'SCHEDULED'
                     }
                     matches.append(match)
+                    processed += 1
                     
-                    # Debug: print first few matches
-                    if len(matches) <= 5:
-                        print(f"  📊 Match {len(matches)}: {home_team} vs {away_team} - W1:{weight_1}, W2:{weight_2}, WX:{weight_x}")
+                    # Debug: print first 3 matches with weights
+                    if processed <= 3:
+                        print(f"\n  📊 Match {processed}: {home_team} vs {away_team}")
+                        print(f"     Result: {result}, W1: {weight_1}, W2: {weight_2}, WX: {weight_x}")
+                        print(f"     Predictions: {player_preds}")
                     
                 except Exception as e:
                     print(f"⚠️ Error parsing row: {e}")
                     continue
         
-        print(f"✅ Parsed {len(matches)} matches from CSV")
+        print(f"\n✅ Parsed {len(matches)} matches from CSV")
         return matches, players
         
     except Exception as e:
@@ -253,7 +285,7 @@ def fetch_live_matches():
     today = datetime.utcnow().strftime('%Y-%m-%d')
     all_matches = []
     
-    print(f"🔄 Searching for matches on {today}...")
+    print(f"\n🔄 Searching for matches on {today}...")
     
     try:
         response = requests.get(f'{API_BASE_URL}/fixtures', 

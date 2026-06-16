@@ -45,48 +45,6 @@ def find_csv_file():
     
     return None
 
-def debug_csv(csv_file):
-    """Debug: Show what's in the CSV file"""
-    print(f"\n🔍 DEBUG: Reading {csv_file}")
-    
-    try:
-        with open(csv_file, 'r', encoding='utf-8-sig') as f:
-            # Read first 10 lines
-            lines = []
-            for i in range(10):
-                line = f.readline()
-                if not line:
-                    break
-                lines.append(line)
-            
-            print(f"📄 First {len(lines)} lines:")
-            for i, line in enumerate(lines):
-                print(f"  Line {i+1}: {line[:200]}...")  # Show first 200 chars
-            
-            # Try to parse as CSV
-            f.seek(0)
-            reader = csv.reader(f, delimiter=',')
-            rows = list(reader)
-            print(f"\n📊 Total rows: {len(rows)}")
-            
-            # Show first 5 rows
-            for i, row in enumerate(rows[:5]):
-                print(f"  Row {i+1}: {row[:10]}")  # Show first 10 columns
-            
-            # Check if any row has 2026 in it
-            found = False
-            for i, row in enumerate(rows):
-                if row and any('2026' in str(cell) for cell in row):
-                    print(f"\n✅ Found '2026' in row {i+1}: {row[:5]}")
-                    found = True
-                    break
-            
-            if not found:
-                print("\n❌ No '2026' found in any row!")
-                
-    except Exception as e:
-        print(f"❌ Error reading CSV: {e}")
-
 def parse_csv(csv_file):
     """Parse the CSV file and extract match data"""
     players = ['Markus', 'Juuso', 'Pera', 'Lari', 'Erno', 'Elmo', 
@@ -99,67 +57,57 @@ def parse_csv(csv_file):
             reader = csv.reader(f, delimiter=',')
             rows = list(reader)
             
-            # Debug: Print first few rows
-            print(f"\n📊 Total rows: {len(rows)}")
-            print("📊 First 5 rows:")
-            for i, row in enumerate(rows[:5]):
-                if row:
-                    print(f"  Row {i+1}: {row[:8]}...")
-            
-            # Find where the data starts (look for a row with a date)
+            # Find where data starts (row with a date)
             data_start_row = None
             for i, row in enumerate(rows):
                 if row and len(row) > 0:
                     cell = str(row[0]).strip()
-                    # Check if it looks like a date (contains a dot and 2026)
                     if '.' in cell and '2026' in cell:
                         data_start_row = i
-                        print(f"\n✅ Found data starting at row {i+1}: {row[:5]}")
+                        print(f"✅ Found data starting at row {i+1}")
                         break
             
             if data_start_row is None:
-                print("\n❌ No data rows found! Check the CSV format.")
-                # Show all rows that might contain data
-                print("\n🔍 Looking for any row with '2026':")
-                for i, row in enumerate(rows):
-                    if row and any('2026' in str(cell) for cell in row):
-                        print(f"  Row {i+1}: {row[:5]}")
+                print("❌ No data rows found!")
                 return [], players
             
-            # Process only data rows (from data_start_row onwards)
+            # Process data rows
             for row in rows[data_start_row:]:
-                if not row or len(row) < 4:
+                if not row or len(row) < 5:
                     continue
                     
-                # Check if this is a match row (has a date)
                 first_cell = str(row[0]).strip() if len(row) > 0 else ''
                 if not first_cell or '.' not in first_cell or '2026' not in first_cell:
                     continue
                 
                 try:
+                    # Parse date
                     date_str = first_cell
                     date_parts = date_str.split(' ')
                     date_part = date_parts[0]
                     time_part = date_parts[1] if len(date_parts) > 1 else '00:00'
                     
-                    # Check if it's a valid date format (dd.mm.yyyy)
                     if len(date_part.split('.')) != 3:
                         continue
                         
                     day, month, year = date_part.split('.')
                     date_iso = f"{year}-{month}-{day}T{time_part}:00Z"
                     
+                    # IMPORTANT: Column 1 = Home team, Column 3 = Away team (column 2 is empty)
                     home_team = row[1].strip() if len(row) > 1 else ''
-                    away_team = row[2].strip() if len(row) > 2 else ''
+                    away_team = row[3].strip() if len(row) > 3 else ''
                     
                     if not home_team or not away_team:
                         continue
                     
-                    result = row[3].strip() if len(row) > 3 else ''
+                    # Column 4 = Result
+                    result = row[4].strip() if len(row) > 4 else ''
                     
+                    # Player predictions start at column 6 (index 6)
+                    # Columns: 0=date, 1=home, 2=empty, 3=away, 4=result, 5=points, 6+=predictions
                     player_preds = {}
                     for i, player in enumerate(players):
-                        col_idx = 4 + i
+                        col_idx = 6 + i  # Start at column 6
                         if col_idx < len(row):
                             pred = row[col_idx].strip()
                             if pred and pred.upper() in ['1', '2', 'X']:
@@ -176,7 +124,6 @@ def parse_csv(csv_file):
                         'status': 'SCHEDULED'
                     }
                     matches.append(match)
-                    
                     print(f"  ✅ Parsed: {home_team} vs {away_team} ({date_str})")
                     
                 except Exception as e:
@@ -311,9 +258,6 @@ def main():
     if not csv_file:
         print('❌ No CSV file found!')
         return False
-    
-    # Debug the CSV first
-    debug_csv(csv_file)
     
     # Parse CSV
     csv_matches, players = parse_csv(csv_file)

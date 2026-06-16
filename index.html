@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KOSSU 2026 - MM-Veto</title>
     <style>
-        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -25,7 +24,6 @@
             margin: 0 auto;
         }
 
-        /* ===== HEADER ===== */
         .header {
             text-align: center;
             padding: 40px 20px 30px;
@@ -37,26 +35,6 @@
             overflow: hidden;
         }
 
-        .header::before {
-            content: '🍾';
-            position: absolute;
-            top: -20px;
-            right: -10px;
-            font-size: 120px;
-            opacity: 0.04;
-            transform: rotate(15deg);
-        }
-
-        .header::after {
-            content: '⚽';
-            position: absolute;
-            bottom: -30px;
-            left: -20px;
-            font-size: 100px;
-            opacity: 0.04;
-            transform: rotate(-10deg);
-        }
-
         .header h1 {
             font-size: 2.8rem;
             font-weight: 900;
@@ -66,7 +44,6 @@
             background-clip: text;
             letter-spacing: 2px;
             margin-bottom: 8px;
-            position: relative;
         }
 
         .header .subtitle {
@@ -89,12 +66,6 @@
             font-weight: 600;
         }
 
-        .header .pot-display span {
-            color: #fff;
-            font-weight: 700;
-        }
-
-        /* ===== STATUS BAR ===== */
         .status-bar {
             display: flex;
             justify-content: space-between;
@@ -136,7 +107,6 @@
             color: #8a7a6a;
         }
 
-        /* ===== STATS GRID ===== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -172,12 +142,49 @@
             margin-top: 4px;
         }
 
-        /* ===== MATCHES ===== */
+        .tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tabs button {
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(210, 180, 140, 0.15);
+            border-radius: 8px;
+            color: #8a7a6a;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .tabs button:hover {
+            border-color: rgba(210, 180, 140, 0.3);
+            color: #f0e6d3;
+        }
+
+        .tabs button.active {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: #ffd700;
+            color: #ffd700;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 30px 0 20px;
+            margin: 0 0 20px 0;
         }
 
         .section-header h2 {
@@ -228,7 +235,6 @@
             padding: 20px;
             border: 1px solid rgba(210, 180, 140, 0.06);
             transition: all 0.3s;
-            cursor: default;
         }
 
         .match-card:hover {
@@ -260,7 +266,6 @@
             font-weight: 600;
             font-size: 0.95rem;
             color: #f0e6d3;
-            margin-bottom: 2px;
         }
 
         .match-card .vs {
@@ -298,20 +303,9 @@
             color: #81c784;
         }
 
-        .match-card .status-badge.live {
-            background: rgba(255, 152, 0, 0.15);
-            color: #ffb74d;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
         .match-card .status-badge.scheduled {
             background: rgba(100, 100, 100, 0.15);
             color: #8a7a6a;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
         }
 
         .match-card .result-badge {
@@ -338,6 +332,54 @@
             color: #aaa;
         }
 
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: rgba(44, 24, 16, 0.4);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .leaderboard-table th {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .leaderboard-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(210, 180, 140, 0.05);
+        }
+
+        .leaderboard-table tr:hover td {
+            background: rgba(255, 215, 0, 0.03);
+        }
+
+        .leaderboard-table .rank {
+            font-weight: 700;
+            color: #8a7a6a;
+        }
+
+        .leaderboard-table .rank-1 { color: #ffd700; }
+        .leaderboard-table .rank-2 { color: #c0c0c0; }
+        .leaderboard-table .rank-3 { color: #cd7f32; }
+
+        .leaderboard-table .player-name {
+            font-weight: 600;
+            color: #f0e6d3;
+        }
+
+        .leaderboard-table .points {
+            font-weight: 700;
+            color: #ffd700;
+        }
+
         .empty-state {
             text-align: center;
             padding: 60px 20px;
@@ -351,80 +393,85 @@
             opacity: 0.5;
         }
 
-        .empty-state p {
-            font-size: 0.9rem;
+        .medals-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
-        .debug-info {
-            background: rgba(0,0,0,0.3);
-            padding: 10px;
-            border-radius: 8px;
-            margin: 10px 0;
-            font-family: monospace;
-            font-size: 0.8rem;
+        .medal-card {
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(210, 180, 140, 0.1);
+            background: rgba(44, 24, 16, 0.4);
+        }
+
+        .medal-card.gold { border-color: rgba(255, 215, 0, 0.3); }
+        .medal-card.silver { border-color: rgba(192, 192, 192, 0.3); }
+        .medal-card.bronze { border-color: rgba(205, 127, 50, 0.3); }
+
+        .medal-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: #ffd700;
+        }
+
+        .medal-card .medal-winners {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .medal-card .medal-winner {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .medal-card.gold .medal-winner { color: #ffd700; }
+        .medal-card.silver .medal-winner { color: #c0c0c0; }
+        .medal-card.bronze .medal-winner { color: #cd7f32; }
+
+        .predictions-list {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(210, 180, 140, 0.1);
+            font-size: 0.75rem;
             color: #8a7a6a;
-            overflow-x: auto;
-            max-height: 200px;
-            overflow-y: auto;
-            display: none;
         }
 
-        /* ===== RESPONSIVE ===== */
+        .predictions-list .pred {
+            display: inline-block;
+            margin: 2px 4px 2px 0;
+            padding: 2px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
         @media (max-width: 768px) {
-            body {
-                padding: 12px;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .header .subtitle {
-                font-size: 0.85rem;
-                letter-spacing: 2px;
-            }
-
-            .header .pot-display {
-                font-size: 0.8rem;
-                padding: 8px 20px;
-            }
-
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
             }
-
-            .stat-card .value {
-                font-size: 1.6rem;
-            }
-
-            .matches-grid {
+            .medals-section {
                 grid-template-columns: 1fr;
             }
-
-            .status-bar {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
-                font-size: 0.75rem;
+            .tabs button {
+                flex: 1;
+                min-width: 80px;
+                text-align: center;
+                font-size: 0.85rem;
+                padding: 10px 16px;
             }
-
             .section-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 12px;
             }
-
-            .section-header .filter-group {
-                flex-wrap: wrap;
-            }
-
-            .match-card .team .name {
-                font-size: 0.85rem;
-            }
-
-            .match-card .score {
-                font-size: 1.3rem;
+            .header h1 {
+                font-size: 2rem;
             }
         }
 
@@ -432,11 +479,9 @@
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
             }
-
             .stat-card {
                 padding: 14px;
             }
-
             .stat-card .value {
                 font-size: 1.3rem;
             }
@@ -445,31 +490,28 @@
 </head>
 <body>
     <div class="container">
-        <!-- HEADER -->
         <header class="header">
             <h1>🍾 KOSSU 2026</h1>
             <p class="subtitle">Jalkapallon MM-Veto</p>
             <div class="pot-display">
-                💰 Potti: <span id="totalPot">0.00 €</span> &nbsp;·&nbsp; 🍾 12 pulloa Koskenkorvaa
+                💰 Potti: <span id="totalPot">213.48 €</span> &nbsp;·&nbsp; 🍾 12 pulloa Koskenkorvaa
             </div>
         </header>
 
-        <!-- STATUS BAR -->
         <div class="status-bar">
             <div class="status">
                 <span class="dot online" id="statusDot"></span>
-                <span id="statusText">Yhdistetty</span>
+                <span id="statusText">Ladataan...</span>
             </div>
             <div class="last-updated">
                 🕐 Päivitetty: <span id="lastUpdate">-</span>
             </div>
         </div>
 
-        <!-- STATS -->
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="value" id="totalMatches">0</div>
-                <div class="label">Ottelut yhteensä</div>
+                <div class="label">Ottelut</div>
             </div>
             <div class="stat-card">
                 <div class="value" id="playedMatches">0</div>
@@ -480,327 +522,280 @@
                 <div class="label">Tulossa</div>
             </div>
             <div class="stat-card">
-                <div class="value" id="playerCount">0</div>
+                <div class="value" id="playerCount">12</div>
                 <div class="label">Osallistujat</div>
             </div>
         </div>
 
-        <!-- MATCHES -->
-        <div class="section-header">
-            <h2>📅 Ottelut</h2>
-            <div class="filter-group">
-                <button class="active" data-filter="all" onclick="filterMatches('all')">Kaikki</button>
-                <button data-filter="live" onclick="filterMatches('live')">🔴 Live</button>
-                <button data-filter="finished" onclick="filterMatches('finished')">Pelatut</button>
-                <button data-filter="upcoming" onclick="filterMatches('upcoming')">Tulossa</button>
+        <div class="tabs">
+            <button class="active" data-tab="matches" onclick="switchTab('matches')">📅 Ottelut</button>
+            <button data-tab="leaderboard" onclick="switchTab('leaderboard')">🏆 Pistelista</button>
+            <button data-tab="predictions" onclick="switchTab('predictions')">📊 Veikkaukset</button>
+        </div>
+
+        <div id="tab-matches" class="tab-content active">
+            <div class="section-header">
+                <h2>📅 Ottelut</h2>
+                <div class="filter-group">
+                    <button class="active" data-filter="all" onclick="filterMatches('all')">Kaikki</button>
+                    <button data-filter="finished" onclick="filterMatches('finished')">Pelatut</button>
+                    <button data-filter="scheduled" onclick="filterMatches('scheduled')">Tulossa</button>
+                </div>
+            </div>
+            <div class="matches-grid" id="matchesGrid">
+                <div class="empty-state"><div class="icon">⚽</div><p>Ladataan...</p></div>
             </div>
         </div>
 
-        <div class="matches-grid" id="matchesGrid">
-            <div class="empty-state">
-                <div class="icon">⚽</div>
-                <p>Ladataan otteluita...</p>
+        <div id="tab-leaderboard" class="tab-content">
+            <h2 style="color:#ffd700; margin-bottom:20px;">🏆 Pistelista</h2>
+            <div style="overflow-x:auto;">
+                <table class="leaderboard-table" id="leaderboardTable">
+                    <thead>
+                        <tr>
+                            <th>Sija</th>
+                            <th>Pelaaja</th>
+                            <th>Pisteet</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardBody"></tbody>
+                </table>
             </div>
         </div>
 
-        <!-- DEBUG INFO -->
-        <div class="debug-info" id="debugInfo"></div>
+        <div id="tab-predictions" class="tab-content">
+            <h2 style="color:#ffd700; margin-bottom:20px;">📊 Pelaajien Veikkaukset</h2>
+            <div class="matches-grid" id="predictionsGrid">
+                <div class="empty-state"><div class="icon">📊</div><p>Ladataan...</p></div>
+            </div>
+        </div>
 
-        <!-- FOOTER -->
         <div style="text-align: center; padding: 30px 0 10px; color: #3a2a1a; font-size: 0.75rem; border-top: 1px solid rgba(210, 180, 140, 0.05);">
-            KOSSU 2026
+            KOSSU 2026 🍾
         </div>
     </div>
 
     <script>
-        // ===== CONFIGURATION =====
-        const TOTAL_PLAYERS = 12;
-        const BET_AMOUNT = 17.79;
-        const TOTAL_POT = TOTAL_PLAYERS * BET_AMOUNT;
-
-        let allMatches = [];
+        // ===== DATA =====
+        let allData = null;
         let currentFilter = 'all';
-        let dataLoaded = false;
+        let currentTab = 'matches';
 
         // ===== DOM REFS =====
         const $ = (id) => document.getElementById(id);
-        const matchesGrid = $('matchesGrid');
-        const totalMatches = $('totalMatches');
-        const playedMatches = $('playedMatches');
-        const remainingMatches = $('remainingMatches');
-        const playerCount = $('playerCount');
-        const totalPot = $('totalPot');
-        const lastUpdate = $('lastUpdate');
-        const statusText = $('statusText');
-        const statusDot = $('statusDot');
-        const debugInfo = $('debugInfo');
-
-        // ===== DEBUG HELPER =====
-        function debugLog(message, data = null) {
-            console.log(`[DEBUG] ${message}`, data || '');
-            if (debugInfo) {
-                debugInfo.style.display = 'block';
-                const entry = document.createElement('div');
-                entry.textContent = typeof message === 'string' ? message : JSON.stringify(message);
-                if (data) {
-                    entry.textContent += ' ' + (typeof data === 'string' ? data : JSON.stringify(data, null, 2));
-                }
-                debugInfo.appendChild(entry);
-                // Keep only last 20 entries
-                while (debugInfo.children.length > 20) {
-                    debugInfo.removeChild(debugInfo.firstChild);
-                }
-            }
-        }
 
         // ===== LOAD DATA =====
         async function loadData() {
-            debugLog('🔄 Loading data...');
-            
             try {
                 const timestamp = new Date().getTime();
                 const response = await fetch(`data/matches.json?t=${timestamp}`);
-
-                debugLog(`📡 Response status: ${response.status}`);
-
+                
                 if (!response.ok) {
                     throw new Error(`HTTP ${response.status}`);
                 }
-
-                const rawText = await response.text();
-                debugLog(`📄 Raw data length: ${rawText.length} characters`);
                 
-                // Show first 200 chars for debugging
-                debugLog(`📄 First 200 chars: ${rawText.substring(0, 200)}...`);
-
-                // Parse JSON
-                let data;
-                try {
-                    data = JSON.parse(rawText);
-                    debugLog('✅ JSON parsed successfully');
-                } catch (e) {
-                    debugLog('❌ JSON parse error:', e.message);
-                    throw new Error(`JSON parse error: ${e.message}`);
-                }
-
-                // Check data structure
-                debugLog('📊 Data keys:', Object.keys(data));
+                allData = await response.json();
+                console.log('✅ Data loaded:', allData);
                 
-                if (!data.matches) {
-                    debugLog('❌ No "matches" key found in data');
-                    throw new Error('Data missing "matches" field');
-                }
-
-                if (!Array.isArray(data.matches)) {
-                    debugLog('❌ "matches" is not an array:', typeof data.matches);
-                    throw new Error('"matches" is not an array');
-                }
-
-                debugLog(`📊 Matches count: ${data.matches.length}`);
-
-                if (data.matches.length === 0) {
-                    debugLog('⚠️ No matches in data');
-                    throw new Error('No matches in data');
-                }
-
-                // Log first match structure
-                debugLog('📊 First match keys:', Object.keys(data.matches[0]));
-                debugLog('📊 First match sample:', data.matches[0]);
-
-                // Map the data to our format
-                allMatches = data.matches.map((match, index) => {
-                    // Handle different possible field names
-                    const mapped = {
-                        id: match.id || index + 1,
-                        date: match.date || match.utcDate || new Date().toISOString(),
-                        homeTeam: match.homeTeam || match.homeTeamName || match.home_team_name || 'Tuntematon',
-                        awayTeam: match.awayTeam || match.awayTeamName || match.away_team_name || 'Tuntematon',
-                        status: match.status || 'SCHEDULED',
-                        score: {
-                            home: match.score?.home ?? match.homeScore ?? match.home_score ?? null,
-                            away: match.score?.away ?? match.awayScore ?? match.away_score ?? null
-                        },
-                        result: match.result || null
-                    };
-                    
-                    // Debug first few matches
-                    if (index < 3) {
-                        debugLog(`Match ${index + 1} mapped:`, mapped);
-                    }
-                    
-                    return mapped;
-                });
-
-                dataLoaded = true;
-
-                // Update last update time
-                if (data.updatedAt) {
-                    const d = new Date(data.updatedAt);
-                    lastUpdate.textContent = d.toLocaleString('fi-FI', {
-                        day: '2-digit', month: '2-digit', year: 'numeric',
-                        hour: '2-digit', minute: '2-digit'
-                    });
-                } else {
-                    lastUpdate.textContent = new Date().toLocaleString('fi-FI');
-                }
-
-                // Update status
-                setStatus(true, `${allMatches.length} ottelua ladattu`);
-                debugLog(`✅ Successfully loaded ${allMatches.length} matches`);
-
-                // Render everything
-                renderStats();
-                renderMatches(currentFilter);
-
+                updateStats();
+                renderMatches('all');
+                renderLeaderboard();
+                renderPredictions();
+                
+                $('statusText').textContent = `${allData.matches.length} ottelua`;
+                $('lastUpdate').textContent = new Date().toLocaleString('fi-FI');
+                $('statusDot').className = 'dot online';
+                
             } catch (error) {
-                debugLog('❌ Error loading data:', error.message);
-                console.error('Virhe ladattaessa dataa:', error);
-                setStatus(false, error.message);
-                
-                // Show error
-                allMatches = [];
-                dataLoaded = false;
-                renderStats();
-                
-                matchesGrid.innerHTML = `
-                    <div class="empty-state">
-                        <div class="icon">⚠️</div>
-                        <p>Dataa ei voitu ladata</p>
-                        <p style="font-size:0.8rem; color:#6a4a3a; margin-top:8px;">${error.message}</p>
-                        <button onclick="loadData()" style="margin-top:16px; padding:8px 24px; background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.2); border-radius:8px; color:#ffd700; cursor:pointer;">Yritä uudelleen</button>
-                    </div>
-                `;
+                console.error('❌ Error:', error);
+                $('statusText').textContent = 'Virhe: ' + error.message;
+                $('statusDot').className = 'dot offline';
             }
         }
 
-        // ===== RENDER STATS =====
-        function renderStats() {
-            const total = allMatches.length;
-            const played = allMatches.filter(m => m.status === 'FINISHED').length;
-            const live = allMatches.filter(m => m.status === 'IN_PLAY' || m.status === 'LIVE').length;
-            const upcoming = allMatches.filter(m => m.status === 'SCHEDULED' || m.status === 'TIMED').length;
-
-            totalMatches.textContent = total;
-            playedMatches.textContent = played;
-            remainingMatches.textContent = upcoming + live;
-            playerCount.textContent = TOTAL_PLAYERS;
-            totalPot.textContent = TOTAL_POT.toFixed(2) + ' €';
+        // ===== UPDATE STATS =====
+        function updateStats() {
+            if (!allData) return;
+            
+            const total = allData.matches.length;
+            const played = allData.matches.filter(m => m.status === 'FINISHED').length;
+            const scheduled = allData.matches.filter(m => m.status === 'SCHEDULED').length;
+            
+            $('totalMatches').textContent = total;
+            $('playedMatches').textContent = played;
+            $('remainingMatches').textContent = scheduled;
+            $('playerCount').textContent = allData.players ? allData.players.length : 12;
         }
 
         // ===== RENDER MATCHES =====
         function renderMatches(filter) {
-            debugLog(`🔄 Rendering matches with filter: "${filter}", dataLoaded: ${dataLoaded}, count: ${allMatches.length}`);
+            if (!allData) return;
             
-            if (!dataLoaded || allMatches.length === 0) {
-                matchesGrid.innerHTML = `
-                    <div class="empty-state">
-                        <div class="icon">⚽</div>
-                        <p>Ei otteluita näytettäväksi</p>
-                        <p style="font-size:0.8rem; color:#6a4a3a; margin-top:8px;">Dataa ei ole vielä ladattu</p>
-                    </div>
-                `;
-                return;
-            }
-
-            const filtered = allMatches.filter(m => {
+            const filtered = allData.matches.filter(m => {
                 if (filter === 'all') return true;
-                if (filter === 'live') return m.status === 'IN_PLAY' || m.status === 'LIVE';
-                if (filter === 'finished') return m.status === 'FINISHED';
-                if (filter === 'upcoming') return m.status === 'SCHEDULED' || m.status === 'TIMED';
-                return true;
+                return m.status === filter.toUpperCase();
             });
-
-            debugLog(`📊 Filtered matches: ${filtered.length} of ${allMatches.length}`);
-
+            
             if (filtered.length === 0) {
-                matchesGrid.innerHTML = `
+                $('matchesGrid').innerHTML = `
                     <div class="empty-state">
                         <div class="icon">📭</div>
-                        <p>Ei otteluita tällä suodattimella</p>
+                        <p>Ei otteluita</p>
                     </div>
                 `;
                 return;
             }
-
-            // Build HTML
+            
             let html = '';
-            filtered.forEach((m, index) => {
-                try {
-                    const date = new Date(m.date);
-                    const dateStr = date.toLocaleString('fi-FI', {
-                        day: 'numeric', month: 'short',
-                        hour: '2-digit', minute: '2-digit'
-                    });
-
-                    const isFinished = m.status === 'FINISHED';
-                    const isLive = m.status === 'IN_PLAY' || m.status === 'LIVE';
-                    const isScheduled = m.status === 'SCHEDULED' || m.status === 'TIMED';
-
-                    let statusClass = 'scheduled';
-                    let statusLabel = '📅 Tulossa';
-                    if (isFinished) { statusClass = 'finished'; statusLabel = '✅ Pelattu'; }
-                    if (isLive) { statusClass = 'live'; statusLabel = '🔴 Live'; }
-
-                    // Result
-                    let resultHtml = '';
-                    if (isFinished && m.score.home !== null && m.score.home !== undefined && m.score.away !== null && m.score.away !== undefined) {
-                        const home = m.score.home;
-                        const away = m.score.away;
-                        let resultClass = 'draw';
-                        let resultLabel = '🤝 Tasapeli';
-                        if (home > away) { resultClass = 'home'; resultLabel = '🏠 Koti voitto'; }
-                        if (away > home) { resultClass = 'away'; resultLabel = '✈️ Vieras voitto'; }
-                        resultHtml = `<span class="result-badge ${resultClass}">${resultLabel}</span>`;
-                    }
-
-                    // Score display
-                    let scoreHtml = '';
-                    if (isFinished || isLive) {
-                        const h = m.score.home !== null && m.score.home !== undefined ? m.score.home : '-';
-                        const a = m.score.away !== null && m.score.away !== undefined ? m.score.away : '-';
-                        scoreHtml = `
-                            <div class="score">
-                                ${h}<span class="dash">–</span>${a}
-                            </div>
-                        `;
-                    } else {
-                        scoreHtml = `<div class="score" style="color:#4a3a2a; font-size:0.9rem;">vs</div>`;
-                    }
-
-                    // Clean team names (remove flags if they exist)
-                    let homeName = String(m.homeTeam || 'Tuntematon').replace(/[🇦-🇿]/g, '').trim();
-                    let awayName = String(m.awayTeam || 'Tuntematon').replace(/[🇦-🇿]/g, '').trim();
-                    
-                    // If names are empty, use original
-                    if (!homeName) homeName = String(m.homeTeam || 'Tuntematon');
-                    if (!awayName) awayName = String(m.awayTeam || 'Tuntematon');
-
-                    html += `
-                        <div class="match-card" data-status="${m.status}">
-                            <div class="date">${dateStr}</div>
-                            <div class="teams">
-                                <div class="team">
-                                    <div class="name">${homeName}</div>
-                                </div>
-                                <div class="vs">vs</div>
-                                <div class="team">
-                                    <div class="name">${awayName}</div>
-                                </div>
-                            </div>
-                            ${scoreHtml}
-                            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-                                <span class="status-badge ${statusClass}">${statusLabel}</span>
-                                ${resultHtml}
-                            </div>
+            filtered.forEach(m => {
+                const date = new Date(m.date);
+                const dateStr = date.toLocaleString('fi-FI', {
+                    day: 'numeric', month: 'short',
+                    hour: '2-digit', minute: '2-digit'
+                });
+                
+                const isFinished = m.status === 'FINISHED';
+                const isScheduled = m.status === 'SCHEDULED';
+                
+                let statusClass = 'scheduled';
+                let statusLabel = '📅 Tulossa';
+                if (isFinished) { statusClass = 'finished'; statusLabel = '✅ Pelattu'; }
+                
+                let scoreHtml = '';
+                if (isFinished && m.score) {
+                    const h = m.score.home !== null ? m.score.home : '-';
+                    const a = m.score.away !== null ? m.score.away : '-';
+                    scoreHtml = `
+                        <div class="score">
+                            ${h}<span class="dash">–</span>${a}
                         </div>
                     `;
-                } catch (err) {
-                    debugLog(`❌ Error rendering match ${index}:`, err.message);
+                } else {
+                    scoreHtml = `<div class="score" style="color:#4a3a2a; font-size:0.9rem;">vs</div>`;
+                }
+                
+                let resultHtml = '';
+                if (isFinished && m.result) {
+                    let resultClass = 'draw';
+                    let resultLabel = '🤝 Tasapeli';
+                    if (m.result === '1') { resultClass = 'home'; resultLabel = '🏠 Koti voitto'; }
+                    if (m.result === '2') { resultClass = 'away'; resultLabel = '✈️ Vieras voitto'; }
+                    resultHtml = `<span class="result-badge ${resultClass}">${resultLabel}</span>`;
+                }
+                
+                // Show predictions count
+                const predCount = m.predictions ? Object.keys(m.predictions).length : 0;
+                const predHtml = predCount > 0 ? `<div style="font-size:0.7rem;color:#8a7a6a;margin-top:8px;">📊 ${predCount} veikkausta</div>` : '';
+                
+                html += `
+                    <div class="match-card">
+                        <div class="date">${dateStr}</div>
+                        <div class="teams">
+                            <div class="team"><div class="name">${m.homeTeam}</div></div>
+                            <div class="vs">vs</div>
+                            <div class="team"><div class="name">${m.awayTeam}</div></div>
+                        </div>
+                        ${scoreHtml}
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+                            <span class="status-badge ${statusClass}">${statusLabel}</span>
+                            ${resultHtml}
+                        </div>
+                        ${predHtml}
+                    </div>
+                `;
+            });
+            
+            $('matchesGrid').innerHTML = html;
+        }
+
+        // ===== RENDER LEADERBOARD =====
+        function renderLeaderboard() {
+            if (!allData || !allData.players) return;
+            
+            // Calculate scores from predictions
+            const scores = {};
+            allData.players.forEach(p => scores[p] = 0);
+            
+            allData.matches.forEach(m => {
+                if (m.status === 'FINISHED' && m.result && m.predictions) {
+                    Object.entries(m.predictions).forEach(([player, pred]) => {
+                        if (pred === m.result) {
+                            scores[player] = (scores[player] || 0) + 1;
+                        }
+                    });
                 }
             });
+            
+            const sorted = allData.players
+                .map(p => ({ name: p, points: scores[p] || 0 }))
+                .sort((a, b) => b.points - a.points);
+            
+            let html = '';
+            sorted.forEach((p, i) => {
+                let rankClass = '';
+                if (i === 0) rankClass = 'rank-1';
+                else if (i === 1) rankClass = 'rank-2';
+                else if (i === 2) rankClass = 'rank-3';
+                
+                html += `
+                    <tr>
+                        <td class="rank ${rankClass}">${i + 1}</td>
+                        <td class="player-name">${p.name}</td>
+                        <td class="points">${p.points}</td>
+                    </tr>
+                `;
+            });
+            
+            $('leaderboardBody').innerHTML = html;
+        }
 
-            matchesGrid.innerHTML = html;
-            debugLog(`✅ Rendered ${filtered.length} matches`);
+        // ===== RENDER PREDICTIONS =====
+        function renderPredictions() {
+            if (!allData) return;
+            
+            const playedMatches = allData.matches.filter(m => m.status === 'FINISHED' && m.predictions);
+            
+            if (playedMatches.length === 0) {
+                $('predictionsGrid').innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">📊</div>
+                        <p>Ei pelattuja otteluita vielä</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            playedMatches.slice(0, 10).forEach(m => {
+                const date = new Date(m.date);
+                const dateStr = date.toLocaleString('fi-FI', {
+                    day: 'numeric', month: 'short'
+                });
+                
+                const preds = Object.entries(m.predictions || {});
+                if (preds.length === 0) return;
+                
+                html += `
+                    <div class="match-card">
+                        <div class="date">${dateStr}</div>
+                        <div class="teams">
+                            <div class="team"><div class="name">${m.homeTeam}</div></div>
+                            <div class="vs">vs</div>
+                            <div class="team"><div class="name">${m.awayTeam}</div></div>
+                        </div>
+                        <div style="text-align:center;color:#ffd700;font-weight:700;margin:6px 0;">
+                            Tulos: ${m.score?.home ?? '-'}–${m.score?.away ?? '-'}
+                        </div>
+                        <div class="predictions-list">
+                            ${preds.map(([player, pred]) => 
+                                `<span class="pred">${player}: ${pred}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            $('predictionsGrid').innerHTML = html;
         }
 
         // ===== FILTER =====
@@ -812,37 +807,25 @@
             renderMatches(filter);
         }
 
-        // ===== STATUS =====
-        function setStatus(online, message = '') {
-            if (online) {
-                statusDot.className = 'dot online';
-                statusText.textContent = message || 'Yhdistetty';
-                statusText.style.color = '#81c784';
-            } else {
-                statusDot.className = 'dot offline';
-                statusText.textContent = `Virhe: ${message || 'ei yhteyttä'}`;
-                statusText.style.color = '#ef9a9a';
-            }
+        // ===== TAB SWITCHING =====
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            document.querySelectorAll('.tabs button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tab);
+            });
+            
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            $(`tab-${tab}`).classList.add('active');
         }
 
-        // ===== AUTO-REFRESH =====
-        let refreshInterval = null;
-
-        function startAutoRefresh() {
-            if (refreshInterval) clearInterval(refreshInterval);
-            refreshInterval = setInterval(() => {
-                loadData();
-            }, 2 * 60 * 1000);
-        }
+        // ===== AUTO REFRESH =====
+        let refreshInterval = setInterval(loadData, 120000);
 
         // ===== INIT =====
-        document.addEventListener('DOMContentLoaded', () => {
-            // Show debug info
-            debugInfo.style.display = 'block';
-            debugLog('🚀 KOSSU 2026 initialized');
-            loadData();
-            startAutoRefresh();
-        });
+        document.addEventListener('DOMContentLoaded', loadData);
     </script>
 </body>
 </html>

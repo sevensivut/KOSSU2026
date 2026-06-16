@@ -15,59 +15,6 @@ API_KEY = os.getenv('RAPIDAPI_KEY')
 API_BASE_URL = 'https://v3.football.api-sports.io'
 OUTPUT_FILE = Path('data/matches.json')
 
-# Team name mapping (Finnish -> English)
-TEAM_MAPPING = {
-    'Meksiko': 'Mexico',
-    'Etelä-Afrikka': 'South Africa',
-    'Etelä-Korea': 'South Korea',
-    'Tšekki': 'Czech Republic',
-    'Kanada': 'Canada',
-    'Bosnia ja Hertsegovina': 'Bosnia and Herzegovina',
-    'USA': 'United States',
-    'Paraguay': 'Paraguay',
-    'Qatar': 'Qatar',
-    'Sveitsi': 'Switzerland',
-    'Brasilia': 'Brazil',
-    'Marokko': 'Morocco',
-    'Haiti': 'Haiti',
-    'Skotlanti': 'Scotland',
-    'Australia': 'Australia',
-    'Turkki': 'Turkey',
-    'Saksa': 'Germany',
-    'Curaçao': 'Curacao',
-    'Hollanti': 'Netherlands',
-    'Japani': 'Japan',
-    'Norsunluurannikko': 'Ivory Coast',
-    'Ecuador': 'Ecuador',
-    'Ruotsi': 'Sweden',
-    'Tunisia': 'Tunisia',
-    'Espanja': 'Spain',
-    'Kap Verde': 'Cape Verde',
-    'Belgia': 'Belgium',
-    'Egypti': 'Egypt',
-    'Saudi-Arabia': 'Saudi Arabia',
-    'Uruguay': 'Uruguay',
-    'Iran': 'Iran',
-    'Uusi-Seelanti': 'New Zealand',
-    'Ranska': 'France',
-    'Senegal': 'Senegal',
-    'Irak': 'Iraq',
-    'Norja': 'Norway',
-    'Argentiina': 'Argentina',
-    'Algeria': 'Algeria',
-    'Itävalta': 'Austria',
-    'Jordania': 'Jordan',
-    'Portugali': 'Portugal',
-    'Kongon dem. tasavalta': 'Congo DR',
-    'Englanti': 'England',
-    'Kroatia': 'Croatia',
-    'Ghana': 'Ghana',
-    'Panama': 'Panama',
-    'Uzbekistan': 'Uzbekistan',
-    'Kolumbia': 'Colombia',
-    'Kongon dem. tv': 'Congo DR',
-}
-
 def find_csv_file():
     """Find the KOSSU CSV file"""
     possible_names = [
@@ -88,7 +35,6 @@ def find_csv_file():
                 print(f"✅ Found CSV at: {full_path}")
                 return full_path
     
-    # Try to find any CSV file
     for path in possible_paths:
         if path.exists():
             for file in path.glob('*.csv'):
@@ -110,21 +56,17 @@ def parse_csv(csv_file):
             reader = csv.reader(f, delimiter=',')
             rows = list(reader)
             
-            # Find where data starts (row with a date)
             data_start_row = None
             for i, row in enumerate(rows):
                 if row and len(row) > 0:
                     cell = str(row[0]).strip()
                     if '.' in cell and '2026' in cell:
                         data_start_row = i
-                        print(f"✅ Found data starting at row {i+1}")
                         break
             
             if data_start_row is None:
-                print("❌ No data rows found!")
                 return [], players
             
-            # Process data rows
             for row in rows[data_start_row:]:
                 if not row or len(row) < 5:
                     continue
@@ -134,29 +76,22 @@ def parse_csv(csv_file):
                     continue
                 
                 try:
-                    # Parse date
                     date_str = first_cell
                     date_parts = date_str.split(' ')
                     date_part = date_parts[0]
                     time_part = date_parts[1] if len(date_parts) > 1 else '00:00'
                     
-                    if len(date_part.split('.')) != 3:
-                        continue
-                        
                     day, month, year = date_part.split('.')
                     date_iso = f"{year}-{month}-{day}T{time_part}:00Z"
                     
-                    # Column 1 = Home team, Column 3 = Away team
                     home_team = row[1].strip() if len(row) > 1 else ''
                     away_team = row[3].strip() if len(row) > 3 else ''
                     
                     if not home_team or not away_team:
                         continue
                     
-                    # Column 4 = Result
                     result = row[4].strip() if len(row) > 4 else ''
                     
-                    # Player predictions start at column 6
                     player_preds = {}
                     for i, player in enumerate(players):
                         col_idx = 6 + i
@@ -169,22 +104,19 @@ def parse_csv(csv_file):
                         'id': len(matches) + 1,
                         'date': date_iso,
                         'homeTeam': home_team,
-                        'homeTeamEn': TEAM_MAPPING.get(home_team, home_team),
                         'awayTeam': away_team,
-                        'awayTeamEn': TEAM_MAPPING.get(away_team, away_team),
                         'result': result.upper() if result.upper() in ['1', '2', 'X'] else None,
                         'predictions': player_preds,
                         'score': {'home': None, 'away': None},
                         'status': 'SCHEDULED'
                     }
                     matches.append(match)
-                    print(f"  ✅ Parsed: {home_team} vs {away_team} (EN: {match['homeTeamEn']} vs {match['awayTeamEn']})")
                     
                 except Exception as e:
                     print(f"⚠️ Error parsing row: {e}")
                     continue
         
-        print(f"\n✅ Parsed {len(matches)} matches from CSV")
+        print(f"✅ Parsed {len(matches)} matches from CSV")
         return matches, players
         
     except Exception as e:
@@ -192,7 +124,7 @@ def parse_csv(csv_file):
         return [], []
 
 def fetch_live_matches():
-    """Fetch live and recent matches from API-Football"""
+    """Fetch live and recent matches from API-Football using the correct league"""
     
     if not API_KEY:
         print('⚠️ No RAPIDAPI_KEY found!')
@@ -203,43 +135,75 @@ def fetch_live_matches():
         'x-rapidapi-host': 'v3.football.api-sports.io'
     }
     
+    # Try multiple league IDs (1 is FIFA World Cup, but there might be others)
+    league_ids = [1, 2, 3, 4, 5]  # Try common IDs
     today = datetime.utcnow().strftime('%Y-%m-%d')
-    yesterday = (datetime.utcnow() - timedelta(days=1)).strftime('%Y-%m-%d')
     
     all_matches = []
     
-    for date in [today, yesterday]:
-        params = {
-            'date': date,
-            'league': '1',
-            'season': '2026'
-        }
+    print(f"🔄 Searching for matches on {today}...")
+    
+    # Try without league filter first to see all matches today
+    try:
+        response = requests.get(f'{API_BASE_URL}/fixtures', 
+                               headers=headers, 
+                               params={'date': today}, 
+                               timeout=10)
         
-        try:
-            url = f'{API_BASE_URL}/fixtures'
-            print(f"🔄 Fetching matches for {date}...")
-            response = requests.get(url, headers=headers, params=params, timeout=10)
+        if response.status_code == 200:
+            data = response.json()
+            matches = data.get('response', [])
             
-            if response.status_code == 200:
-                data = response.json()
-                if data.get('response'):
-                    all_matches.extend(data['response'])
-                    print(f"  ✅ Found {len(data['response'])} matches")
-                    # Print first match to debug
-                    if data['response']:
-                        first = data['response'][0]
-                        home = first.get('teams', {}).get('home', {}).get('name', '')
-                        away = first.get('teams', {}).get('away', {}).get('name', '')
-                        print(f"  📊 First API match: {home} vs {away}")
-                else:
-                    print(f"  ℹ️ No matches for {date}")
-            else:
-                print(f"  ⚠️ API error: {response.status_code}")
-                if response.status_code == 401:
-                    print("  🔑 Invalid API key!")
+            if matches:
+                print(f"✅ Found {len(matches)} matches today")
                 
-        except Exception as e:
-            print(f"  ⚠️ Request failed: {e}")
+                # Filter for World Cup matches
+                for match in matches:
+                    league_name = match.get('league', {}).get('name', '')
+                    if 'world cup' in league_name.lower() or 'worldcup' in league_name.lower():
+                        all_matches.append(match)
+                        print(f"  📊 Found World Cup match: {match.get('teams', {}).get('home', {}).get('name', '')} vs {match.get('teams', {}).get('away', {}).get('name', '')}")
+                
+                if all_matches:
+                    print(f"✅ Found {len(all_matches)} World Cup matches")
+                    return all_matches
+                else:
+                    print("ℹ️ Found matches today, but none are World Cup")
+                    print("📋 All matches today:")
+                    for match in matches[:5]:
+                        home = match.get('teams', {}).get('home', {}).get('name', '')
+                        away = match.get('teams', {}).get('away', {}).get('name', '')
+                        league = match.get('league', {}).get('name', '')
+                        print(f"  - {home} vs {away} ({league})")
+            else:
+                print(f"ℹ️ No matches found for today")
+        else:
+            print(f"⚠️ API error: {response.status_code}")
+    except Exception as e:
+        print(f"⚠️ Request failed: {e}")
+    
+    # If no matches found, try yesterday and tomorrow
+    if not all_matches:
+        for days_ago in [1, 2, 3]:
+            date = (datetime.utcnow() - timedelta(days=days_ago)).strftime('%Y-%m-%d')
+            print(f"🔄 Checking {date}...")
+            try:
+                response = requests.get(f'{API_BASE_URL}/fixtures', 
+                                       headers=headers, 
+                                       params={'date': date}, 
+                                       timeout=10)
+                if response.status_code == 200:
+                    data = response.json()
+                    matches = data.get('response', [])
+                    for match in matches:
+                        league_name = match.get('league', {}).get('name', '')
+                        if 'world cup' in league_name.lower() or 'worldcup' in league_name.lower():
+                            all_matches.append(match)
+                            print(f"  📊 Found World Cup match on {date}")
+                    if all_matches:
+                        break
+            except:
+                pass
     
     return all_matches
 
@@ -253,26 +217,19 @@ def merge_data(csv_matches, api_matches):
         
         key = f"{home}_{away}_{date}"
         api_map[key] = m
-        # Also add with swapped teams
         api_map[f"{away}_{home}_{date}"] = m
     
     merged = []
     matched_count = 0
     
     for csv_match in csv_matches:
-        # Use English names for matching
-        home_en = csv_match['homeTeamEn']
-        away_en = csv_match['awayTeamEn']
+        home = csv_match['homeTeam']
+        away = csv_match['awayTeam']
         date = csv_match['date'][:10]
         
-        # Try to find match with English names
-        key = f"{home_en}_{away_en}_{date}"
+        # Try to find match
+        key = f"{home}_{away}_{date}"
         api_match = api_map.get(key)
-        
-        # If not found, try with original Finnish names
-        if not api_match:
-            key_fi = f"{csv_match['homeTeam']}_{csv_match['awayTeam']}_{date}"
-            api_match = api_map.get(key_fi)
         
         if api_match:
             matched_count += 1
@@ -324,6 +281,8 @@ def calculate_scores(matches, players):
 def main():
     print('🏆 KOSSU 2026 - Live Match Data Fetcher')
     print('=' * 50)
+    print(f'📅 Today: {datetime.utcnow().strftime("%Y-%m-%d %H:%M")}')
+    print()
     
     # Find CSV
     csv_file = find_csv_file()
@@ -368,11 +327,11 @@ def main():
         for m in live_matches:
             print(f"  {m['homeTeam']} {m['score']['home']} - {m['score']['away']} {m['awayTeam']}")
     
-    # Show finished matches with scores
+    # Show finished matches
     finished_matches = [m for m in merged_matches if m['status'] == 'FINISHED' and m['score']['home'] is not None]
     if finished_matches:
         print(f"\n✅ FINISHED MATCHES ({len(finished_matches)}):")
-        for m in finished_matches[:5]:  # Show first 5
+        for m in finished_matches[:5]:
             print(f"  {m['homeTeam']} {m['score']['home']} - {m['score']['away']} {m['awayTeam']}")
     
     # Show scores

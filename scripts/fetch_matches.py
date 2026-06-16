@@ -172,7 +172,7 @@ def parse_csv(csv_file):
                     if not home_team or not away_team:
                         continue
                     
-                    # CSV result (from column 4) - used as fallback only
+                    # CSV result (from column 4) - only used if API has no data
                     csv_result = row[4].strip() if len(row) > 4 else ''
                     
                     # Get weights from correct columns
@@ -219,7 +219,7 @@ def parse_csv(csv_file):
                         'awayTeam': away_team,
                         'homeTeamEn': TEAM_MAPPING.get(home_team, home_team),
                         'awayTeamEn': TEAM_MAPPING.get(away_team, away_team),
-                        'csv_result': csv_result.upper() if csv_result.upper() in ['1', '2', 'X'] else None,  # Store as fallback
+                        'csv_result': csv_result.upper() if csv_result.upper() in ['1', '2', 'X'] else None,
                         'weight_1': weight_1,
                         'weight_2': weight_2,
                         'weight_x': weight_x,
@@ -241,7 +241,7 @@ def parse_csv(csv_file):
         return [], []
 
 def fetch_live_matches():
-    """Fetch live and recent matches from API-Football"""
+    """Fetch live and recent matches from API-Football for entire World Cup"""
     
     if not API_KEY:
         print('⚠️ No RAPIDAPI_KEY found!')
@@ -252,15 +252,21 @@ def fetch_live_matches():
         'x-rapidapi-host': 'v3.football.api-sports.io'
     }
     
-    # Check today and last 7 days
+    # Check ALL World Cup dates: June 11 to July 19, 2026
     all_matches = []
+    
+    start_date = datetime(2026, 6, 11)
+    end_date = datetime(2026, 7, 19)
+    
     dates_to_check = []
+    current_date = start_date
+    while current_date <= end_date:
+        dates_to_check.append(current_date.strftime('%Y-%m-%d'))
+        current_date += timedelta(days=1)
     
-    for i in range(7):
-        date = (datetime.utcnow() - timedelta(days=i)).strftime('%Y-%m-%d')
-        dates_to_check.append(date)
+    print(f"🔄 Checking {len(dates_to_check)} days for World Cup matches (June 11 - July 19)...")
     
-    print(f"🔄 Checking {len(dates_to_check)} days for matches...")
+    total_matches_found = 0
     
     for date in dates_to_check:
         try:
@@ -274,25 +280,49 @@ def fetch_live_matches():
                 matches = data.get('response', [])
                 
                 if matches:
-                    # Filter for World Cup matches
                     for match in matches:
                         league_name = match.get('league', {}).get('name', '')
                         if 'world cup' in league_name.lower() or 'worldcup' in league_name.lower():
                             all_matches.append(match)
                     
-                    if all_matches:
-                        print(f"  ✅ Found {len(all_matches)} World Cup matches so far")
+                    if matches:
+                        world_cup_count = len([m for m in matches if 'world cup' in m.get('league', {}).get('name', '').lower()])
+                        if world_cup_count > 0:
+                            print(f"  📅 {date}: {len(matches)} matches total, {world_cup_count} World Cup")
+                            total_matches_found += world_cup_count
+                else:
+                    # No matches this day - skip silently
+                    pass
+                    
+            elif response.status_code == 404:
+                # No matches - skip silently
+                pass
             else:
-                print(f"  ⚠️ API error for {date}: {response.status_code}")
+                if response.status_code != 429:  # Rate limit
+                    print(f"  ⚠️ API error for {date}: {response.status_code}")
                 
         except Exception as e:
-            print(f"  ⚠️ Request failed for {date}: {e}")
+            # Don't print errors for days with no matches
+            if '404' not in str(e):
+                print(f"  ⚠️ Request failed for {date}: {e}")
     
-    print(f"✅ Found {len(all_matches)} World Cup matches in total")
+    print(f"✅ Found {len(all_matches)} World Cup matches in total (group + knockout stages)")
+    
+    # Show first few matches for debugging
+    if all_matches:
+        print("\n📋 First 5 World Cup matches found:")
+        for i, match in enumerate(all_matches[:5]):
+            home = match.get('teams', {}).get('home', {}).get('name', '')
+            away = match.get('teams', {}).get('away', {}).get('name', '')
+            date = match.get('fixture', {}).get('date', '')[:10]
+            status = match.get('status', {}).get('short', '')
+            goals = match.get('goals', {})
+            print(f"  {i+1}. {home} vs {away} ({date}) - Status: {status}, Score: {goals.get('home', '?')}-{goals.get('away', '?')}")
+    
     return all_matches
 
 def merge_data(csv_matches, api_matches):
-    """Merge CSV predictions with live API data"""
+    """Merge CSV predictions with live API data - API takes priority"""
     api_map = {}
     for m in api_matches:
         home = m.get('teams', {}).get('home', {}).get('name', '')
@@ -304,8 +334,8 @@ def merge_data(csv_matches, api_matches):
         api_map[f"{away}_{home}_{date}"] = m
     
     merged = []
-    matched_count = 0
-    api_used_count = 0
+    api_matched = 0
+    csv_fallback = 0
     
     for csv_match in csv_matches:
         home_en = csv_match['homeTeamEn']
@@ -320,8 +350,8 @@ def merge_data(csv_matches, api_matches):
             api_match = api_map.get(key_fi)
         
         if api_match:
-            matched_count += 1
-            api_used_count += 1
+            # USE API DATA - priority
+            api_matched += 1
             
             goals = api_match.get('goals', {})
             score_home = goals.get('home')
@@ -330,6 +360,7 @@ def merge_data(csv_matches, api_matches):
             status_obj = api_match.get('status', {})
             status_short = status_obj.get('short', '')
             
+            # Map API status
             if status_short in ['FT', 'AET', 'PEN']:
                 status = 'FINISHED'
             elif status_short in ['LIVE', '1H', '2H', 'HT', 'ET']:
@@ -337,13 +368,14 @@ def merge_data(csv_matches, api_matches):
             else:
                 status = 'SCHEDULED'
             
+            # Set score from API (even if None, keep as 0)
             csv_match['score'] = {
                 'home': score_home if score_home is not None else 0,
                 'away': score_away if score_away is not None else 0
             }
             csv_match['status'] = status
-            csv_match['result'] = None  # Will be calculated below if finished
             
+            # Calculate result from score
             if status == 'FINISHED' and score_home is not None and score_away is not None:
                 if score_home > score_away:
                     csv_match['result'] = '1'
@@ -351,23 +383,27 @@ def merge_data(csv_matches, api_matches):
                     csv_match['result'] = '2'
                 else:
                     csv_match['result'] = 'X'
+            else:
+                csv_match['result'] = None
         else:
-            # No API match found - use CSV result as fallback
+            # No API match - use CSV as fallback
+            csv_fallback += 1
             if csv_match.get('csv_result'):
                 csv_match['result'] = csv_match['csv_result']
                 csv_match['status'] = 'FINISHED'
-                # Set score based on result
                 if csv_match['result'] == '1':
                     csv_match['score'] = {'home': 1, 'away': 0}
                 elif csv_match['result'] == '2':
                     csv_match['score'] = {'home': 0, 'away': 1}
                 elif csv_match['result'] == 'X':
                     csv_match['score'] = {'home': 1, 'away': 1}
+            else:
+                csv_match['status'] = 'SCHEDULED'
+                csv_match['score'] = {'home': 0, 'away': 0}
         
         merged.append(csv_match)
     
-    print(f"\n🔗 Matched {matched_count} of {len(csv_matches)} matches with API data")
-    print(f"📊 Using API for {api_used_count} matches, CSV fallback for {len(csv_matches) - api_used_count} matches")
+    print(f"\n🔗 Matches: {api_matched} from API, {csv_fallback} from CSV fallback")
     return merged
 
 def calculate_scores(matches, players):
@@ -427,16 +463,18 @@ def main():
     
     print(f"\n✅ Saved {len(merged_matches)} matches to {OUTPUT_FILE}")
     
+    # Show live matches
     live_matches = [m for m in merged_matches if m['status'] == 'IN_PLAY']
     if live_matches:
         print(f"\n🔴 LIVE MATCHES ({len(live_matches)}):")
         for m in live_matches:
             print(f"  {m['homeTeam']} {m['score']['home']} - {m['score']['away']} {m['awayTeam']}")
     
+    # Show finished matches with scores
     finished_matches = [m for m in merged_matches if m['status'] == 'FINISHED' and m['score']['home'] is not None]
     if finished_matches:
         print(f"\n✅ FINISHED MATCHES ({len(finished_matches)}):")
-        for m in finished_matches[:5]:
+        for m in finished_matches[:10]:
             print(f"  {m['homeTeam']} {m['score']['home']} - {m['score']['away']} {m['awayTeam']}")
     
     print("\n📊 Player Scores:")

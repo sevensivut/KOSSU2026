@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Get all history for proper merge
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -35,10 +37,17 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          
+          # Pull latest changes first
+          git pull origin main --no-rebase
+          
+          # Add the file
           git add -f data/matches.json
+          
+          # Commit if there are changes
           if git diff --staged --quiet; then
-            echo "No changes"
+            echo "No changes to commit"
           else
             git commit -m "Update data $(date -u +'%Y-%m-%d %H:%M:%S')"
-            git push
+            git push origin main
           fi

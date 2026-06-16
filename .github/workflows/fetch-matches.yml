@@ -2,7 +2,7 @@ name: Update Match Data
 
 on:
   schedule:
-    - cron: '*/2 * * * *'  # Run every 2 minutes for live scores
+    - cron: '*/2 * * * *'
   workflow_dispatch:
   push:
     branches:
@@ -28,6 +28,12 @@ jobs:
       - name: Install dependencies
         run: |
           pip install requests
+
+      - name: Test API connection
+        env:
+          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
+        run: |
+          python scripts/test_api.py
 
       - name: Run script
         env:

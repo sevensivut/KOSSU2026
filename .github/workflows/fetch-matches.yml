@@ -2,7 +2,6 @@ name: Fetch Real-time Match Data
 
 on:
   schedule:
-    # Run every 15 minutes
     - cron: '*/15 * * * *'
   workflow_dispatch:
   push:
@@ -27,11 +26,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests
+          pip install requests urllib3
 
       - name: Fetch match data from worldcup26.ir
         run: |
           python scripts/fetch_matches.py
+        # Add more verbose output
+        env:
+          PYTHONUNBUFFERED: 1
 
       - name: Commit and push changes
         run: |

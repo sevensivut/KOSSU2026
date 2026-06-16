@@ -241,10 +241,10 @@ def parse_csv(csv_file):
         return [], []
 
 def fetch_live_matches():
-    """Fetch live and recent matches from API-Football for entire World Cup"""
+    """Fetch live and recent matches from API-Football"""
     
     if not API_KEY:
-        print('⚠️ No RAPIDAPI_KEY found!')
+        print('⚠️ No RAPIDAPI_KEY found! Make sure it\'s set in GitHub Secrets')
         return []
     
     headers = {
@@ -252,72 +252,76 @@ def fetch_live_matches():
         'x-rapidapi-host': 'v3.football.api-sports.io'
     }
     
-    # Check ALL World Cup dates: June 11 to July 19, 2026
+    # Check multiple dates: June 14-18 (US time zone matches)
     all_matches = []
     
-    start_date = datetime(2026, 6, 11)
-    end_date = datetime(2026, 7, 19)
+    # Check June 14, 15, 16, 17, 18 (covers US time matches)
+    dates_to_check = ['2026-06-14', '2026-06-15', '2026-06-16', '2026-06-17', '2026-06-18']
     
-    dates_to_check = []
-    current_date = start_date
-    while current_date <= end_date:
-        dates_to_check.append(current_date.strftime('%Y-%m-%d'))
-        current_date += timedelta(days=1)
-    
-    print(f"🔄 Checking {len(dates_to_check)} days for World Cup matches (June 11 - July 19)...")
-    
-    total_matches_found = 0
+    print(f"🔄 Checking dates: {', '.join(dates_to_check)}")
+    print(f"🔑 Using API key: {API_KEY[:10]}...")
     
     for date in dates_to_check:
         try:
-            response = requests.get(f'{API_BASE_URL}/fixtures', 
-                                   headers=headers, 
-                                   params={'date': date}, 
-                                   timeout=10)
+            url = f'{API_BASE_URL}/fixtures'
+            params = {'date': date}
+            
+            print(f"  📅 Checking {date}...")
+            response = requests.get(url, headers=headers, params=params, timeout=10)
             
             if response.status_code == 200:
                 data = response.json()
                 matches = data.get('response', [])
                 
-                if matches:
-                    for match in matches:
-                        league_name = match.get('league', {}).get('name', '')
-                        if 'world cup' in league_name.lower() or 'worldcup' in league_name.lower():
-                            all_matches.append(match)
-                    
-                    if matches:
-                        world_cup_count = len([m for m in matches if 'world cup' in m.get('league', {}).get('name', '').lower()])
-                        if world_cup_count > 0:
-                            print(f"  📅 {date}: {len(matches)} matches total, {world_cup_count} World Cup")
-                            total_matches_found += world_cup_count
+                # Check if any World Cup matches
+                world_cup_matches = []
+                for match in matches:
+                    league_name = match.get('league', {}).get('name', '')
+                    if 'world cup' in league_name.lower():
+                        world_cup_matches.append(match)
+                        all_matches.append(match)
+                
+                if world_cup_matches:
+                    print(f"    ✅ Found {len(world_cup_matches)} World Cup matches on {date}")
+                    # Show first one
+                    m = world_cup_matches[0]
+                    home = m.get('teams', {}).get('home', {}).get('name', '')
+                    away = m.get('teams', {}).get('away', {}).get('name', '')
+                    goals = m.get('goals', {})
+                    status = m.get('status', {}).get('short', '')
+                    print(f"      Example: {home} vs {away} - Status: {status}, Score: {goals.get('home', '?')}-{goals.get('away', '?')}")
                 else:
-                    # No matches this day - skip silently
-                    pass
-                    
-            elif response.status_code == 404:
-                # No matches - skip silently
-                pass
+                    if matches:
+                        print(f"    ℹ️ {len(matches)} matches found on {date}, but none are World Cup")
+                        # Show first match league for debugging
+                        if matches:
+                            league = matches[0].get('league', {}).get('name', 'Unknown')
+                            print(f"      First match league: {league}")
+                    else:
+                        print(f"    ℹ️ No matches on {date}")
             else:
-                if response.status_code != 429:  # Rate limit
-                    print(f"  ⚠️ API error for {date}: {response.status_code}")
+                if response.status_code == 429:
+                    print(f"    ⚠️ Rate limit exceeded! Wait a moment.")
+                else:
+                    print(f"    ⚠️ API error for {date}: {response.status_code}")
+                    if response.status_code == 401:
+                        print("      🔑 Invalid API key! Check your RAPIDAPI_KEY secret.")
                 
         except Exception as e:
-            # Don't print errors for days with no matches
-            if '404' not in str(e):
-                print(f"  ⚠️ Request failed for {date}: {e}")
+            print(f"    ⚠️ Request failed for {date}: {e}")
     
-    print(f"✅ Found {len(all_matches)} World Cup matches in total (group + knockout stages)")
+    print(f"\n✅ Found {len(all_matches)} World Cup matches in total")
     
-    # Show first few matches for debugging
+    # Show all found matches
     if all_matches:
-        print("\n📋 First 5 World Cup matches found:")
-        for i, match in enumerate(all_matches[:5]):
+        print("\n📋 All World Cup matches found:")
+        for i, match in enumerate(all_matches):
             home = match.get('teams', {}).get('home', {}).get('name', '')
             away = match.get('teams', {}).get('away', {}).get('name', '')
             date = match.get('fixture', {}).get('date', '')[:10]
             status = match.get('status', {}).get('short', '')
             goals = match.get('goals', {})
-            print(f"  {i+1}. {home} vs {away} ({date}) - Status: {status}, Score: {goals.get('home', '?')}-{goals.get('away', '?')}")
+            print(f"  {i+1}. {home} vs {away} ({date}) - {status} - {goals.get('home', '?')}-{goals.get('away', '?')}")
     
     return all_matches
 
@@ -350,7 +354,6 @@ def merge_data(csv_matches, api_matches):
             api_match = api_map.get(key_fi)
         
         if api_match:
-            # USE API DATA - priority
             api_matched += 1
             
             goals = api_match.get('goals', {})
@@ -368,14 +371,12 @@ def merge_data(csv_matches, api_matches):
             else:
                 status = 'SCHEDULED'
             
-            # Set score from API (even if None, keep as 0)
             csv_match['score'] = {
                 'home': score_home if score_home is not None else 0,
                 'away': score_away if score_away is not None else 0
             }
             csv_match['status'] = status
             
-            # Calculate result from score
             if status == 'FINISHED' and score_home is not None and score_away is not None:
                 if score_home > score_away:
                     csv_match['result'] = '1'
@@ -386,7 +387,6 @@ def merge_data(csv_matches, api_matches):
             else:
                 csv_match['result'] = None
         else:
-            # No API match - use CSV as fallback
             csv_fallback += 1
             if csv_match.get('csv_result'):
                 csv_match['result'] = csv_match['csv_result']

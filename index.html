@@ -20,7 +20,6 @@
             padding: 20px;
         }
 
-        /* ===== CONTAINER ===== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -264,10 +263,6 @@
             margin-bottom: 2px;
         }
 
-        .match-card .team .flag {
-            font-size: 1.4rem;
-        }
-
         .match-card .vs {
             color: #4a3a2a;
             font-size: 0.7rem;
@@ -343,11 +338,11 @@
             color: #aaa;
         }
 
-        /* ===== EMPTY STATE ===== */
         .empty-state {
             text-align: center;
             padding: 60px 20px;
             color: #4a3a2a;
+            grid-column: 1 / -1;
         }
 
         .empty-state .icon {
@@ -508,6 +503,7 @@
 
         let allMatches = [];
         let currentFilter = 'all';
+        let dataLoaded = false;
 
         // ===== DOM REFS =====
         const $ = (id) => document.getElementById(id);
@@ -527,15 +523,32 @@
                 const timestamp = new Date().getTime();
                 const response = await fetch(`data/matches.json?t=${timestamp}`);
 
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
 
                 const data = await response.json();
 
+                // Check if we have real data
                 if (!data.matches || data.matches.length === 0) {
-                    throw new Error('Ei otteluita');
+                    throw new Error('Ei otteluita datassa');
                 }
 
-                allMatches = data.matches;
+                // Map the data to our format
+                allMatches = data.matches.map(match => ({
+                    id: match.id || Math.random(),
+                    date: match.date || new Date().toISOString(),
+                    homeTeam: match.homeTeam || 'Tuntematon',
+                    awayTeam: match.awayTeam || 'Tuntematon',
+                    status: match.status || 'SCHEDULED',
+                    score: {
+                        home: match.score?.home ?? null,
+                        away: match.score?.away ?? null
+                    },
+                    result: match.result || null
+                }));
+
+                dataLoaded = true;
 
                 // Update last update time
                 if (data.updatedAt) {
@@ -544,83 +557,68 @@
                         day: '2-digit', month: '2-digit', year: 'numeric',
                         hour: '2-digit', minute: '2-digit'
                     });
+                } else {
+                    lastUpdate.textContent = new Date().toLocaleString('fi-FI');
                 }
 
                 // Update status
-                setStatus(true);
+                setStatus(true, `${allMatches.length} ottelua ladattu`);
 
-                // Render
+                // Render everything
                 renderStats();
-                renderMatches('all');
+                renderMatches(currentFilter);
+
+                console.log(`✅ Ladattu ${allMatches.length} ottelua datasta`);
 
             } catch (error) {
                 console.error('Virhe ladattaessa dataa:', error);
                 setStatus(false, error.message);
-                // Use sample data
-                allMatches = getSampleMatches();
+                
+                // Show error but DON'T use sample data - show empty state instead
+                allMatches = [];
+                dataLoaded = false;
                 renderStats();
-                renderMatches('all');
+                renderMatches(currentFilter);
+                
+                // Show error message in grid
+                matchesGrid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">⚠️</div>
+                        <p>Dataa ei voitu ladata</p>
+                        <p style="font-size:0.8rem; color:#6a4a3a; margin-top:8px;">${error.message}</p>
+                        <button onclick="loadData()" style="margin-top:16px; padding:8px 24px; background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.2); border-radius:8px; color:#ffd700; cursor:pointer;">Yritä uudelleen</button>
+                    </div>
+                `;
             }
-        }
-
-        // ===== SAMPLE DATA (fallback) =====
-        function getSampleMatches() {
-            const today = new Date();
-            const teams = [
-                ['🇩🇪 Saksa', '🇪🇸 Espanja'],
-                ['🇧🇷 Brasilia', '🇦🇷 Argentiina'],
-                ['🇫🇷 Ranska', '🇵🇹 Portugali'],
-                ['🇬🇧 Englanti', '🇮🇹 Italia'],
-                ['🇳🇱 Alankomaat', '🇧🇪 Belgia'],
-                ['🇺🇸 USA', '🇲🇽 Meksiko']
-            ];
-
-            return teams.map((t, i) => {
-                const d = new Date(today);
-                d.setDate(d.getDate() + i);
-                d.setHours(16 + i * 2, 0, 0);
-
-                let status, homeScore, awayScore;
-                if (i === 0) {
-                    status = 'FINISHED';
-                    homeScore = 2;
-                    awayScore = 1;
-                } else if (i === 1) {
-                    status = 'IN_PLAY';
-                    homeScore = 1;
-                    awayScore = 0;
-                } else {
-                    status = 'SCHEDULED';
-                    homeScore = null;
-                    awayScore = null;
-                }
-
-                return {
-                    id: i + 1,
-                    date: d.toISOString(),
-                    homeTeam: t[0],
-                    awayTeam: t[1],
-                    status: status,
-                    score: { home: homeScore, away: awayScore }
-                };
-            });
         }
 
         // ===== RENDER STATS =====
         function renderStats() {
             const total = allMatches.length;
             const played = allMatches.filter(m => m.status === 'FINISHED').length;
-            const upcoming = allMatches.filter(m => m.status === 'SCHEDULED').length;
+            const upcoming = allMatches.filter(m => m.status === 'SCHEDULED' || m.status === 'SCHEDULED').length;
+            const live = allMatches.filter(m => m.status === 'IN_PLAY' || m.status === 'LIVE').length;
 
             totalMatches.textContent = total;
             playedMatches.textContent = played;
-            remainingMatches.textContent = upcoming;
+            remainingMatches.textContent = upcoming + live;
             playerCount.textContent = TOTAL_PLAYERS;
             totalPot.textContent = TOTAL_POT.toFixed(2) + ' €';
         }
 
         // ===== RENDER MATCHES =====
         function renderMatches(filter) {
+            if (!dataLoaded || allMatches.length === 0) {
+                matchesGrid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">⚽</div>
+                        <p>Ei otteluita näytettäväksi</p>
+                        <p style="font-size:0.8rem; color:#6a4a3a; margin-top:8px;">Dataa ei ole vielä ladattu</p>
+                    </div>
+                `;
+                return;
+            }
+
             const filtered = allMatches.filter(m => {
                 if (filter === 'all') return true;
                 if (filter === 'live') return m.status === 'IN_PLAY' || m.status === 'LIVE';
@@ -631,7 +629,7 @@
 
             if (filtered.length === 0) {
                 matchesGrid.innerHTML = `
-                    <div class="empty-state" style="grid-column: 1 / -1;">
+                    <div class="empty-state">
                         <div class="icon">📭</div>
                         <p>Ei otteluita tällä suodattimella</p>
                     </div>
@@ -657,7 +655,7 @@
 
                 // Result
                 let resultHtml = '';
-                if (isFinished && m.score.home !== null) {
+                if (isFinished && m.score.home !== null && m.score.away !== null) {
                     const home = m.score.home;
                     const away = m.score.away;
                     let resultClass = 'draw';
@@ -670,8 +668,8 @@
                 // Score display
                 let scoreHtml = '';
                 if (isFinished || isLive) {
-                    const h = m.score.home ?? '-';
-                    const a = m.score.away ?? '-';
+                    const h = m.score.home !== null && m.score.home !== undefined ? m.score.home : '-';
+                    const a = m.score.away !== null && m.score.away !== undefined ? m.score.away : '-';
                     scoreHtml = `
                         <div class="score">
                             ${h}<span class="dash">–</span>${a}
@@ -681,16 +679,24 @@
                     scoreHtml = `<div class="score" style="color:#4a3a2a; font-size:0.9rem;">vs</div>`;
                 }
 
+                // Clean team names (remove flags if they exist)
+                let homeName = m.homeTeam.replace(/[🇦-🇿]/g, '').trim();
+                let awayName = m.awayTeam.replace(/[🇦-🇿]/g, '').trim();
+                
+                // If names are empty, use original
+                if (!homeName) homeName = m.homeTeam;
+                if (!awayName) awayName = m.awayTeam;
+
                 return `
                     <div class="match-card" data-status="${m.status}">
                         <div class="date">${dateStr}</div>
                         <div class="teams">
                             <div class="team">
-                                <div class="name">${m.homeTeam}</div>
+                                <div class="name">${homeName}</div>
                             </div>
                             <div class="vs">vs</div>
                             <div class="team">
-                                <div class="name">${m.awayTeam}</div>
+                                <div class="name">${awayName}</div>
                             </div>
                         </div>
                         ${scoreHtml}
@@ -714,14 +720,14 @@
         }
 
         // ===== STATUS =====
-        function setStatus(online, error = null) {
+        function setStatus(online, message = '') {
             if (online) {
                 statusDot.className = 'dot online';
-                statusText.textContent = 'Yhdistetty';
+                statusText.textContent = message || 'Yhdistetty';
                 statusText.style.color = '#81c784';
             } else {
                 statusDot.className = 'dot offline';
-                statusText.textContent = `Virhe: ${error || 'ei yhteyttä'}`;
+                statusText.textContent = `Virhe: ${message || 'ei yhteyttä'}`;
                 statusText.style.color = '#ef9a9a';
             }
         }
@@ -732,7 +738,6 @@
         function startAutoRefresh() {
             if (refreshInterval) clearInterval(refreshInterval);
             refreshInterval = setInterval(() => {
-                // Only refresh if we're not in the middle of something
                 loadData();
             }, 2 * 60 * 1000); // 2 minutes
         }

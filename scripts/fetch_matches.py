@@ -16,7 +16,7 @@ API_BASE_URL = 'https://v3.football.api-sports.io'
 OUTPUT_FILE = Path('data/matches.json')
 
 def find_csv_file():
-    """Find the CSV file in common locations"""
+    """Find the KOSSU CSV file"""
     possible_names = [
         'Kossu 2026 jalkapallon MM (Taulukko).csv',
         'Kossu_2026_jalkapallon_MM_Taulukko.csv',
@@ -24,26 +24,24 @@ def find_csv_file():
         'Kossu2026.csv'
     ]
     
-    possible_paths = [
-        Path('.'),
-        Path('data'),
-        Path('scripts'),
-        Path('..')
-    ]
+    possible_paths = [Path('.'), Path('data'), Path('scripts')]
     
     for path in possible_paths:
+        if not path.exists():
+            continue
         for name in possible_names:
             full_path = path / name
             if full_path.exists():
                 print(f"✅ Found CSV at: {full_path}")
                 return full_path
     
-    # Try to find any .csv file
+    # Try to find any CSV file
     for path in possible_paths:
         if path.exists():
             for file in path.glob('*.csv'):
-                print(f"✅ Found CSV at: {file}")
-                return file
+                if 'kossu' in str(file).lower() or '2026' in str(file):
+                    print(f"✅ Found CSV at: {file}")
+                    return file
     
     return None
 
@@ -114,8 +112,7 @@ def fetch_live_matches():
     """Fetch live and recent matches from API-Football"""
     
     if not API_KEY:
-        print('⚠️ No RAPIDAPI_KEY found in environment variables!')
-        print('💡 Make sure to set RAPIDAPI_KEY in GitHub Secrets')
+        print('⚠️ No RAPIDAPI_KEY found!')
         return []
     
     headers = {
@@ -123,7 +120,6 @@ def fetch_live_matches():
         'x-rapidapi-host': 'v3.football.api-sports.io'
     }
     
-    # Get matches from today and yesterday
     today = datetime.utcnow().strftime('%Y-%m-%d')
     yesterday = (datetime.utcnow() - timedelta(days=1)).strftime('%Y-%m-%d')
     
@@ -132,7 +128,7 @@ def fetch_live_matches():
     for date in [today, yesterday]:
         params = {
             'date': date,
-            'league': '1',  # FIFA World Cup
+            'league': '1',
             'season': '2026'
         }
         
@@ -150,8 +146,6 @@ def fetch_live_matches():
                     print(f"  ℹ️ No matches for {date}")
             else:
                 print(f"  ⚠️ API error: {response.status_code}")
-                if response.status_code == 401:
-                    print("  🔑 Invalid API key! Check your RAPIDAPI_KEY secret.")
                 
         except Exception as e:
             print(f"  ⚠️ Request failed: {e}")
@@ -160,8 +154,6 @@ def fetch_live_matches():
 
 def merge_data(csv_matches, api_matches):
     """Merge CSV predictions with live API data"""
-    
-    # Create map of API matches
     api_map = {}
     for m in api_matches:
         home = m.get('teams', {}).get('home', {}).get('name', '')
@@ -170,10 +162,7 @@ def merge_data(csv_matches, api_matches):
         
         key = f"{home}_{away}_{date}"
         api_map[key] = m
-        
-        # Also add reversed version
-        key_swapped = f"{away}_{home}_{date}"
-        api_map[key_swapped] = m
+        api_map[f"{away}_{home}_{date}"] = m
     
     merged = []
     for csv_match in csv_matches:
@@ -185,12 +174,10 @@ def merge_data(csv_matches, api_matches):
         api_match = api_map.get(key)
         
         if api_match:
-            # Get real score
             goals = api_match.get('goals', {})
             score_home = goals.get('home')
             score_away = goals.get('away')
             
-            # Get status
             status_obj = api_match.get('status', {})
             status_short = status_obj.get('short', '')
             
@@ -235,11 +222,10 @@ def main():
     print('🏆 KOSSU 2026 - Live Match Data Fetcher')
     print('=' * 50)
     
-    # Find CSV file
+    # Find CSV
     csv_file = find_csv_file()
     if not csv_file:
-        print('❌ Could not find CSV file!')
-        print('💡 Make sure "Kossu 2026 jalkapallon MM (Taulukko).csv" is in the repository')
+        print('❌ No CSV file found!')
         return False
     
     # Parse CSV

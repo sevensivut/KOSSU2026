@@ -4,9 +4,7 @@ on:
   schedule:
     # Run every 15 minutes
     - cron: '*/15 * * * *'
-  # Allow manual trigger
   workflow_dispatch:
-  # Run on push to main
   push:
     branches:
       - main
@@ -31,11 +29,8 @@ jobs:
         run: |
           pip install requests
 
-      - name: Fetch match data from football-data.org
-        env:
-          FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
+      - name: Fetch match data from worldcup26.ir
         run: |
-          echo "API Key (first 10 chars): ${FOOTBALL_API_KEY:0:10}"
           python scripts/fetch_matches.py
 
       - name: Commit and push changes
@@ -43,11 +38,10 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # Check if there are changes
           if git diff --quiet; then
             echo "No changes to commit"
           else
             git add data/matches.json
-            git commit -m "Update match data from football-data.org - $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+            git commit -m "Update match data - $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
             git push
           fi

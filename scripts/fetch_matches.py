@@ -13,7 +13,7 @@ from pathlib import Path
 # Configuration
 CSV_FILE = Path('Kossu 2026 jalkapallon MM (Taulukko).csv')
 OUTPUT_FILE = Path('data/matches.json')
-API_KEY = 'bf69bdfcf6fe47a2b8eb9de53657bf3c'  # Your football-data.org key
+API_KEY = 'bf69bdfcf6fe47a2b8eb9de53657bf3c'
 
 def parse_csv():
     """Parse the CSV file and extract match data"""
@@ -21,28 +21,23 @@ def parse_csv():
                'Petri', 'Tommi', 'Severi', 'Matti H', 'Pasi', 'Matti K']
     
     matches = []
-    predictions = {p: {} for p in players}
     
     try:
         with open(CSV_FILE, 'r', encoding='utf-8-sig') as f:
             reader = csv.reader(f, delimiter=',')
             rows = list(reader)
             
-            # Find rows with match data
             for row in rows:
                 if not row or len(row) < 4:
                     continue
                     
-                # Check if this is a match row (has a date with 2026)
                 if row[0] and '2026' in row[0] and '.' in row[0]:
                     try:
-                        # Parse match
                         date_str = row[0].strip()
                         home_team = row[1].strip() if len(row) > 1 else ''
                         away_team = row[2].strip() if len(row) > 2 else ''
                         result = row[3].strip() if len(row) > 3 else ''
                         
-                        # Parse date: 11.06.2026 22:00 -> 2026-06-11T22:00:00Z
                         date_parts = date_str.split(' ')
                         date_part = date_parts[0]
                         time_part = date_parts[1] if len(date_parts) > 1 else '00:00'
@@ -99,8 +94,6 @@ def fetch_api_matches():
 
 def merge_data(csv_matches, api_matches, players):
     """Merge CSV predictions with API data"""
-    
-    # Create map of API matches by team+date
     api_map = {}
     for m in api_matches:
         home = m.get('homeTeam', {}).get('name', '')
@@ -116,11 +109,9 @@ def merge_data(csv_matches, api_matches, players):
         date = csv_match['date'][:10]
         key = f"{home}_{away}_{date}"
         
-        # Get API data if available
         api_match = api_map.get(key)
         
         if api_match:
-            # Use real score and status
             score = api_match.get('score', {}).get('fullTime', {})
             csv_match['score'] = {
                 'home': score.get('home', 0),
@@ -129,7 +120,6 @@ def merge_data(csv_matches, api_matches, players):
             csv_match['status'] = api_match.get('status', 'SCHEDULED')
             csv_match['realResult'] = api_match.get('result', {})
         else:
-            # Use CSV data
             csv_match['score'] = {'home': 0, 'away': 0}
             csv_match['status'] = 'FINISHED' if csv_match['result'] else 'SCHEDULED'
         
@@ -140,19 +130,14 @@ def merge_data(csv_matches, api_matches, players):
 def main():
     print('🔄 Processing KOSSU 2026 data...')
     
-    # Parse CSV
     csv_matches, players = parse_csv()
     if not csv_matches:
         print('❌ No data found in CSV!')
         return False
     
-    # Fetch API data
     api_matches = fetch_api_matches()
-    
-    # Merge data
     merged_matches = merge_data(csv_matches, api_matches, players)
     
-    # Save to JSON
     output_data = {
         'updatedAt': datetime.utcnow().isoformat() + 'Z',
         'matchCount': len(merged_matches),

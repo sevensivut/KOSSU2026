@@ -1,8 +1,7 @@
-name: Fetch Real-time Match Data
+name: Fetch Match Data
 
 on:
   schedule:
-    # Run every 15 minutes
     - cron: '*/15 * * * *'
   workflow_dispatch:
   push:
@@ -29,9 +28,7 @@ jobs:
         run: |
           pip install requests
 
-      - name: Fetch match data (smart)
-        env:
-          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
+      - name: Fetch match data
         run: |
           python scripts/fetch_matches.py
 
@@ -40,24 +37,13 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # Add state file to track fetch counts
-          git add data/matches.json data/fetch_state.json 2>/dev/null || true
+          # Add the file
+          git add data/matches.json
           
-          if git diff --quiet; then
+          # Commit if there are changes
+          if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Update match data - $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
-            git push
-          fi
-      - name: Commit and push changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          
-          if git diff --quiet; then
-            echo "No changes to commit"
-          else
-            git add data/matches.json
-            git commit -m "Update match data - $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+            git commit -m "Update match data - $(date -u +'%Y-%m-%d %H:%M:%S')"
             git push
           fi

@@ -2,7 +2,7 @@ name: Update Match Data
 
 on:
   schedule:
-    - cron: '*/2 * * * *'  # Run every 2 minutes for live scores
+    - cron: '*/2 * * * *'
   workflow_dispatch:
   push:
     branches:
@@ -39,20 +39,10 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
-          # Stash any local changes
           git stash --include-untracked
-          
-          # Pull latest changes
           git pull origin main --no-rebase
-          
-          # Pop the stash (restore local changes)
           git stash pop || true
-          
-          # Add the file
           git add -f data/matches.json
-          
-          # Commit if there are changes
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else

@@ -1,78 +1,1780 @@
 {
-  "updatedAt": "2026-06-16T20:35:27.229277Z",
-  "competitionName": "FIFA World Cup 2026",
-  "matchCount": 4,
-  "playedCount": 0,
-  "inPlayCount": 0,
-  "upcomingCount": 4,
+  "updatedAt": "2026-06-16T20:41:44.439341Z",
+  "matchCount": 72,
+  "players": [
+    "Markus",
+    "Juuso",
+    "Pera",
+    "Lari",
+    "Erno",
+    "Elmo",
+    "Petri",
+    "Tommi",
+    "Severi",
+    "Matti H",
+    "Pasi",
+    "Matti K"
+  ],
   "matches": [
     {
       "id": 1,
-      "date": "2026-06-11T16:00:00Z",
-      "homeTeam": "USA",
-      "homeTeamId": 1,
-      "awayTeam": "Mexico",
-      "awayTeamId": 2,
-      "status": "SCHEDULED",
+      "date": "2026-06-11T22:00:00Z",
+      "homeTeam": "Meksiko",
+      "awayTeam": "",
+      "result": "Etelä-Afrikka",
+      "predictions": {
+        "Markus": "1",
+        "Juuso": "1.0",
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "X",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
       "score": {
         "home": 0,
         "away": 0
       },
-      "stage": "group",
-      "group": "A",
-      "stadium": "Stadium A",
-      "matchday": "Group Stage"
+      "status": "FINISHED"
     },
     {
       "id": 2,
-      "date": "2026-06-11T18:00:00Z",
-      "homeTeam": "Brazil",
-      "homeTeamId": 3,
-      "awayTeam": "Argentina",
-      "awayTeamId": 4,
-      "status": "SCHEDULED",
+      "date": "2026-06-12T05:00:00Z",
+      "homeTeam": "Etelä-Korea",
+      "awayTeam": "",
+      "result": "Tšekki",
+      "predictions": {
+        "Markus": "1",
+        "Juuso": "2.0",
+        "Pera": "2",
+        "Lari": "x",
+        "Erno": "1",
+        "Elmo": "X",
+        "Petri": "X",
+        "Tommi": "2",
+        "Severi": "x",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
       "score": {
         "home": 0,
         "away": 0
       },
-      "stage": "group",
-      "group": "B",
-      "stadium": "Stadium B",
-      "matchday": "Group Stage"
+      "status": "FINISHED"
     },
     {
       "id": 3,
-      "date": "2026-06-12T16:00:00Z",
-      "homeTeam": "Germany",
-      "homeTeamId": 5,
-      "awayTeam": "France",
-      "awayTeamId": 6,
-      "status": "SCHEDULED",
+      "date": "2026-06-12T22:00:00Z",
+      "homeTeam": "Kanada",
+      "awayTeam": "",
+      "result": "Bosnia ja Hertsegovina",
+      "predictions": {
+        "Markus": "x",
+        "Juuso": "2.5",
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "X",
+        "Pasi": "1",
+        "Matti K": "2"
+      },
       "score": {
         "home": 0,
         "away": 0
       },
-      "stage": "group",
-      "group": "C",
-      "stadium": "Stadium C",
-      "matchday": "Group Stage"
+      "status": "FINISHED"
     },
     {
       "id": 4,
-      "date": "2026-06-12T18:00:00Z",
-      "homeTeam": "England",
-      "homeTeamId": 7,
-      "awayTeam": "Spain",
-      "awayTeamId": 8,
-      "status": "SCHEDULED",
+      "date": "2026-06-13T04:00:00Z",
+      "homeTeam": "USA",
+      "awayTeam": "",
+      "result": "Paraguay",
+      "predictions": {
+        "Markus": "1",
+        "Juuso": "1.0",
+        "Pera": "x",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "X",
+        "Petri": "1",
+        "Tommi": "2",
+        "Severi": "x",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "2"
+      },
       "score": {
         "home": 0,
         "away": 0
       },
-      "stage": "group",
-      "group": "D",
-      "stadium": "Stadium D",
-      "matchday": "Group Stage"
+      "status": "FINISHED"
+    },
+    {
+      "id": 5,
+      "date": "2026-06-13T22:00:00Z",
+      "homeTeam": "Qatar",
+      "awayTeam": "",
+      "result": "Sveitsi",
+      "predictions": {
+        "Markus": "x",
+        "Juuso": "2.5",
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "2",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 6,
+      "date": "2026-06-14T01:00:00Z",
+      "homeTeam": "Brasilia",
+      "awayTeam": "",
+      "result": "Marokko",
+      "predictions": {
+        "Markus": "x",
+        "Juuso": "2.0",
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "X",
+        "Petri": "1",
+        "Tommi": "2",
+        "Severi": "x",
+        "Matti H": "1",
+        "Pasi": "x",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 7,
+      "date": "2026-06-14T04:00:00Z",
+      "homeTeam": "Haiti",
+      "awayTeam": "",
+      "result": "Skotlanti",
+      "predictions": {
+        "Markus": "2",
+        "Juuso": "1.0",
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "x",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 8,
+      "date": "2026-06-14T07:00:00Z",
+      "homeTeam": "Australia",
+      "awayTeam": "",
+      "result": "Turkki",
+      "predictions": {
+        "Markus": "1",
+        "Juuso": "3.0",
+        "Pera": "x",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "X",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "X",
+        "Pasi": "2",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 9,
+      "date": "2026-06-14T20:00:00Z",
+      "homeTeam": "Saksa",
+      "awayTeam": "",
+      "result": "Curaçao",
+      "predictions": {
+        "Markus": "1",
+        "Juuso": "1.0",
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 10,
+      "date": "2026-06-14T23:00:00Z",
+      "homeTeam": "Hollanti",
+      "awayTeam": "",
+      "result": "Japani",
+      "predictions": {
+        "Markus": "x",
+        "Juuso": "2.0",
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "X",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "2",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 11,
+      "date": "2026-06-15T02:00:00Z",
+      "homeTeam": "Norsunluurannikko",
+      "awayTeam": "",
+      "result": "Ecuador",
+      "predictions": {
+        "Markus": "1",
+        "Juuso": "2.0",
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "1",
+        "Elmo": "2",
+        "Petri": "X",
+        "Tommi": "1",
+        "Severi": "x",
+        "Matti H": "X",
+        "Pasi": "x",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 12,
+      "date": "2026-06-15T05:00:00Z",
+      "homeTeam": "Ruotsi",
+      "awayTeam": "",
+      "result": "Tunisia",
+      "predictions": {
+        "Markus": "1",
+        "Juuso": "1.0",
+        "Pera": "x",
+        "Lari": "1",
+        "Erno": "x",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "X",
+        "Severi": "x",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 13,
+      "date": "2026-06-15T19:00:00Z",
+      "homeTeam": "Espanja",
+      "awayTeam": "",
+      "result": "Kap Verde",
+      "predictions": {
+        "Markus": "x",
+        "Juuso": "2.5",
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 14,
+      "date": "2026-06-15T22:00:00Z",
+      "homeTeam": "Belgia",
+      "awayTeam": "",
+      "result": "Egypti",
+      "predictions": {
+        "Markus": "x",
+        "Juuso": "2.0",
+        "Pera": "x",
+        "Lari": "1",
+        "Erno": "2",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "2",
+        "Matti H": "1",
+        "Pasi": "x",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 15,
+      "date": "2026-06-16T01:00:00Z",
+      "homeTeam": "Saudi-Arabia",
+      "awayTeam": "",
+      "result": "Uruguay",
+      "predictions": {
+        "Markus": "x",
+        "Juuso": "2.0",
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "x",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "X",
+        "Severi": "x",
+        "Matti H": "2",
+        "Pasi": "2",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 16,
+      "date": "2026-06-16T04:00:00Z",
+      "homeTeam": "Iran",
+      "awayTeam": "",
+      "result": "Uusi-Seelanti",
+      "predictions": {
+        "Markus": "x",
+        "Juuso": "2.5",
+        "Pera": "x",
+        "Lari": "1",
+        "Erno": "2",
+        "Elmo": "X",
+        "Petri": "1",
+        "Tommi": "2",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 17,
+      "date": "2026-06-16T22:00:00Z",
+      "homeTeam": "Ranska",
+      "awayTeam": "",
+      "result": "Senegal",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "x",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 18,
+      "date": "2026-06-17T01:00:00Z",
+      "homeTeam": "Irak",
+      "awayTeam": "",
+      "result": "Norja",
+      "predictions": {
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "2",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 19,
+      "date": "2026-06-17T04:00:00Z",
+      "homeTeam": "Argentiina",
+      "awayTeam": "",
+      "result": "Algeria",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "x",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 20,
+      "date": "2026-06-17T07:00:00Z",
+      "homeTeam": "Itävalta",
+      "awayTeam": "",
+      "result": "Jordania",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "X",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "x",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 21,
+      "date": "2026-06-17T20:00:00Z",
+      "homeTeam": "Portugali",
+      "awayTeam": "",
+      "result": "Kongon dem. tv",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 22,
+      "date": "2026-06-17T23:00:00Z",
+      "homeTeam": "Englanti",
+      "awayTeam": "",
+      "result": "Kroatia",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "X",
+        "Petri": "X",
+        "Tommi": "1",
+        "Severi": "x",
+        "Matti H": "1",
+        "Pasi": "x",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 23,
+      "date": "2026-06-18T02:00:00Z",
+      "homeTeam": "Ghana",
+      "awayTeam": "",
+      "result": "Panama",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "X",
+        "Pasi": "x",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 24,
+      "date": "2026-06-18T05:00:00Z",
+      "homeTeam": "Uzbekistan",
+      "awayTeam": "",
+      "result": "Kolumbia",
+      "predictions": {
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "2",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 25,
+      "date": "2026-06-18T19:00:00Z",
+      "homeTeam": "Tšekki",
+      "awayTeam": "",
+      "result": "Etelä-Afrikka",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "X",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "2",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 26,
+      "date": "2026-06-18T22:00:00Z",
+      "homeTeam": "Sveitsi",
+      "awayTeam": "",
+      "result": "Bosnia ja Hertsegovina",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "X",
+        "Petri": "X",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "x",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 27,
+      "date": "2026-06-19T01:00:00Z",
+      "homeTeam": "Kanada",
+      "awayTeam": "",
+      "result": "Qatar",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 28,
+      "date": "2026-06-19T04:00:00Z",
+      "homeTeam": "Meksiko",
+      "awayTeam": "",
+      "result": "Etelä-Korea",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "x",
+        "Matti H": "X",
+        "Pasi": "x",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 29,
+      "date": "2026-06-19T22:00:00Z",
+      "homeTeam": "USA",
+      "awayTeam": "",
+      "result": "Australia",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "X",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 30,
+      "date": "2026-06-20T01:00:00Z",
+      "homeTeam": "Skotlanti",
+      "awayTeam": "",
+      "result": "Marokko",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "2",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 31,
+      "date": "2026-06-20T03:30:00Z",
+      "homeTeam": "Brasilia",
+      "awayTeam": "",
+      "result": "Haiti",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 32,
+      "date": "2026-06-20T06:00:00Z",
+      "homeTeam": "Turkki",
+      "awayTeam": "",
+      "result": "Paraguay",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "x",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "X",
+        "Severi": "x",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 33,
+      "date": "2026-06-20T20:00:00Z",
+      "homeTeam": "Hollanti",
+      "awayTeam": "",
+      "result": "Ruotsi",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "X",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "2",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 34,
+      "date": "2026-06-20T23:00:00Z",
+      "homeTeam": "Saksa",
+      "awayTeam": "",
+      "result": "Norsunluurannikko",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "2",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "x",
+        "Matti H": "1",
+        "Pasi": "x",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 35,
+      "date": "2026-06-21T03:00:00Z",
+      "homeTeam": "Ecuador",
+      "awayTeam": "",
+      "result": "Curaçao",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 36,
+      "date": "2026-06-21T07:00:00Z",
+      "homeTeam": "Tunisia",
+      "awayTeam": "",
+      "result": "Japani",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "2",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 37,
+      "date": "2026-06-21T19:00:00Z",
+      "homeTeam": "Espanja",
+      "awayTeam": "",
+      "result": "Saudi-Arabia",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 38,
+      "date": "2026-06-21T22:00:00Z",
+      "homeTeam": "Belgia",
+      "awayTeam": "",
+      "result": "Iran",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 39,
+      "date": "2026-06-22T01:00:00Z",
+      "homeTeam": "Uruguay",
+      "awayTeam": "",
+      "result": "Kap Verde",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 40,
+      "date": "2026-06-22T04:00:00Z",
+      "homeTeam": "Uusi-Seelanti",
+      "awayTeam": "",
+      "result": "Egypti",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "X",
+        "Pasi": "2",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 41,
+      "date": "2026-06-22T20:00:00Z",
+      "homeTeam": "Argentiina",
+      "awayTeam": "",
+      "result": "Itävalta",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "x",
+        "Matti H": "1",
+        "Pasi": "x",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 42,
+      "date": "2026-06-23T00:00:00Z",
+      "homeTeam": "Ranska",
+      "awayTeam": "",
+      "result": "Irak",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 43,
+      "date": "2026-06-23T03:00:00Z",
+      "homeTeam": "Norja",
+      "awayTeam": "",
+      "result": "Senegal",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "x",
+        "Elmo": "X",
+        "Petri": "X",
+        "Tommi": "1",
+        "Severi": "2",
+        "Matti H": "1",
+        "Pasi": "x",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 44,
+      "date": "2026-06-23T06:00:00Z",
+      "homeTeam": "Jordania",
+      "awayTeam": "",
+      "result": "Algeria",
+      "predictions": {
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "x",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "X",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "2",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 45,
+      "date": "2026-06-23T20:00:00Z",
+      "homeTeam": "Portugali",
+      "awayTeam": "",
+      "result": "Uzbekistan",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 46,
+      "date": "2026-06-23T23:00:00Z",
+      "homeTeam": "Englanti",
+      "awayTeam": "",
+      "result": "Ghana",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 47,
+      "date": "2026-06-24T02:00:00Z",
+      "homeTeam": "Panama",
+      "awayTeam": "",
+      "result": "Kroatia",
+      "predictions": {
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "1",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "x",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 48,
+      "date": "2026-06-24T05:00:00Z",
+      "homeTeam": "Kolumbia",
+      "awayTeam": "",
+      "result": "Kongon dem. tasavalta",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "x",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 49,
+      "date": "2026-06-24T22:00:00Z",
+      "homeTeam": "Sveitsi",
+      "awayTeam": "",
+      "result": "Kanada",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "X",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "X",
+        "Pasi": "x",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 50,
+      "date": "2026-06-24T22:00:00Z",
+      "homeTeam": "Bosnia ja Hertsegovina",
+      "awayTeam": "",
+      "result": "Qatar",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "X",
+        "Severi": "1",
+        "Matti H": "X",
+        "Pasi": "1",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 51,
+      "date": "2026-06-25T01:00:00Z",
+      "homeTeam": "Skotlanti",
+      "awayTeam": "",
+      "result": "Brasilia",
+      "predictions": {
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "x",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 52,
+      "date": "2026-06-25T01:00:00Z",
+      "homeTeam": "Marokko",
+      "awayTeam": "",
+      "result": "Haiti",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 53,
+      "date": "2026-06-25T04:00:00Z",
+      "homeTeam": "Tšekki",
+      "awayTeam": "",
+      "result": "Meksiko",
+      "predictions": {
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "x",
+        "Elmo": "X",
+        "Petri": "X",
+        "Tommi": "1",
+        "Severi": "x",
+        "Matti H": "2",
+        "Pasi": "x",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 54,
+      "date": "2026-06-25T04:00:00Z",
+      "homeTeam": "Etelä-Afrikka",
+      "awayTeam": "",
+      "result": "Etelä-Korea",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "X",
+        "Petri": "2",
+        "Tommi": "1",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "x",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 55,
+      "date": "2026-06-25T23:00:00Z",
+      "homeTeam": "Curaçao",
+      "awayTeam": "",
+      "result": "Norsunluurannikko",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "1",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "1",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 56,
+      "date": "2026-06-25T23:00:00Z",
+      "homeTeam": "Ecuador",
+      "awayTeam": "",
+      "result": "Saksa",
+      "predictions": {
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "X",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "X",
+        "Pasi": "2",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 57,
+      "date": "2026-06-26T02:00:00Z",
+      "homeTeam": "Japani",
+      "awayTeam": "",
+      "result": "Ruotsi",
+      "predictions": {
+        "Pera": "2",
+        "Lari": "1",
+        "Erno": "x",
+        "Elmo": "X",
+        "Petri": "X",
+        "Tommi": "1",
+        "Severi": "x",
+        "Matti H": "X",
+        "Pasi": "1",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 58,
+      "date": "2026-06-26T02:00:00Z",
+      "homeTeam": "Tunisia",
+      "awayTeam": "",
+      "result": "Hollanti",
+      "predictions": {
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "2",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 59,
+      "date": "2026-06-26T05:00:00Z",
+      "homeTeam": "Turkki",
+      "awayTeam": "",
+      "result": "USA",
+      "predictions": {
+        "Pera": "2",
+        "Lari": "1",
+        "Erno": "2",
+        "Elmo": "X",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "x",
+        "Matti H": "X",
+        "Pasi": "1",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 60,
+      "date": "2026-06-26T05:00:00Z",
+      "homeTeam": "Paraguay",
+      "awayTeam": "",
+      "result": "Australia",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "1",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "X",
+        "Tommi": "1",
+        "Severi": "x",
+        "Matti H": "2",
+        "Pasi": "x",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 61,
+      "date": "2026-06-26T22:00:00Z",
+      "homeTeam": "Norja",
+      "awayTeam": "",
+      "result": "Ranska",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "X",
+        "Severi": "2",
+        "Matti H": "X",
+        "Pasi": "x",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 62,
+      "date": "2026-06-26T22:00:00Z",
+      "homeTeam": "Senegal",
+      "awayTeam": "",
+      "result": "Irak",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "1",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "1",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 63,
+      "date": "2026-06-27T03:00:00Z",
+      "homeTeam": "Kap Verde",
+      "awayTeam": "",
+      "result": "Saudi-Arabia",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "1",
+        "Petri": "X",
+        "Tommi": "2",
+        "Severi": "x",
+        "Matti H": "2",
+        "Pasi": "x",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 64,
+      "date": "2026-06-27T03:00:00Z",
+      "homeTeam": "Uruguay",
+      "awayTeam": "",
+      "result": "Espanja",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "X",
+        "Petri": "X",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "2",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 65,
+      "date": "2026-06-27T06:00:00Z",
+      "homeTeam": "Egypti",
+      "awayTeam": "",
+      "result": "Iran",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "2",
+        "Petri": "X",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "X",
+        "Pasi": "x",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 66,
+      "date": "2026-06-27T06:00:00Z",
+      "homeTeam": "Uusi-Seelanti",
+      "awayTeam": "",
+      "result": "Belgia",
+      "predictions": {
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "2",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 67,
+      "date": "2026-06-28T00:00:00Z",
+      "homeTeam": "Panama",
+      "awayTeam": "",
+      "result": "Englanti",
+      "predictions": {
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "2",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 68,
+      "date": "2026-06-28T00:00:00Z",
+      "homeTeam": "Kroatia",
+      "awayTeam": "",
+      "result": "Ghana",
+      "predictions": {
+        "Pera": "1",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "X",
+        "Petri": "1",
+        "Tommi": "1",
+        "Severi": "1",
+        "Matti H": "1",
+        "Pasi": "x",
+        "Matti K": "1"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 69,
+      "date": "2026-06-28T02:30:00Z",
+      "homeTeam": "Kolumbia",
+      "awayTeam": "",
+      "result": "Portugali",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "1",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "x",
+        "Matti H": "X",
+        "Pasi": "x",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 70,
+      "date": "2026-06-28T02:30:00Z",
+      "homeTeam": "Kongon dem. tasavalta",
+      "awayTeam": "",
+      "result": "Uzbekistan",
+      "predictions": {
+        "Pera": "x",
+        "Lari": "1",
+        "Erno": "1",
+        "Elmo": "2",
+        "Petri": "X",
+        "Tommi": "X",
+        "Severi": "x",
+        "Matti H": "2",
+        "Pasi": "1",
+        "Matti K": "x"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 71,
+      "date": "2026-06-28T05:00:00Z",
+      "homeTeam": "Algeria",
+      "awayTeam": "",
+      "result": "Itävalta",
+      "predictions": {
+        "Pera": "2",
+        "Lari": "x",
+        "Erno": "2",
+        "Elmo": "X",
+        "Petri": "X",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "1",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
+    },
+    {
+      "id": 72,
+      "date": "2026-06-28T05:00:00Z",
+      "homeTeam": "Jordania",
+      "awayTeam": "",
+      "result": "Argentiina",
+      "predictions": {
+        "Pera": "2",
+        "Lari": "2",
+        "Erno": "2",
+        "Elmo": "2",
+        "Petri": "2",
+        "Tommi": "2",
+        "Severi": "2",
+        "Matti H": "2",
+        "Pasi": "2",
+        "Matti K": "2"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "status": "FINISHED"
     }
   ]
 }

@@ -1,41 +1,53 @@
 import fs from "fs";
 
 /* =========================================================
-   LOAD RAW DATA
+LOAD DATA SOURCES
 ========================================================= */
 
-const input = JSON.parse(
-  fs.readFileSync("data/raw.json", "utf-8")
-);
+const raw = JSON.parse(fs.readFileSync("data/raw.json", "utf-8"));
+const players = JSON.parse(fs.readFileSync("data/players.json", "utf-8"));
+const predictions = JSON.parse(fs.readFileSync("data/predictions.json", "utf-8"));
 
-const matches = input.matches || [];
-const players = input.players || [];
+const matches = raw.matches || [];
 
 /* =========================================================
-   1X2 WEIGHT SYSTEM
+RESULT LOGIC (1X2)
+========================================================= */
+
+function getResult(home, away) {
+  if (home == null || away == null) return null;
+  if (home > away) return "1";
+  if (home < away) return "2";
+  return "X";
+}
+
+/* =========================================================
+WEIGHT SYSTEM (USES predictions.json)
 ========================================================= */
 
 function calculateWeights(match) {
   const counts = { "1": 0, "X": 0, "2": 0 };
 
-  const votes = match.predictions || {};
+  const matchPreds = predictions[match.id] || {};
 
-  for (const v of Object.values(votes)) {
+  for (const v of Object.values(matchPreds)) {
     if (counts[v] !== undefined) counts[v]++;
   }
 
-  const sorted = Object.entries(counts)
-    .sort((a, b) => a[1] - b[1]); // least → most
+  const sorted = Object.entries(counts).sort((a, b) => a[1] - b[1]);
 
   // fallback safety
   if (sorted.length < 3) {
-    return { weights: { "1": 2, "X": 2, "2": 2 }, multiplier: 1 };
+    return {
+      weights: { "1": 2, "X": 2, "2": 2 },
+      multiplier: 1
+    };
   }
 
   const weights = {
     [sorted[2][0]]: 1,
     [sorted[1][0]]: 2,
-    [sorted[0][0]]: 3,
+    [sorted[0][0]]: 3
   };
 
   const values = Object.values(counts);
@@ -43,7 +55,6 @@ function calculateWeights(match) {
 
   let multiplier = 1;
 
-  // tie logic from your rules
   if (unique === 2) multiplier = 1.5;
   if (unique === 1) multiplier = 2.5;
 
@@ -51,18 +62,18 @@ function calculateWeights(match) {
 }
 
 /* =========================================================
-   PLAYER MATCH SCORE
+SCORE SINGLE PLAYER
 ========================================================= */
 
 function scoreMatchPlayer(match, player, weights, multiplier) {
-  const pred = match.predictions?.[player];
+  const pred = predictions[match.id]?.[player];
   if (!pred) return 0;
 
   return (weights[pred] || 0) * multiplier;
 }
 
 /* =========================================================
-   PODIUM SCORING
+PODIUM (kept for compatibility)
 ========================================================= */
 
 function scorePodium(match, player) {
@@ -74,18 +85,15 @@ function scorePodium(match, player) {
   let score = 0;
 
   for (const k of ["gold", "silver", "bronze"]) {
-    if (p[k] === actual[k]) {
-      score += 3;
-    } else if (Object.values(actual).includes(p[k])) {
-      score += 1;
-    }
+    if (p[k] === actual[k]) score += 3;
+    else if (Object.values(actual).includes(p[k])) score += 1;
   }
 
   return score;
 }
 
 /* =========================================================
-   PROCESS MATCHES
+PROCESS MATCHES
 ========================================================= */
 
 function processMatches() {
@@ -104,7 +112,7 @@ function processMatches() {
       scores[player] += mScore + pScore;
 
       enrichedPreds[player] = {
-        prediction: match.predictions?.[player] || null,
+        prediction: predictions[match.id]?.[player] || null,
         matchPoints: mScore,
         podiumPoints: pScore,
         total: mScore + pScore
@@ -123,7 +131,7 @@ function processMatches() {
 }
 
 /* =========================================================
-   LEADERBOARD
+LEADERBOARD
 ========================================================= */
 
 function buildLeaderboard(scores) {
@@ -133,7 +141,7 @@ function buildLeaderboard(scores) {
 }
 
 /* =========================================================
-   OUTPUT
+OUTPUT
 ========================================================= */
 
 const { scores, enrichedMatches } = processMatches();

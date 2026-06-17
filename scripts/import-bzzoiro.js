@@ -20,11 +20,17 @@ async function fetchBzzoiro() {
     `&league_id=${GROUP_STAGE.league_id}`;
 
   const res = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${API_TOKEN}`
-    }
-  });
+  headers: {
+    Authorization: `Token ${API_TOKEN}`
+  }
+});
+  
+  if (!API_TOKEN) {
+  throw new Error("Missing BZZOIRO_TOKEN in GitHub Secrets");
+}
 
+   console.log("🔑 Using Bzzoiro token:", API_TOKEN.slice(0, 6) + "...");
+  
   if (!res.ok) {
     throw new Error(`BSD API error: ${res.status}`);
   }

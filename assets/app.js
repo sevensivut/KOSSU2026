@@ -1,308 +1,198 @@
-let data = null;
+document.addEventListener('DOMContentLoaded', () => {
+  // DOM Elements
+  const tabs = document.querySelectorAll('.tab');
+  const tabContents = document.querySelectorAll('.tab-content');
+  const updatedAtEl = document.getElementById('updatedAt');
+  const statsEl = document.getElementById('stats');
+  const leaderboardEl = document.getElementById('leaderboard');
+  const matchesListEl = document.getElementById('matchesList');
+  const awardsGridEl = document.getElementById('awardsGrid');
+  const teamSearchEl = document.getElementById('teamSearch');
+  const errorBoxEl = document.getElementById('errorBox');
 
-const $ = (id) => document.getElementById(id);
+  let globalData = null;
 
-/* =========================================================
-   LOAD DATA
-========================================================= */
+  // 1. TAB NAVIGATION
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tabContents.forEach(c => c.classList.add('hidden'));
+      
+      tab.classList.add('active');
+      const target = tab.getAttribute('data-tab');
+      document.getElementById(target).classList.remove('hidden');
+    });
+  });
 
-async function loadData() {
-  try {
-    const response = await fetch(`data/matches.json?v=${Date.now()}`);
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+  // 2. FETCH DATA
+  async function loadData() {
+    try {
+      // Cache-busting to ensure GitHub Pages loads the latest JSON
+      const res = await fetch('data/matches.json?t=' + new Date().getTime()); 
+      if (!res.ok) throw new Error('Dataa ei löytynyt');
+      globalData = await res.json();
+      
+      renderAll();
+    } catch (err) {
+      showError('Virhe ladatessa dataa: ' + err.message);
     }
-
-    data = await response.json();
-
-    renderAll();
-
-  } catch (err) {
-    console.error(err);
-    showError(err.message);
-  }
-}
-
-/* =========================================================
-   MASTER RENDER
-========================================================= */
-
-function renderAll() {
-  if (!data) return;
-
-  renderHeader();
-  renderStats();
-  renderLeaderboard();
-  renderMatches();
-  renderAwards();
-}
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-function renderHeader() {
-  const el = $("updatedAt");
-
-  if (!data?.updatedAt) {
-    el.textContent = "Päivitetty —";
-    return;
   }
 
-  const d = new Date(data.updatedAt);
-
-  el.textContent = !isNaN(d)
-    ? `Päivitetty ${d.toLocaleString("fi-FI")}`
-    : "Päivitetty —";
-}
-
-/* =========================================================
-   STATS
-========================================================= */
-
-function renderStats() {
-  const scores = data?.scores || {};
-  const matches = data?.matches || [];
-
-  const entries = Object.entries(scores);
-
-  if (!entries.length) {
-    $("stats").innerHTML = `<div class="card">Ei dataa</div>`;
-    return;
+  function showError(msg) {
+    errorBoxEl.textContent = msg;
+    errorBoxEl.classList.remove('hidden');
   }
 
-  const sorted = [...entries].sort((a, b) => b[1] - a[1]);
-  const leader = sorted[0];
-
-  const completed = matches.filter(m => m.status === "FINISHED").length;
-
-  $("stats").innerHTML = `
-    <div class="card">
-      <div class="card-value">${leader?.[0] ?? "—"}</div>
-      <div class="card-label">Johtaja</div>
-    </div>
-
-    <div class="card">
-      <div class="card-value">${leader?.[1] ?? "—"}</div>
-      <div class="card-label">Pisteet</div>
-    </div>
-
-    <div class="card">
-      <div class="card-value">${completed}/${data.matchCount ?? matches.length}</div>
-      <div class="card-label">Pelattu</div>
-    </div>
-
-    <div class="card">
-      <div class="card-value">${data.liveCount ?? 0}</div>
-      <div class="card-label">Live</div>
-    </div>
-  `;
-}
-
-/* =========================================================
-   LEADERBOARD
-========================================================= */
-
-function renderLeaderboard() {
-  const scores = data?.scores || {};
-  const entries = Object.entries(scores);
-
-  if (!entries.length) {
-    $("leaderboard").innerHTML = `<div class="card">Ei pisteitä</div>`;
-    return;
+  function renderAll() {
+    renderUpdatedAt();
+    renderStats();
+    renderLeaderboard();
+    renderMatches();
+    renderAwards();
   }
 
-  const sorted = [...entries].sort((a, b) => b[1] - a[1]);
+  // 3. RENDER HEADER & STATS
+  function renderUpdatedAt() {
+    if (!globalData.updatedAt) return;
+    const date = new Date(globalData.updatedAt);
+    updatedAtEl.textContent = `Päivitetty: ${date.toLocaleDateString('fi-FI')} klo ${date.toLocaleTimeString('fi-FI', {hour: '2-digit', minute:'2-digit'})}`;
+  }
 
-  $("leaderboard").innerHTML = sorted.map((p, index) => {
-    let medal = index + 1;
-
-    if (index === 0) medal = "🥇";
-    else if (index === 1) medal = "🥈";
-    else if (index === 2) medal = "🥉";
-
-    return `
-      <div class="leader-row">
-        <div>
-          <span class="rank">${medal}</span>
-          ${p?.[0] ?? "—"}
-        </div>
-
-        <div class="points">
-          ${p?.[1] ?? 0}
-        </div>
+  function renderStats() {
+    const totalMatches = globalData.matches.length;
+    const finishedMatches = globalData.matches.filter(m => m.status === 'FINISHED').length;
+    const totalPlayers = globalData.players.length;
+    const topScore = globalData.leaderboard[0]?.points || 0;
+    
+    statsEl.innerHTML = `
+      <div class="stat-card">
+        <h3>${totalPlayers}</h3>
+        <p>Pelaajaa</p>
+      </div>
+      <div class="stat-card">
+        <h3>${finishedMatches} / ${totalMatches}</h3>
+        <p>Ottelua pelattu</p>
+      </div>
+      <div class="stat-card">
+        <h3>${topScore.toFixed(1)}</h3>
+        <p>Kärkipistettä</p>
       </div>
     `;
-  }).join("");
-}
-
-/* =========================================================
-   MATCHES
-========================================================= */
-
-function renderMatches() {
-  const container = $("matchesList");
-
-  const matches = data?.matches || [];
-
-  const search = $("teamSearch")?.value?.toLowerCase() || "";
-
-  const filtered = matches.filter(m => {
-    if (!search) return true;
-
-    return (
-      (m.homeTeam || "").toLowerCase().includes(search) ||
-      (m.awayTeam || "").toLowerCase().includes(search)
-    );
-  });
-
-  if (!filtered.length) {
-    container.innerHTML = `<div class="card">Ei otteluita</div>`;
-    return;
   }
 
-  container.innerHTML = filtered.map(m => {
-
-    const home = m.homeTeam ?? "—";
-    const away = m.awayTeam ?? "—";
-
-    const dateObj = m.date ? new Date(m.date) : null;
-
-    const dateStr =
-      dateObj && !isNaN(dateObj)
-        ? dateObj.toLocaleString("fi-FI")
-        : "—";
-
-    const popular = mostPopularPrediction(m);
-
-    const preds = Object.entries(m.predictions || {});
-
-    return `
-      <details class="match">
-        <summary>
-          <strong>${home} – ${away}</strong>
-          <br>
-          ${dateStr}
-          <br>
-          🔥 Kansan veikkaus: ${popular}
-        </summary>
-
-        <div class="predictions">
-          ${
-            preds.length
-              ? preds.map(([name, pred]) => `
-                  <div class="pred">
-                    <span>${name}</span>
-                    <strong>${pred}</strong>
-                  </div>
-                `).join("")
-              : `<div class="pred">Ei veikkauksia</div>`
-          }
-        </div>
-      </details>
+  // 4. RENDER LEADERBOARD
+  function renderLeaderboard() {
+    if (!globalData.leaderboard) return;
+    
+    let html = `
+      <table class="leaderboard-table">
+        <thead>
+          <tr>
+            <th>Sija</th>
+            <th>Pelaaja</th>
+            <th>Pisteet</th>
+          </tr>
+        </thead>
+        <tbody>
     `;
-  }).join("");
-}
-
-/* =========================================================
-   MOST POPULAR PREDICTION
-========================================================= */
-
-function mostPopularPrediction(match) {
-  const counts = { "1": 0, "X": 0, "2": 0 };
-
-  Object.values(match?.predictions || {})
-    .forEach(v => {
-      if (counts[v] !== undefined) counts[v]++;
+    
+    globalData.leaderboard.forEach((p, i) => {
+      const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
+      html += `
+        <tr>
+          <td>${i + 1} ${medal}</td>
+          <td>${p.name}</td>
+          <td><strong>${p.points.toFixed(1)}</strong></td>
+        </tr>
+      `;
     });
-
-  const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-
-  return sorted.length ? sorted[0][0] : "—";
-}
-
-/* =========================================================
-   AWARDS
-========================================================= */
-
-function renderAwards() {
-  const scores = data?.scores || {};
-  const entries = Object.entries(scores);
-
-  if (entries.length < 1) {
-    $("awardsGrid").innerHTML = `<div class="card">Ei dataa</div>`;
-    return;
+    
+    html += `</tbody></table>`;
+    leaderboardEl.innerHTML = html;
   }
 
-  const sorted = [...entries].sort((a, b) => b[1] - a[1]);
+  // 5. RENDER MATCHES
+  function renderMatches(filter = '') {
+    if (!globalData.matches) return;
+    
+    // Sort chronologically
+    const sortedMatches = [...globalData.matches].sort((a, b) => new Date(a.date) - new Date(b.date));
+    
+    let html = '';
+    let visibleCount = 0;
+    
+    sortedMatches.forEach(m => {
+      const teams = `${m.homeTeam} ${m.awayTeam}`.toLowerCase();
+      if (filter && !teams.includes(filter.toLowerCase())) return;
+      visibleCount++;
+      
+      const date = new Date(m.date);
+      const dateStr = date.toLocaleDateString('fi-FI', { weekday: 'short', day: '2-digit', month: '2-digit' });
+      const timeStr = date.toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit' });
+      
+      const isFinished = m.status === 'FINISHED';
+      const statusClass = isFinished ? 'finished' : 'scheduled';
+      
+      const scoreDisplay = isFinished && m.score 
+        ? `<span class="score">${m.score.home} - ${m.score.away}</span>` 
+        : `<span class="time">${timeStr}</span>`;
+        
+      const weights = m.weights || { '1': 0, 'X': 0, '2': 0 };
+        
+      html += `
+        <div class="match-card ${statusClass}">
+          <div class="match-header">
+            <span class="date">${dateStr}</span>
+            ${scoreDisplay}
+          </div>
+          <div class="match-teams">
+            <div class="team home">${m.homeTeam}</div>
+            <div class="team away">${m.awayTeam}</div>
+          </div>
+          <div class="match-predictions">
+            <h4>Veikkaukset <span class="weights">(1: ${weights['1']}p | X: ${weights['X']}p | 2: ${weights['2']}p)</span></h4>
+            <div class="pred-grid">
+      `;
+      
+      globalData.players.forEach(player => {
+        const pred = m.predictions?.[player] || '-';
+        const pts = m.enrichedPredictions?.[player]?.matchPoints || 0;
+        const isCorrect = isFinished && pred === m.result;
+        
+        html += `
+          <div class="pred-item ${isCorrect ? 'correct' : ''}">
+            <span class="pred-player">${player}</span>
+            <span class="pred-pick">${pred}</span>
+            <span class="pred-pts">${pts > 0 ? '+' + pts : ''}</span>
+          </div>
+        `;
+      });
+      
+      html += `
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    
+    matchesListEl.innerHTML = html || '<p>Ei otteluita hakusanalla.</p>';
+  }
 
-  const g = sorted[0];
-  const s = sorted[1];
-  const b = sorted[2];
-
-  $("awardsGrid").innerHTML = `
-    <div class="card">
-      <h3>🥇 Mestari</h3>
-      <p>${g?.[0] ?? "—"}</p>
-    </div>
-
-    <div class="card">
-      <h3>🥈 Hopea</h3>
-      <p>${s?.[0] ?? "—"}</p>
-    </div>
-
-    <div class="card">
-      <h3>🥉 Pronssi</h3>
-      <p>${b?.[0] ?? "—"}</p>
-    </div>
-  `;
-}
-
-/* =========================================================
-   ERROR HANDLING
-========================================================= */
-
-function showError(msg) {
-  const box = $("errorBox");
-
-  if (!box) return;
-
-  box.textContent = msg;
-  box.classList.remove("hidden");
-}
-
-/* =========================================================
-   EVENTS
-========================================================= */
-
-document.querySelectorAll(".tab").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach(t =>
-      t.classList.remove("active")
-    );
-
-    btn.classList.add("active");
-
-    const target = btn.dataset.tab;
-
-    document.querySelectorAll(".tab-content").forEach(c =>
-      c.classList.add("hidden")
-    );
-
-    $(target)?.classList.remove("hidden");
+  teamSearchEl.addEventListener('input', (e) => {
+    renderMatches(e.target.value);
   });
-});
 
-document.addEventListener("input", (e) => {
-  if (e.target.id === "teamSearch") {
-    renderMatches();
+  // 6. RENDER AWARDS (PODIUM)
+  function renderAwards() {
+    // See note below about the Podium data!
+    awardsGridEl.innerHTML = `
+      <div class="awards-placeholder">
+        <h3>🏆 Palkintopallisijoitukset</h3>
+        <p>Kulta-, Hopea- ja Pronssiveikkaukset julkaistaan tässä, kun turnaus etenee!</p>
+      </div>
+    `;
   }
+
+  // Initialize
+  loadData();
 });
-
-/* =========================================================
-   INIT
-========================================================= */
-
-loadData();
-setInterval(loadData, 60000);

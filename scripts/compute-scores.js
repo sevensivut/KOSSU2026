@@ -1,6 +1,16 @@
 import fs from "fs";
 
-let raw, predictions, players;
+let raw, predictions, players, podium;
+
+// ... (keep existing try/catches for raw, predictions, players) ...
+
+try {
+    podium = JSON.parse(fs.readFileSync("data/podium.json", "utf-8"));
+    console.log("✅ podium.json is valid");
+} catch (e) {
+    console.error("❌ SYNTAX ERROR in data/podium.json:", e.message);
+    process.exit(1);
+}
 
 try {
     raw = JSON.parse(fs.readFileSync("data/raw.json", "utf-8"));

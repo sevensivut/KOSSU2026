@@ -4,10 +4,12 @@ on:
   push:
     paths:
       - "scripts/**"
-      - "data/bzzoiro.json"
-  workflow_dispatch:
+      - "data/predictions.json"
+      - "data/players.json"
+      - "data/podium.json"
+  workflow_dispatch: # Allows you to click a button to run it manually
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/10 * * * *" # Wakes up every 10 minutes
 
 permissions:
   contents: write

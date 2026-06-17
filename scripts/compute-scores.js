@@ -1,40 +1,110 @@
 import fs from "fs";
 
 /* =========================================================
-LOAD DATA SOURCES
+ LOAD DATA
 ========================================================= */
-
-const raw = JSON.parse(fs.readFileSync("data/raw.json", "utf-8"));
-const players = JSON.parse(fs.readFileSync("data/players.json", "utf-8"));
-const predictions = JSON.parse(fs.readFileSync("data/predictions.json", "utf-8"));
-
-const matches = raw.matches || [];
+// We now read from matches.json which contains the imported weights
+const input = JSON.parse(fs.readFileSync("data/matches.json", "utf-8"));
+const matches = input.matches || [];
+const players = input.players || [];
 
 /* =========================================================
-RESULT LOGIC (1X2)
+ 1X2 MATCH SCORING
 ========================================================= */
+function scoreMatchPlayer(match, player) {
+    const pred = match.predictions?.[player];
+    if (!pred) return 0;
 
-function getResult(home, away) {
-  if (home == null || away == null) return null;
-  if (home > away) return "1";
-  if (home < away) return "2";
-  return "X";
+    // Use the weights imported from the CSV
+    const weights = match.weights || { "1": 0, "X": 0, "2": 0 };
+    
+    // Return the points for the predicted outcome
+    return weights[pred] || 0;
 }
 
 /* =========================================================
-WEIGHT SYSTEM (USES predictions.json)
+ PODIUM SCORING (Gold/Silver/Bronze)
 ========================================================= */
+function scorePodium(match, player) {
+    const p = match.podiumPrediction?.[player];
+    const actual = match.podium;
 
-function calculateWeights(match) {
-  const counts = { "1": 0, "X": 0, "2": 0 };
+    if (!p || !actual) return 0;
 
-  const matchPreds = predictions[match.id] || {};
+    let score = 0;
 
-  for (const v of Object.values(matchPreds)) {
-    if (counts[v] !== undefined) counts[v]++;
-  }
+    for (const k of ["gold", "silver", "bronze"]) {
+        if (p[k] === actual[k]) {
+            score += 3; // Exact match
+        } else if (Object.values(actual).includes(p[k])) {
+            score += 1; // Correct team, wrong position
+        }
+    }
 
-  const sorted = Object.entries(counts).sort((a, b) => a[1] - b[1]);
+    return score;
+}
+
+/* =========================================================
+ PROCESS MATCHES
+========================================================= */
+function processMatches() {
+    const scores = {};
+    players.forEach(p => (scores[p] = 0));
+
+    const enrichedMatches = matches.map(match => {
+        const enrichedPreds = {};
+
+        for (const player of players) {
+            const mScore = scoreMatchPlayer(match, player);
+            const pScore = scorePodium(match, player);
+
+            scores[player] += mScore + pScore;
+
+            enrichedPreds[player] = {
+                prediction: match.predictions?.[player] || null,
+                matchPoints: mScore,
+                podiumPoints: pScore,
+                total: mScore + pScore
+            };
+        }
+
+        return {
+            ...match,
+            enrichedPredictions: enrichedPreds
+        };
+    });
+
+    return { scores, enrichedMatches };
+}
+
+/* =========================================================
+ LEADERBOARD
+========================================================= */
+function buildLeaderboard(scores) {
+    return Object.entries(scores)
+        .map(([name, points]) => ({ name, points }))
+        .sort((a, b) => b.points - a.points);
+}
+
+/* =========================================================
+ OUTPUT
+========================================================= */
+const { scores, enrichedMatches } = processMatches();
+const leaderboard = buildLeaderboard(scores);
+
+const output = {
+    updatedAt: new Date().toISOString(),
+    players,
+    scores,
+    leaderboard,
+    matches: enrichedMatches
+};
+
+fs.writeFileSync("data/matches.json", JSON.stringify(output, null, 2));
+
+console.log("✅ Scoring complete");
+console.log(`🏁 Matches: ${matches.length}`);
+console.log(`👥 Players: ${players.length}`);  const sorted = Object.entries(counts).sort((a, b) => a[1] - b[1]);
 
   // fallback safety
   if (sorted.length < 3) {

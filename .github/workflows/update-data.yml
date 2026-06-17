@@ -9,7 +9,7 @@ on:
       - "data/podium.json"
   workflow_dispatch: # Allows you to click a button to run it manually
   schedule:
-    - cron: "*/10 * * * *" # Wakes up every 10 minutes
+    - cron: "*/15 * * * *" # Wakes up every 15 minutes
 
 permissions:
   contents: write

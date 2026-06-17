@@ -43,24 +43,18 @@ function normalize(api) {
     players: [],
     matches: matches.map(m => ({
       id: String(m.id),
-
       date: m.event_date,
-
       homeTeam: m.home_team,
       awayTeam: m.away_team,
-
       status: mapStatus(m.status),
-
       score: {
         home: m.home_score ?? null,
         away: m.away_score ?? null
       },
-
       result: deriveResult({
         home: m.home_score,
         away: m.away_score
       }),
-
       predictions: {}
     }))
   };
@@ -97,8 +91,6 @@ if (api.results && api.results.length > 0) {
     console.log("-----------------------------------\n");
 }
 // ------------------------------------
-
-const raw = normalize(api);
 
 const raw = normalize(api);
 

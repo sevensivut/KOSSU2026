@@ -1,28 +1,4 @@
 {
-  "players": ["Mikko", "Antti", "Jussi"],
-  "matches": [
-    {
-      "homeTeam": "Brazil",
-      "awayTeam": "Argentina",
-      "date": "2026-06-17T18:00:00Z",
-      "result": "1",
-      "predictions": {
-        "Mikko": "1",
-        "Antti": "X",
-        "Jussi": "2"
-      },
-      "podium": {
-        "gold": "Brazil",
-        "silver": "Argentina",
-        "bronze": "France"
-      },
-      "podiumPrediction": {
-        "Mikko": {
-          "gold": "Brazil",
-          "silver": "France",
-          "bronze": "Argentina"
-        }
-      }
-    }
-  ]
+  "players": [],
+  "matches": []
 }

@@ -35,6 +35,8 @@ jobs:
 
       # 3. Load Bzzoiro data → raw.json
       - name: Import Bzzoiro data
+        env:
+          BZZOIRO_TOKEN: ${{ secrets.BZZOIRO_TOKEN }}
         run: node scripts/import-bzzoiro.js
 
       # 4. Validate schema (FAIL FAST)

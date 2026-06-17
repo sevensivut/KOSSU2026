@@ -89,6 +89,17 @@ function deriveResult(score) {
 }
 
 const api = await fetchBzzoiro();
+
+// --- DEBUG LOG FOR GITHUB ACTIONS ---
+if (api.results && api.results.length > 0) {
+    console.log("\n--- DEBUG: RAW API MATCH OBJECT ---");
+    console.log(JSON.stringify(api.results[0], null, 2));
+    console.log("-----------------------------------\n");
+}
+// ------------------------------------
+
+const raw = normalize(api);
+
 const raw = normalize(api);
 
 fs.writeFileSync(

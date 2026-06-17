@@ -59,23 +59,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderStats() {
+    if (!globalData) return;
     const totalMatches = globalData.matches.length;
     const finishedMatches = globalData.matches.filter(m => m.status === 'FINISHED').length;
     const totalPlayers = globalData.players.length;
     const topScore = globalData.leaderboard[0]?.points || 0;
     
     statsEl.innerHTML = `
-      <div class="stat-card">
-        <h3>${totalPlayers}</h3>
-        <p>Pelaajaa</p>
+      <div class="card">
+        <div class="card-value">${totalPlayers}</div>
+        <div class="card-label">Pelaajaa</div>
       </div>
-      <div class="stat-card">
-        <h3>${finishedMatches} / ${totalMatches}</h3>
-        <p>Ottelua pelattu</p>
+      <div class="card">
+        <div class="card-value">${finishedMatches} / ${totalMatches}</div>
+        <div class="card-label">Ottelua pelattu</div>
       </div>
-      <div class="stat-card">
-        <h3>${topScore.toFixed(1)}</h3>
-        <p>Kärkipistettä</p>
+      <div class="card">
+        <div class="card-value">${topScore.toFixed(1)}</div>
+        <div class="card-label">Kärkipistettä</div>
       </div>
     `;
   }
@@ -84,30 +85,18 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderLeaderboard() {
     if (!globalData.leaderboard) return;
     
-    let html = `
-      <table class="leaderboard-table">
-        <thead>
-          <tr>
-            <th>Sija</th>
-            <th>Pelaaja</th>
-            <th>Pisteet</th>
-          </tr>
-        </thead>
-        <tbody>
-    `;
+    let html = '';
     
     globalData.leaderboard.forEach((p, i) => {
       const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
       html += `
-        <tr>
-          <td>${i + 1} ${medal}</td>
-          <td>${p.name}</td>
-          <td><strong>${p.points.toFixed(1)}</strong></td>
-        </tr>
+        <div class="leader-row">
+          <span class="rank">${i + 1}. ${medal} ${p.name}</span>
+          <span class="points">${p.points.toFixed(1)} p</span>
+        </div>
       `;
     });
     
-    html += `</tbody></table>`;
     leaderboardEl.innerHTML = html;
   }
 
@@ -131,51 +120,49 @@ document.addEventListener('DOMContentLoaded', () => {
       const timeStr = date.toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit' });
       
       const isFinished = m.status === 'FINISHED';
-      const statusClass = isFinished ? 'finished' : 'scheduled';
       
-      const scoreDisplay = isFinished && m.score 
-        ? `<span class="score">${m.score.home} - ${m.score.away}</span>` 
-        : `<span class="time">${timeStr}</span>`;
+      const scoreDisplay = isFinished && m.score && m.score.home !== null
+        ? `<strong style="color:var(--gold2)">${m.score.home} - ${m.score.away}</strong>` 
+        : `<span>${timeStr}</span>`;
         
       const weights = m.weights || { '1': 0, 'X': 0, '2': 0 };
-        
-      html += `
-        <div class="match-card ${statusClass}">
-          <div class="match-header">
-            <span class="date">${dateStr}</span>
-            ${scoreDisplay}
-          </div>
-          <div class="match-teams">
-            <div class="team home">${m.homeTeam}</div>
-            <div class="team away">${m.awayTeam}</div>
-          </div>
-          <div class="match-predictions">
-            <h4>Veikkaukset <span class="weights">(1: ${weights['1']}p | X: ${weights['X']}p | 2: ${weights['2']}p)</span></h4>
-            <div class="pred-grid">
-      `;
       
+      let predsHtml = '';
       globalData.players.forEach(player => {
         const pred = m.predictions?.[player] || '-';
         const pts = m.enrichedPredictions?.[player]?.matchPoints || 0;
         const isCorrect = isFinished && pred === m.result;
         
-        html += `
-          <div class="pred-item ${isCorrect ? 'correct' : ''}">
-            <span class="pred-player">${player}</span>
-            <span class="pred-pick">${pred}</span>
-            <span class="pred-pts">${pts > 0 ? '+' + pts : ''}</span>
+        const highlight = isCorrect ? 'color:var(--green); font-weight:bold;' : '';
+        const ptsDisplay = pts > 0 ? `<span style="color:var(--gold); margin-left:8px;">+${pts}p</span>` : '';
+        
+        predsHtml += `
+          <div class="pred">
+            <span>${player}</span>
+            <span style="${highlight}">${pred} ${isCorrect ? '✅' : ''} ${ptsDisplay}</span>
           </div>
         `;
       });
-      
+
       html += `
+        <details class="match">
+          <summary>
+            <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+              <strong>${m.homeTeam} - ${m.awayTeam}</strong>
+              ${scoreDisplay}
             </div>
+            <div style="color:var(--dim); font-size:0.85rem; margin-top:6px;">
+              ${dateStr} &nbsp;|&nbsp; Painot: 1:${weights['1']}p &nbsp; X:${weights['X']}p &nbsp; 2:${weights['2']}p
+            </div>
+          </summary>
+          <div class="predictions">
+            ${predsHtml}
           </div>
-        </div>
+        </details>
       `;
     });
     
-    matchesListEl.innerHTML = html || '<p>Ei otteluita hakusanalla.</p>';
+    matchesListEl.innerHTML = visibleCount > 0 ? html : '<p style="color:var(--dim); text-align:center;">Ei otteluita hakusanalla.</p>';
   }
 
   teamSearchEl.addEventListener('input', (e) => {
@@ -197,12 +184,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let html = '';
     
-    // Create a card for each medal category
     medals.forEach(medal => {
       html += `<div class="card" style="border-top: 3px solid ${medal.color};">`;
       html += `<h3 style="margin-top:0; color:${medal.color};">${medal.label}</h3>`;
       
-      // Group players by their pick for this medal
       const picks = {};
       globalData.players.forEach(player => {
         const team = globalData.podiumPredictions[player][medal.key];
@@ -210,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
         picks[team].push(player);
       });
       
-      // Render the teams and who picked them
       for (const [team, playersWhoPicked] of Object.entries(picks)) {
         html += `
           <div style="margin-bottom: 12px;">
@@ -218,6 +202,14 @@ document.addEventListener('DOMContentLoaded', () => {
             <div style="color: var(--dim); font-size: 0.9rem;">${playersWhoPicked.join(', ')}</div>
           </div>
         `;
+      }
+      html += `</div>`; // CLOSE CARD
+    }); // CLOSE FOREACH
+
+    awardsGridEl.className = 'awards'; // Apply CSS grid class
+    awardsGridEl.innerHTML = html;
+  } // CLOSE RENDER AWARDS
+
   // Initialize
   loadData();
 });

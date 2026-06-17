@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-17T21:47:09.672Z",
+  "updatedAt": "2026-06-17T21:51:01.474Z",
   "players": [
     "Markus",
     "Juuso",
@@ -7296,7 +7296,7 @@
       "awayTeam": "Croatia",
       "status": "IN_PLAY",
       "score": {
-        "home": 3,
+        "home": 4,
         "away": 2
       },
       "result": "1",

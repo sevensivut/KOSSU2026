@@ -1,0 +1,14 @@
+{
+  "Markus": { "gold": "Saksa", "silver": "Brasilia", "bronze": "Englanti" },
+  "Juuso": { "gold": "Espanja", "silver": "Ranska", "bronze": "Englanti" },
+  "Pera": { "gold": "Brasilia", "silver": "Portugali", "bronze": "Espanja" },
+  "Lari": { "gold": "Espanja", "silver": "Kolumbia", "bronze": "Ranska" },
+  "Erno": { "gold": "Brasilia", "silver": "Ranska", "bronze": "Espanja" },
+  "Elmo": { "gold": "Espanja", "silver": "Ranska", "bronze": "Argentiina" },
+  "Petri": { "gold": "Hollanti", "silver": "Argentiina", "bronze": "Saksa" },
+  "Tommi": { "gold": "Espanja", "silver": "Englanti", "bronze": "Ranska" },
+  "Severi": { "gold": "Ranska", "silver": "Englanti", "bronze": "Senegal" },
+  "Matti H": { "gold": "Espanja", "silver": "Ranska", "bronze": "Brasilia" },
+  "Pasi": { "gold": "Espanja", "silver": "Ranska", "bronze": "Argentiina" },
+  "Matti K": { "gold": "Brasilia", "silver": "Meksiko", "bronze": "Englanti" }
+}

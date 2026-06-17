@@ -17,7 +17,8 @@ async function fetchBzzoiro() {
     `https://sports.bzzoiro.com/api/v2/events/` +
     `?date_from=${GROUP_STAGE.date_from}` +
     `&date_to=${GROUP_STAGE.date_to}` +
-    `&league_id=${GROUP_STAGE.league_id}`;
+    `&league_id=${GROUP_STAGE.league_id}`
+    `&status=all`;
 
   const res = await fetch(url, {
     headers: {

@@ -1,8 +1,8 @@
 import fs from "fs";
 
 const GROUP_STAGE = {
-  date_from: "2026-06-11",
-  date_to: "2026-06-28",
+  date_from: "2026-06-01",
+  date_to: "2026-06-27",
   league_id: 27
 };
 

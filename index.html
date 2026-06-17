@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>KOSHUVEIKKA 2026</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +13,7 @@
 
   <link rel="stylesheet" href="assets/style.css">
 </head>
+
 <body>
 
 <header class="hero">
@@ -23,8 +25,10 @@
   </div>
 </header>
 
+<!-- STATS -->
 <section class="stats" id="stats"></section>
 
+<!-- TABS -->
 <nav class="tabs">
   <button class="tab active" data-tab="leaderboard">Sarjataulukko</button>
   <button class="tab" data-tab="matches">Ottelut</button>
@@ -33,26 +37,32 @@
 
 <main>
 
-<section id="leaderboard" class="tab-content"></section>
+  <!-- LEADERBOARD -->
+  <section id="leaderboard" class="tab-content"></section>
 
-<section id="matches" class="tab-content hidden">
-  <div class="search-wrap">
-    <input
-      type="text"
-      id="teamSearch"
-      placeholder="Hae joukkuetta..."
-    >
-  </div>
+  <!-- MATCHES -->
+  <section id="matches" class="tab-content hidden">
 
-  <div id="matchesList"></div>
-</section>
+    <div class="search-wrap">
+      <input
+        id="teamSearch"
+        type="text"
+        placeholder="Hae joukkuetta..."
+      >
+    </div>
 
-<section id="awards" class="tab-content hidden">
-  <div id="awardsGrid"></div>
-</section>
+    <div id="matchesList"></div>
+
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards" class="tab-content hidden">
+    <div id="awardsGrid"></div>
+  </section>
 
 </main>
 
+<!-- ERROR -->
 <div id="errorBox" class="error hidden"></div>
 
 <script src="assets/app.js"></script>

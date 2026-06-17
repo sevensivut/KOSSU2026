@@ -41,3 +41,13 @@ console.log(`🏁 Loaded ${raw.matches.length} matches`);
 console.log(`🔮 Loaded ${Object.keys(predictions).length} match predictions`);
 
 const matches = raw.matches || [];
+
+const output = {
+    updatedAt: new Date().toISOString(),
+    players: players,
+    scores: result.scores,
+    leaderboard: leaderboard,
+    matches: result.enrichedMatches,
+    podiumPredictions: podium,
+    podiumActual: null // You can update this manually when the World Cup ends!
+};

@@ -1,0 +1,56 @@
+name: Update Bzzoiro → Scores Pipeline
+
+on:
+  push:
+    paths:
+      - "scripts/**"
+      - "data/bzzoiro.json"
+  workflow_dispatch:
+  schedule:
+    - cron: "*/10 * * * *"  # optional auto refresh
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    concurrency:
+      group: kossu-data-pipeline
+      cancel-in-progress: true
+
+    steps:
+      # 1. Checkout repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2. Setup Node
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3. Load Bzzoiro data → raw.json
+      - name: Import Bzzoiro data
+        run: node scripts/import-bzzoiro.js
+
+      # 4. Validate schema (FAIL FAST)
+      - name: Validate schema
+        run: node scripts/validate-schema.js
+
+      # 5. Compute scores
+      - name: Compute scores
+        run: node scripts/compute-scores.js
+
+      # 6. Commit updated output
+      - name: Commit results
+        run: |
+          git config user.name "kossu-bot"
+          git config user.email "bot@users.noreply.github.com"
+
+          git add data/raw.json data/matches.json
+
+          git commit -m "update: bzzoiro sync + scores $(date -u +'%Y-%m-%dT%H:%MZ')" || echo "No changes"
+
+          git pull --rebase origin main
+          git push origin main

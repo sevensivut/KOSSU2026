@@ -3,34 +3,32 @@ import fs from "fs";
 /* =========================================================
  1. LOAD DATA
 ========================================================= */
-let input;
+let rawInput, predictionsInput;
+
 try {
-    input = JSON.parse(fs.readFileSync("data/raw.json", "utf-8"));
+    rawInput = JSON.parse(fs.readFileSync("data/raw.json", "utf-8"));
 } catch (e) {
-    console.error("❌ Could not read data/raw.json. Did import-bzzoiro.js run successfully?");
+    console.error("❌ Could not read data/raw.json. Did import-bzzoiro.js run?");
     process.exit(1);
 }
 
-const matches = input.matches || [];
-
-/* =========================================================
- 2. EXTRACT PLAYERS FROM PREDICTIONS
-========================================================= */
-function extractPlayers(matches) {
-    const playerSet = new Set();
-    
-    for (const match of matches) {
-        if (match.predictions) {
-            for (const player in match.predictions) {
-                playerSet.add(player);
-            }
-        }
-    }
-    
-    return Array.from(playerSet);
+try {
+    predictionsInput = JSON.parse(fs.readFileSync("data/predictions.json", "utf-8"));
+} catch (e) {
+    console.error("❌ Could not read data/predictions.json.");
+    process.exit(1);
 }
 
-const players = extractPlayers(matches);
+const matches = rawInput.matches || [];
+
+/* =========================================================
+ 2. EXTRACT PLAYERS FROM PREDICTIONS.JSON
+========================================================= */
+// Get the player names from the keys of the first match in predictions.json
+const firstMatchId = Object.keys(predictionsInput)[0];
+const players = firstMatchId ? Object.keys(predictionsInput[firstMatchId]) : [];
+
+console.log(`👥 Found ${players.length} players in predictions.json: ${players.join(", ")}`);
 
 /* =========================================================
  3. DYNAMIC WEIGHT CALCULATION
@@ -51,23 +49,28 @@ function calculateWeights(predictions) {
         { outcome: "X", count: cX }
     ];
     
+    // Sort descending by popularity (highest count first)
     counts.sort((a, b) => b.count - a.count);
     
     const weights = { "1": 0, "2": 0, "X": 0 };
     
+    // Assign points based on rank (1, 2, 3) with average for ties
     let i = 0;
     while (i < 3) {
         let j = i;
+        // Find all outcomes with the exact same count (ties)
         while (j < 3 && counts[j].count === counts[i].count) {
             j++;
         }
         
+        // Calculate the average of the positions they span
         let sum = 0;
         for (let k = i + 1; k <= j; k++) {
             sum += k;
         }
         const avgWeight = sum / (j - i);
         
+        // Assign this weight to all tied outcomes
         for (let k = i; k < j; k++) {
             weights[counts[k].outcome] = avgWeight;
         }
@@ -81,30 +84,10 @@ function calculateWeights(predictions) {
 /* =========================================================
  4. SCORING LOGIC
 ========================================================= */
-function scoreMatchPlayer(match, player, weights) {
-    const pred = match.predictions ? String(match.predictions[player]).toUpperCase() : null;
-    if (!pred) return 0;
-    
+function scoreMatchPlayer(prediction, weights) {
+    if (!prediction) return 0;
+    const pred = String(prediction).toUpperCase();
     return weights[pred] || 0;
-}
-
-function scorePodium(match, player) {
-    const p = match.podiumPrediction ? match.podiumPrediction[player] : null;
-    const actual = match.podium;
-    if (!p || !actual) return 0;
-
-    let score = 0;
-    const medals = ["gold", "silver", "bronze"];
-    
-    for (let i = 0; i < medals.length; i++) {
-        const k = medals[i];
-        if (p[k] === actual[k]) {
-            score += 3;
-        } else if (Object.values(actual).includes(p[k])) {
-            score += 1;
-        }
-    }
-    return score;
 }
 
 /* =========================================================
@@ -117,26 +100,31 @@ function processMatches() {
     }
 
     const enrichedMatches = matches.map(match => {
-        const weights = calculateWeights(match.predictions || {});
+        // 1. Get the predictions for this specific match from predictions.json
+        const matchPredictions = predictionsInput[match.id] || {};
+        
+        // 2. Calculate weights dynamically for THIS specific match
+        const weights = calculateWeights(matchPredictions);
         const enrichedPreds = {};
 
+        // 3. Score each player
         for (let i = 0; i < players.length; i++) {
             const player = players[i];
-            const mScore = scoreMatchPlayer(match, player, weights);
-            const pScore = scorePodium(match, player);
+            const prediction = matchPredictions[player];
+            const mScore = scoreMatchPlayer(prediction, weights);
 
-            scores[player] += mScore + pScore;
+            scores[player] += mScore;
 
             enrichedPreds[player] = {
-                prediction: match.predictions ? match.predictions[player] : null,
+                prediction: prediction || null,
                 matchPoints: mScore,
-                podiumPoints: pScore,
-                total: mScore + pScore
+                total: mScore
             };
         }
 
         const newMatch = Object.assign({}, match);
-        newMatch.weights = weights;
+        newMatch.predictions = matchPredictions; // Attach the actual predictions to the match
+        newMatch.weights = weights; // Save weights for the frontend
         newMatch.enrichedPredictions = enrichedPreds;
         return newMatch;
     });
@@ -147,30 +135,4 @@ function processMatches() {
 /* =========================================================
  6. LEADERBOARD
 ========================================================= */
-function buildLeaderboard(scores) {
-    const entries = Object.entries(scores);
-    const mapped = entries.map(([name, points]) => ({ name: name, points: points }));
-    
-    mapped.sort((a, b) => b.points - a.points);
-    return mapped;
-}
-
-/* =========================================================
- 7. OUTPUT TO FILE
-========================================================= */
-const result = processMatches();
-const leaderboard = buildLeaderboard(result.scores);
-
-const output = {
-    updatedAt: new Date().toISOString(),
-    players: players,
-    scores: result.scores,
-    leaderboard: leaderboard,
-    matches: result.enrichedMatches
-};
-
-fs.writeFileSync("data/matches.json", JSON.stringify(output, null, 2));
-
-console.log("✅ Scoring complete");
-console.log(`🏁 Matches processed: ${matches.length}`);
-console.log(`👥 Players scored: ${players.length}`);
+function buildLeaderboard(scores

@@ -1,0 +1,170 @@
+:root{
+  --bg:#07101C;
+  --surface:#0C1826;
+  --surface2:#12202F;
+  --border:#1A2E42;
+  --gold:#C9982E;
+  --gold2:#E8B84B;
+  --cream:#F2EDE0;
+  --dim:#89A0B5;
+  --green:#3A9E6A;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--cream);
+}
+
+.hero{
+  text-align:center;
+  padding:48px 20px;
+}
+
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,6vw,4rem);
+  margin:0;
+}
+
+.hero span{
+  color:var(--gold);
+}
+
+.updated{
+  margin-top:12px;
+  color:var(--dim);
+}
+
+.stats{
+  max-width:1100px;
+  margin:auto;
+  padding:0 20px 30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:12px;
+}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:20px;
+}
+
+.card-value{
+  font-size:2rem;
+  font-weight:700;
+}
+
+.card-label{
+  color:var(--dim);
+}
+
+.tabs{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  padding:10px;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.tab{
+  background:none;
+  border:none;
+  color:var(--dim);
+  cursor:pointer;
+  padding:10px 16px;
+}
+
+.tab.active{
+  color:var(--gold2);
+}
+
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+.hidden{
+  display:none;
+}
+
+.leader-row{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:14px;
+  margin-bottom:10px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.rank{
+  font-size:1.3rem;
+}
+
+.points{
+  color:var(--gold2);
+  font-weight:700;
+}
+
+.match{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+.match summary{
+  cursor:pointer;
+  padding:16px;
+}
+
+.predictions{
+  border-top:1px solid var(--border);
+  padding:12px;
+}
+
+.pred{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:6px;
+}
+
+.search-wrap{
+  margin-bottom:20px;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:white;
+}
+
+.awards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;
+}
+
+.error{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#7a2323;
+  padding:16px;
+  border-radius:10px;
+}

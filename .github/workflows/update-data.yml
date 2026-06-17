@@ -7,7 +7,10 @@ on:
       - "data/bzzoiro.json"
   workflow_dispatch:
   schedule:
-    - cron: "*/10 * * * *"  # optional auto refresh
+    - cron: "*/10 * * * *"
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -50,7 +53,8 @@ jobs:
 
           git add data/raw.json data/matches.json
 
-          git commit -m "update: bzzoiro sync + scores $(date -u +'%Y-%m-%dT%H:%MZ')" || echo "No changes"
+          git commit -m "update: bzzoiro sync + scores $(date -u +'%Y-%m-%dT%H:%MZ')" || exit 0
 
           git pull --rebase origin main
-          git push origin main
+
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git

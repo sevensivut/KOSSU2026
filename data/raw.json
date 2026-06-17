@@ -1072,7 +1072,7 @@
       "date": "2026-06-17T20:00:00+00:00",
       "homeTeam": "England",
       "awayTeam": "Croatia",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 4,
         "away": 2

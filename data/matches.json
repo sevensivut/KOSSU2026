@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-17T20:41:25.490Z",
+  "updatedAt": "2026-06-17T21:47:09.672Z",
   "players": [
     "Markus",
     "Juuso",
@@ -15,67 +15,67 @@
     "Matti K"
   ],
   "scores": {
-    "Markus": 10.5,
-    "Juuso": 9,
-    "Pera": 14,
-    "Lari": 14.5,
-    "Erno": 11,
-    "Elmo": 14,
-    "Petri": 15,
-    "Tommi": 13.5,
-    "Severi": 14,
-    "Matti H": 14.5,
-    "Pasi": 14,
-    "Matti K": 8
+    "Markus": 11.5,
+    "Juuso": 10,
+    "Pera": 15,
+    "Lari": 12.5,
+    "Erno": 9,
+    "Elmo": 15,
+    "Petri": 13,
+    "Tommi": 14.5,
+    "Severi": 12,
+    "Matti H": 12.5,
+    "Pasi": 15,
+    "Matti K": 9
   },
   "leaderboard": [
     {
-      "name": "Petri",
+      "name": "Pera",
       "points": 15
     },
     {
-      "name": "Lari",
-      "points": 14.5
-    },
-    {
-      "name": "Matti H",
-      "points": 14.5
-    },
-    {
-      "name": "Pera",
-      "points": 14
-    },
-    {
       "name": "Elmo",
-      "points": 14
-    },
-    {
-      "name": "Severi",
-      "points": 14
+      "points": 15
     },
     {
       "name": "Pasi",
-      "points": 14
+      "points": 15
     },
     {
       "name": "Tommi",
-      "points": 13.5
+      "points": 14.5
     },
     {
-      "name": "Erno",
-      "points": 11
+      "name": "Petri",
+      "points": 13
+    },
+    {
+      "name": "Lari",
+      "points": 12.5
+    },
+    {
+      "name": "Matti H",
+      "points": 12.5
+    },
+    {
+      "name": "Severi",
+      "points": 12
     },
     {
       "name": "Markus",
-      "points": 10.5
+      "points": 11.5
     },
     {
       "name": "Juuso",
+      "points": 10
+    },
+    {
+      "name": "Erno",
       "points": 9
     },
     {
       "name": "Matti K",
-      "points": 8
+      "points": 9
     }
   ],
   "matches": [
@@ -3012,10 +3012,10 @@
       }
     },
     {
-      "id": "8353",
+      "id": "8354",
       "date": "2026-06-27T21:00:00+00:00",
-      "homeTeam": "Croatia",
-      "awayTeam": "Ghana",
+      "homeTeam": "Panama",
+      "awayTeam": "England",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -3105,10 +3105,10 @@
       }
     },
     {
-      "id": "8354",
+      "id": "8353",
       "date": "2026-06-27T21:00:00+00:00",
-      "homeTeam": "Panama",
-      "awayTeam": "England",
+      "homeTeam": "Croatia",
+      "awayTeam": "Ghana",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -3384,10 +3384,10 @@
       }
     },
     {
-      "id": "8349",
+      "id": "8350",
       "date": "2026-06-27T00:00:00+00:00",
-      "homeTeam": "Cabo Verde",
-      "awayTeam": "Saudi Arabia",
+      "homeTeam": "Uruguay",
+      "awayTeam": "Spain",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -3477,10 +3477,10 @@
       }
     },
     {
-      "id": "8350",
+      "id": "8349",
       "date": "2026-06-27T00:00:00+00:00",
-      "homeTeam": "Uruguay",
-      "awayTeam": "Spain",
+      "homeTeam": "Cabo Verde",
+      "awayTeam": "Saudi Arabia",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4686,10 +4686,10 @@
       }
     },
     {
-      "id": "8336",
+      "id": "8335",
       "date": "2026-06-24T19:00:00+00:00",
-      "homeTeam": "Bosnia & Herzegovina",
-      "awayTeam": "Qatar",
+      "homeTeam": "Switzerland",
+      "awayTeam": "Canada",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4779,10 +4779,10 @@
       }
     },
     {
-      "id": "8335",
+      "id": "8336",
       "date": "2026-06-24T19:00:00+00:00",
-      "homeTeam": "Switzerland",
-      "awayTeam": "Canada",
+      "homeTeam": "Bosnia & Herzegovina",
+      "awayTeam": "Qatar",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -7296,10 +7296,10 @@
       "awayTeam": "Croatia",
       "status": "IN_PLAY",
       "score": {
-        "home": 1,
-        "away": 1
+        "home": 3,
+        "away": 2
       },
-      "result": "X",
+      "result": "1",
       "predictions": {
         "Markus": "1",
         "Juuso": "1",
@@ -7322,63 +7322,63 @@
       "enrichedPredictions": {
         "Markus": {
           "prediction": "1",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         },
         "Juuso": {
           "prediction": "1",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         },
         "Pera": {
           "prediction": "1",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         },
         "Lari": {
           "prediction": "X",
-          "matchPoints": 2,
-          "total": 2
+          "matchPoints": 0,
+          "total": 0
         },
         "Erno": {
           "prediction": "X",
-          "matchPoints": 2,
-          "total": 2
+          "matchPoints": 0,
+          "total": 0
         },
         "Elmo": {
           "prediction": "1",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         },
         "Petri": {
           "prediction": "X",
-          "matchPoints": 2,
-          "total": 2
+          "matchPoints": 0,
+          "total": 0
         },
         "Tommi": {
           "prediction": "1",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         },
         "Severi": {
           "prediction": "X",
-          "matchPoints": 2,
-          "total": 2
+          "matchPoints": 0,
+          "total": 0
         },
         "Matti H": {
           "prediction": "X",
-          "matchPoints": 2,
-          "total": 2
+          "matchPoints": 0,
+          "total": 0
         },
         "Pasi": {
           "prediction": "1",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         },
         "Matti K": {
           "prediction": "1",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         }
       }
     },

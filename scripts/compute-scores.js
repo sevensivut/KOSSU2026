@@ -1,43 +1,33 @@
 import fs from "fs";
 
 /* =========================================================
- 1. LOAD DATA
+ 1. LOAD ALL STATIC & DYNAMIC DATA
 ========================================================= */
-let rawInput, predictionsInput;
+let raw, predictions, players;
 
 try {
-    rawInput = JSON.parse(fs.readFileSync("data/raw.json", "utf-8"));
+    raw = JSON.parse(fs.readFileSync("data/raw.json", "utf-8"));
+    predictions = JSON.parse(fs.readFileSync("data/predictions.json", "utf-8"));
+    players = JSON.parse(fs.readFileSync("data/players.json", "utf-8"));
 } catch (e) {
-    console.error("❌ Could not read data/raw.json. Did import-bzzoiro.js run?");
+    console.error("❌ Failed to load data files:", e.message);
     process.exit(1);
 }
 
-try {
-    predictionsInput = JSON.parse(fs.readFileSync("data/predictions.json", "utf-8"));
-} catch (e) {
-    console.error("❌ Could not read data/predictions.json.");
-    process.exit(1);
-}
+console.log(`👥 Loaded ${players.length} players from players.json`);
+console.log(`🏁 Loaded ${raw.matches.length} matches from raw.json`);
+console.log(`🔮 Loaded ${Object.keys(predictions).length} match predictions from predictions.json`);
 
-const matches = rawInput.matches || [];
+const matches = raw.matches || [];
 
 /* =========================================================
- 2. EXTRACT PLAYERS FROM PREDICTIONS.JSON
+ 2. DYNAMIC WEIGHT CALCULATION
 ========================================================= */
-// Get the player names from the keys of the first match in predictions.json
-const firstMatchId = Object.keys(predictionsInput)[0];
-const players = firstMatchId ? Object.keys(predictionsInput[firstMatchId]) : [];
-
-console.log(`👥 Found ${players.length} players in predictions.json: ${players.join(", ")}`);
-
-/* =========================================================
- 3. DYNAMIC WEIGHT CALCULATION
-========================================================= */
-function calculateWeights(predictions) {
+function calculateWeights(matchPredictions) {
     let c1 = 0, c2 = 0, cX = 0;
     
-    for (const player in predictions) {
-        const p = String(predictions[player]).toUpperCase();
+    for (const player of players) {
+        const p = String(matchPredictions[player] || "").toUpperCase();
         if (p === "1") c1++;
         else if (p === "2") c2++;
         else if (p === "X") cX++;
@@ -49,28 +39,23 @@ function calculateWeights(predictions) {
         { outcome: "X", count: cX }
     ];
     
-    // Sort descending by popularity (highest count first)
     counts.sort((a, b) => b.count - a.count);
     
     const weights = { "1": 0, "2": 0, "X": 0 };
     
-    // Assign points based on rank (1, 2, 3) with average for ties
     let i = 0;
     while (i < 3) {
         let j = i;
-        // Find all outcomes with the exact same count (ties)
         while (j < 3 && counts[j].count === counts[i].count) {
             j++;
         }
         
-        // Calculate the average of the positions they span
         let sum = 0;
         for (let k = i + 1; k <= j; k++) {
             sum += k;
         }
         const avgWeight = sum / (j - i);
         
-        // Assign this weight to all tied outcomes
         for (let k = i; k < j; k++) {
             weights[counts[k].outcome] = avgWeight;
         }
@@ -82,7 +67,7 @@ function calculateWeights(predictions) {
 }
 
 /* =========================================================
- 4. SCORING LOGIC
+ 3. SCORING LOGIC
 ========================================================= */
 function scoreMatchPlayer(prediction, weights) {
     if (!prediction) return 0;
@@ -91,25 +76,20 @@ function scoreMatchPlayer(prediction, weights) {
 }
 
 /* =========================================================
- 5. PROCESS MATCHES
+ 4. PROCESS MATCHES
 ========================================================= */
 function processMatches() {
     const scores = {};
-    for (let i = 0; i < players.length; i++) {
-        scores[players[i]] = 0;
+    for (const player of players) {
+        scores[player] = 0;
     }
 
     const enrichedMatches = matches.map(match => {
-        // 1. Get the predictions for this specific match from predictions.json
-        const matchPredictions = predictionsInput[match.id] || {};
-        
-        // 2. Calculate weights dynamically for THIS specific match
+        const matchPredictions = predictions[match.id] || {};
         const weights = calculateWeights(matchPredictions);
         const enrichedPreds = {};
 
-        // 3. Score each player
-        for (let i = 0; i < players.length; i++) {
-            const player = players[i];
+        for (const player of players) {
             const prediction = matchPredictions[player];
             const mScore = scoreMatchPlayer(prediction, weights);
 
@@ -122,17 +102,36 @@ function processMatches() {
             };
         }
 
-        const newMatch = Object.assign({}, match);
-        newMatch.predictions = matchPredictions; // Attach the actual predictions to the match
-        newMatch.weights = weights; // Save weights for the frontend
-        newMatch.enrichedPredictions = enrichedPreds;
-        return newMatch;
+        return {
+            ...match,
+            predictions: matchPredictions,
+            weights: weights,
+            enrichedPredictions: enrichedPreds
+        };
     });
 
-    return { scores: scores, enrichedMatches: enrichedMatches };
+    return { scores, enrichedMatches };
 }
 
 /* =========================================================
- 6. LEADERBOARD
+ 5. LEADERBOARD & OUTPUT
 ========================================================= */
-function buildLeaderboard(scores
+const result = processMatches();
+
+const leaderboard = Object.entries(result.scores)
+    .map(([name, points]) => ({ name, points }))
+    .sort((a, b) => b.points - a.points);
+
+const output = {
+    updatedAt: new Date().toISOString(),
+    players: players,
+    scores: result.scores,
+    leaderboard: leaderboard,
+    matches: result.enrichedMatches
+};
+
+fs.writeFileSync("data/matches.json", JSON.stringify(output, null, 2));
+
+console.log("✅ Scoring complete");
+console.log(`🏁 Matches processed: ${matches.length}`);
+console.log(`👥 Players scored: ${players.length}`);

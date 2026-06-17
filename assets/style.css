@@ -168,3 +168,19 @@ input{
   padding:16px;
   border-radius:10px;
 }
+
+/* Polish the details/summary arrows and search input */
+.match summary::-webkit-details-marker { display: none; }
+.match summary::after {
+  content: '+';
+  font-size: 1.5rem;
+  color: var(--gold);
+  transition: transform 0.2s;
+}
+.match[open] summary::after {
+  content: '−';
+}
+input:focus {
+  outline: none;
+  border-color: var(--gold);
+}

@@ -20,17 +20,11 @@ async function fetchBzzoiro() {
     `&league_id=${GROUP_STAGE.league_id}`;
 
   const res = await fetch(url, {
-  headers: {
-    Authorization: `Token ${API_TOKEN}`
-  }
-});
-  
-  if (!API_TOKEN) {
-  throw new Error("Missing BZZOIRO_TOKEN in GitHub Secrets");
-}
+    headers: {
+      Authorization: `Token ${API_TOKEN}`
+    }
+  });
 
-   console.log("🔑 Using Bzzoiro token:", API_TOKEN.slice(0, 6) + "...");
-  
   if (!res.ok) {
     throw new Error(`BSD API error: ${res.status}`);
   }
@@ -38,25 +32,34 @@ async function fetchBzzoiro() {
   return await res.json();
 }
 
+function extractMatches(api) {
+  return api.results || [];
+}
+
 function normalize(api) {
+  const matches = extractMatches(api);
+
   return {
-    players: [], // unchanged (your system source)
-    matches: (api.events || []).map(m => ({
+    players: [],
+    matches: matches.map(m => ({
       id: String(m.id),
 
-      date: m.kickoff_time || m.date,
+      date: m.event_date,
 
-      homeTeam: m.home?.name,
-      awayTeam: m.away?.name,
+      homeTeam: m.home_team,
+      awayTeam: m.away_team,
 
       status: mapStatus(m.status),
 
       score: {
-        home: m.score?.home ?? null,
-        away: m.score?.away ?? null
+        home: m.home_score ?? null,
+        away: m.away_score ?? null
       },
 
-      result: deriveResult(m.score),
+      result: deriveResult({
+        home: m.home_score,
+        away: m.away_score
+      }),
 
       predictions: {}
     }))
@@ -67,13 +70,14 @@ function mapStatus(s) {
   if (!s) return "SCHEDULED";
 
   const map = {
+    notstarted: "SCHEDULED",
     scheduled: "SCHEDULED",
     finished: "FINISHED",
     in_play: "IN_PLAY",
     live: "IN_PLAY"
   };
 
-  return map[s.toLowerCase()] || "SCHEDULED";
+  return map[String(s).toLowerCase()] || "SCHEDULED";
 }
 
 function deriveResult(score) {

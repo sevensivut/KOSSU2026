@@ -1,78 +1,89 @@
 import fs from "fs";
 
-/**
- * STEP 1: Load Bzzoiro export (from your working system)
- */
-const bzz = JSON.parse(
-  fs.readFileSync("data/bzzoiro.json", "utf-8")
-);
+const GROUP_STAGE = {
+  date_from: "2026-06-11",
+  date_to: "2026-06-28",
+  league_id: 27
+};
 
-/**
- * STEP 2: Normalize Bzzoiro → KOSSU schema
- */
-function normalize(bzz) {
-  const matches = bzz.matches.map(m => ({
-    id: String(m.id),
+const API_TOKEN = process.env.BZZOIRO_TOKEN;
 
-    date: m.kickoff || m.date,
+if (!API_TOKEN) {
+  throw new Error("Missing BZZOIRO_TOKEN");
+}
 
-    homeTeam: m.home.team,
-    awayTeam: m.away.team,
+async function fetchBzzoiro() {
+  const url =
+    `https://sports.bzzoiro.com/api/v2/events/` +
+    `?date_from=${GROUP_STAGE.date_from}` +
+    `&date_to=${GROUP_STAGE.date_to}` +
+    `&league_id=${GROUP_STAGE.league_id}`;
 
-    status: mapStatus(m.status),
+  const res = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${API_TOKEN}`
+    }
+  });
 
-    score: {
-      home: m.score?.home ?? null,
-      away: m.score?.away ?? null
-    },
+  if (!res.ok) {
+    throw new Error(`BSD API error: ${res.status}`);
+  }
 
-    // IMPORTANT: Bzzoiro provides result OR can be derived
-    result: m.result || deriveResult(m.score),
+  return await res.json();
+}
 
-    predictions: {} // still yours (NOT from Bzzoiro)
-  }));
-
+function normalize(api) {
   return {
-    players: bzz.players || [],
-    matches
+    players: [], // unchanged (your system source)
+    matches: (api.events || []).map(m => ({
+      id: String(m.id),
+
+      date: m.kickoff_time || m.date,
+
+      homeTeam: m.home?.name,
+      awayTeam: m.away?.name,
+
+      status: mapStatus(m.status),
+
+      score: {
+        home: m.score?.home ?? null,
+        away: m.score?.away ?? null
+      },
+
+      result: deriveResult(m.score),
+
+      predictions: {}
+    }))
   };
 }
 
-/**
- * STEP 3: Status mapping (protects schema stability)
- */
 function mapStatus(s) {
   if (!s) return "SCHEDULED";
 
   const map = {
     scheduled: "SCHEDULED",
     finished: "FINISHED",
-    live: "IN_PLAY",
-    in_play: "IN_PLAY"
+    in_play: "IN_PLAY",
+    live: "IN_PLAY"
   };
 
   return map[s.toLowerCase()] || "SCHEDULED";
 }
 
-/**
- * STEP 4: Safe result derivation
- */
 function deriveResult(score) {
-  if (!score) return null;
+  if (!score || score.home == null || score.away == null) return null;
 
   if (score.home > score.away) return "1";
   if (score.home < score.away) return "2";
   return "X";
 }
 
-/**
- * STEP 5: Write raw.json
- */
-const raw = normalize(bzz);
+const api = await fetchBzzoiro();
+const raw = normalize(api);
 
 fs.writeFileSync(
   "data/raw.json",
   JSON.stringify(raw, null, 2)
 );
 
-console.log("✅ Bzzoiro → raw.json normalized");
+console.log("✅ Bzzoiro API → raw.json updated");

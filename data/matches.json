@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-18T20:43:16.586Z",
+  "updatedAt": "2026-06-18T20:45:32.477Z",
   "players": [
     "Markus",
     "Juuso",
@@ -6924,7 +6924,7 @@
       "awayTeam": "Bosnia & Herzegovina",
       "status": "IN_PLAY",
       "score": {
-        "home": 1,
+        "home": 2,
         "away": 0
       },
       "result": "1",

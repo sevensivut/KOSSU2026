@@ -88,17 +88,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let html = '';
     
     globalData.leaderboard.forEach((p, i) => {
-      const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
-      html += `
-        <div class="leader-row">
-          <span class="rank">${i + 1}. ${medal} ${p.name}</span>
-          <span class="points">${p.points.toFixed(1)} p</span>
-        </div>
-      `;
-    });
-    
-    leaderboardEl.innerHTML = html;
-  }
+  const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
+  
+  // Check if player has any live/provisional points
+  const hasLivePoints = globalData.matches.some(m => 
+    (m.status === 'IN_PLAY' || m.status === 'LIVE') &&
+    m.enrichedPredictions?.[p.name]?.matchPoints > 0
+  );
+  
+  const liveIndicator = hasLivePoints 
+    ? '<span class="live-badge">LIVE</span>' 
+    : '';
+  
+  html += `
+    <tr>
+      <td>${i + 1} ${medal}</td>
+      <td>${p.name} ${liveIndicator}</td>
+      <td><strong>${p.points.toFixed(1)}</strong></td>
+    </tr>
+  `;
+});
 
   // 5. RENDER MATCHES
   function renderMatches(filter = '') {

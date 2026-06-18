@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-18T18:45:37.465Z",
+  "updatedAt": "2026-06-18T19:00:55.488Z",
   "players": [
     "Markus",
     "Juuso",
@@ -18,23 +18,23 @@
     "Markus": 16,
     "Juuso": 12,
     "Pera": 17,
-    "Lari": 17,
-    "Erno": 11,
+    "Lari": 19,
+    "Erno": 13,
     "Elmo": 17,
     "Petri": 15,
     "Tommi": 15.5,
-    "Severi": 13,
-    "Matti H": 13.5,
+    "Severi": 15,
+    "Matti H": 15.5,
     "Pasi": 17,
     "Matti K": 10
   },
   "leaderboard": [
     {
-      "name": "Pera",
-      "points": 17
+      "name": "Lari",
+      "points": 19
     },
     {
-      "name": "Lari",
+      "name": "Pera",
       "points": 17
     },
     {
@@ -54,24 +54,24 @@
       "points": 15.5
     },
     {
+      "name": "Matti H",
+      "points": 15.5
+    },
+    {
       "name": "Petri",
       "points": 15
     },
     {
-      "name": "Matti H",
-      "points": 13.5
+      "name": "Severi",
+      "points": 15
     },
     {
-      "name": "Severi",
+      "name": "Erno",
       "points": 13
     },
     {
       "name": "Juuso",
       "points": 12
-    },
-    {
-      "name": "Erno",
-      "points": 11
     },
     {
       "name": "Matti K",
@@ -6922,12 +6922,12 @@
       "date": "2026-06-18T19:00:00+00:00",
       "homeTeam": "Switzerland",
       "awayTeam": "Bosnia & Herzegovina",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "1",
         "Juuso": "1",
@@ -6965,13 +6965,13 @@
         },
         "Lari": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Erno": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Elmo": {
           "prediction": "1",
@@ -6990,13 +6990,13 @@
         },
         "Severi": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Matti H": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Pasi": {
           "prediction": "1",

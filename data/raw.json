@@ -1020,10 +1020,10 @@
       "date": "2026-06-18T19:00:00+00:00",
       "homeTeam": "Switzerland",
       "awayTeam": "Bosnia & Herzegovina",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
-        "home": 2,
-        "away": 0
+        "home": 4,
+        "away": 1
       },
       "result": "1",
       "predictions": {}

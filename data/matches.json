@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-18T03:15:32.313Z",
+  "updatedAt": "2026-06-18T03:30:42.075Z",
   "players": [
     "Markus",
     "Juuso",
@@ -7110,8 +7110,8 @@
       "awayTeam": "Colombia",
       "status": "IN_PLAY",
       "score": {
-        "home": 0,
-        "away": 1
+        "home": 1,
+        "away": 2
       },
       "result": "2",
       "predictions": {

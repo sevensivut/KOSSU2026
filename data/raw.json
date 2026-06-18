@@ -1033,7 +1033,7 @@
       "date": "2026-06-18T16:00:00+00:00",
       "homeTeam": "Czechia",
       "awayTeam": "South Africa",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 1,
         "away": 1

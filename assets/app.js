@@ -27,11 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. FETCH DATA
   async function loadData() {
     try {
-      // Cache-busting to ensure GitHub Pages loads the latest JSON
       const res = await fetch('data/matches.json?t=' + new Date().getTime()); 
       if (!res.ok) throw new Error('Dataa ei löytynyt');
       globalData = await res.json();
-      
       renderAll();
     } catch (err) {
       showError('Virhe ladatessa dataa: ' + err.message);
@@ -53,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 3. RENDER HEADER & STATS
   function renderUpdatedAt() {
-    if (!globalData.updatedAt) return;
+    if (!globalData?.updatedAt) return;
     const date = new Date(globalData.updatedAt);
     updatedAtEl.textContent = `Päivitetty: ${date.toLocaleDateString('fi-FI')} klo ${date.toLocaleTimeString('fi-FI', {hour: '2-digit', minute:'2-digit'})}`;
   }
@@ -81,39 +79,40 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   }
 
-  // 4. RENDER LEADERBOARD
+  // 4. RENDER LEADERBOARD (FIXED!)
   function renderLeaderboard() {
-    if (!globalData.leaderboard) return;
+    if (!globalData?.leaderboard) return;
     
     let html = '';
     
     globalData.leaderboard.forEach((p, i) => {
-  const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
-  
-  // Check if player has any live/provisional points
-  const hasLivePoints = globalData.matches.some(m => 
-    (m.status === 'IN_PLAY' || m.status === 'LIVE') &&
-    m.enrichedPredictions?.[p.name]?.matchPoints > 0
-  );
-  
-  const liveIndicator = hasLivePoints 
-    ? '<span class="live-badge">LIVE</span>' 
-    : '';
-  
-  html += `
-    <tr>
-      <td>${i + 1} ${medal}</td>
-      <td>${p.name} ${liveIndicator}</td>
-      <td><strong>${p.points.toFixed(1)}</strong></td>
-    </tr>
-  `;
-});
+      const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
+      
+      // Check if player has any live/provisional points
+      const hasLivePoints = globalData.matches.some(m => 
+        (m.status === 'IN_PLAY' || m.status === 'LIVE') &&
+        m.enrichedPredictions?.[p.name]?.matchPoints > 0
+      );
+      
+      const liveIndicator = hasLivePoints 
+        ? '<span class="live-badge">LIVE</span>' 
+        : '';
+      
+      html += `
+        <div class="leader-row">
+          <span class="rank">${i + 1}. ${medal} ${p.name} ${liveIndicator}</span>
+          <span class="points">${p.points.toFixed(1)} p</span>
+        </div>
+      `;
+    });
+    
+    leaderboardEl.innerHTML = html;
+  } // <-- PROPERLY CLOSED HERE
 
   // 5. RENDER MATCHES
   function renderMatches(filter = '') {
-    if (!globalData.matches) return;
+    if (!globalData?.matches) return;
     
-    // Sort chronologically
     const sortedMatches = [...globalData.matches].sort((a, b) => new Date(a.date) - new Date(b.date));
     
     let html = '';
@@ -129,10 +128,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const timeStr = date.toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit' });
       
       const isFinished = m.status === 'FINISHED';
+      const isLive = m.status === 'IN_PLAY' || m.status === 'LIVE';
       
-      const scoreDisplay = isFinished && m.score && m.score.home !== null
-        ? `<strong style="color:var(--gold2)">${m.score.home} - ${m.score.away}</strong>` 
-        : `<span>${timeStr}</span>`;
+      let scoreDisplay;
+      if (isFinished && m.score && m.score.home !== null) {
+        scoreDisplay = `<strong style="color:var(--gold2)">${m.score.home} - ${m.score.away}</strong>`;
+      } else if (isLive && m.score && m.score.home !== null) {
+        scoreDisplay = `<strong style="color:var(--green)">${m.score.home} - ${m.score.away} <span class="live-badge">LIVE</span></strong>`;
+      } else {
+        scoreDisplay = `<span>${timeStr}</span>`;
+      }
         
       const weights = m.weights || { '1': 0, 'X': 0, '2': 0 };
       
@@ -140,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
       globalData.players.forEach(player => {
         const pred = m.predictions?.[player] || '-';
         const pts = m.enrichedPredictions?.[player]?.matchPoints || 0;
-        const isCorrect = isFinished && pred === m.result;
+        const isCorrect = (isFinished || isLive) && pred === m.result;
         
         const highlight = isCorrect ? 'color:var(--green); font-weight:bold;' : '';
         const ptsDisplay = pts > 0 ? `<span style="color:var(--gold); margin-left:8px;">+${pts}p</span>` : '';
@@ -148,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         predsHtml += `
           <div class="pred">
             <span>${player}</span>
-            <span style="${highlight}">${pred} ${isCorrect ? '✅' : ''} ${ptsDisplay}</span>
+            <span style="${highlight}">${pred} ${isCorrect && isFinished ? '✅' : ''} ${ptsDisplay}</span>
           </div>
         `;
       });
@@ -180,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 6. RENDER AWARDS (PODIUM)
   function renderAwards() {
-    if (!globalData.podiumPredictions) {
+    if (!globalData?.podiumPredictions) {
       awardsGridEl.innerHTML = '<p style="color:var(--dim); text-align:center;">Ei palkintopalliveikkauksia.</p>';
       return;
     }
@@ -212,12 +217,12 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         `;
       }
-      html += `</div>`; // CLOSE CARD
-    }); // CLOSE FOREACH
+      html += `</div>`;
+    });
 
-    awardsGridEl.className = 'awards'; // Apply CSS grid class
+    awardsGridEl.className = 'awards';
     awardsGridEl.innerHTML = html;
-  } // CLOSE RENDER AWARDS
+  }
 
   // Initialize
   loadData();

@@ -5,10 +5,37 @@ import fs from "fs";
 ========================================================= */
 let raw, predictions, players, podium;
 
-try { raw = JSON.parse(fs.readFileSync("data/raw.json", "utf-8")); console.log("✅ raw.json is valid"); } catch (e) { console.error("❌ SYNTAX ERROR in raw.json:", e.message); process.exit(1); }
-try { predictions = JSON.parse(fs.readFileSync("data/predictions.json", "utf-8")); console.log("✅ predictions.json is valid"); } catch (e) { console.error("❌ SYNTAX ERROR in predictions.json:", e.message); process.exit(1); }
-try { players = JSON.parse(fs.readFileSync("data/players.json", "utf-8")); console.log("✅ players.json is valid"); } catch (e) { console.error("❌ SYNTAX ERROR in players.json:", e.message); process.exit(1); }
-try { podium = JSON.parse(fs.readFileSync("data/podium.json", "utf-8")); console.log("✅ podium.json is valid"); } catch (e) { console.error("❌ SYNTAX ERROR in podium.json:", e.message); process.exit(1); }
+try { 
+    raw = JSON.parse(fs.readFileSync("data/raw.json", "utf-8")); 
+    console.log("✅ raw.json is valid"); 
+} catch (e) { 
+    console.error("❌ SYNTAX ERROR in raw.json:", e.message); 
+    process.exit(1); 
+}
+
+try { 
+    predictions = JSON.parse(fs.readFileSync("data/predictions.json", "utf-8")); 
+    console.log("✅ predictions.json is valid"); 
+} catch (e) { 
+    console.error("❌ SYNTAX ERROR in predictions.json:", e.message); 
+    process.exit(1); 
+}
+
+try { 
+    players = JSON.parse(fs.readFileSync("data/players.json", "utf-8")); 
+    console.log("✅ players.json is valid"); 
+} catch (e) { 
+    console.error("❌ SYNTAX ERROR in players.json:", e.message); 
+    process.exit(1); 
+}
+
+try { 
+    podium = JSON.parse(fs.readFileSync("data/podium.json", "utf-8")); 
+    console.log("✅ podium.json is valid"); 
+} catch (e) { 
+    console.error("❌ SYNTAX ERROR in podium.json:", e.message); 
+    process.exit(1); 
+}
 
 console.log(`👥 Loaded ${players.length} players`);
 console.log(`🏁 Loaded ${raw.matches.length} matches`);
@@ -17,14 +44,11 @@ console.log(`🔮 Loaded ${Object.keys(predictions).length} match predictions`);
 const matches = raw.matches || [];
 
 /* =========================================================
- 2. CHRONOLOGICAL ID MAPPING (FIXES THE "CRAZY POINTS" BUG)
+ 2. CHRONOLOGICAL ID MAPPING
 ========================================================= */
-// Sort API matches by date
 const sortedApiMatches = [...matches].sort((a, b) => new Date(a.date) - new Date(b.date));
-// Sort prediction keys (8308, 8309...) numerically
 const predictionKeys = Object.keys(predictions).sort((a, b) => Number(a) - Number(b));
 
-// Zip them together: Real API ID -> Correct Predictions
 const mappedPredictions = {};
 sortedApiMatches.forEach((match, index) => {
     const fakeId = predictionKeys[index];
@@ -68,7 +92,7 @@ function calculateWeights(matchPredictions) {
 }
 
 /* =========================================================
- 4. SCORING LOGIC
+ 4. SCORING LOGIC (WITH LIVE SUPPORT)
 ========================================================= */
 function scoreMatchPlayer(prediction, weights, actualResult, matchStatus) {
     if (!prediction) return 0;
@@ -82,12 +106,8 @@ function scoreMatchPlayer(prediction, weights, actualResult, matchStatus) {
     }
     
     // Award PROVISIONAL points for LIVE matches based on current score
-    if (status === "IN_PLAY" || status === "LIVE") {
-        // If prediction matches the CURRENT live result, show provisional points
-        // Note: actualResult here should be derived from live score in import-bzzoiro.js
-        if (actualResult && pred === actualResult) {
-            return weights[pred] || 0;
-        }
+    if ((status === "IN_PLAY" || status === "LIVE") && actualResult && pred === actualResult) {
+        return weights[pred] || 0;
     }
     
     return 0;
@@ -102,13 +122,13 @@ function processMatches() {
 
     const enrichedMatches = matches.map(match => {
         const actualResult = match.result; 
-        const matchPredictions = mappedPredictions[match.id] || {}; // USE MAPPED PREDICTIONS!
+        const matchPredictions = mappedPredictions[match.id] || {};
         const weights = calculateWeights(matchPredictions);
         const enrichedPreds = {};
 
         for (const player of players) {
             const prediction = matchPredictions[player];
-            const mScore = scoreMatchPlayer(prediction, weights, match.result, match.status);
+            const mScore = scoreMatchPlayer(prediction, weights, actualResult, match.status);
             scores[player] += mScore;
 
             enrichedPreds[player] = {

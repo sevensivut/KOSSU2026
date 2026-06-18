@@ -70,10 +70,26 @@ function calculateWeights(matchPredictions) {
 /* =========================================================
  4. SCORING LOGIC
 ========================================================= */
-function scoreMatchPlayer(prediction, weights, actualResult) {
-    if (!prediction || !actualResult) return 0;
+function scoreMatchPlayer(prediction, weights, actualResult, matchStatus) {
+    if (!prediction) return 0;
+    
     const pred = String(prediction).toUpperCase();
-    if (pred === actualResult) return weights[pred] || 0;
+    const status = String(matchStatus || "").toUpperCase();
+    
+    // Award points for FINISHED matches
+    if (actualResult && pred === actualResult) {
+        return weights[pred] || 0;
+    }
+    
+    // Award PROVISIONAL points for LIVE matches based on current score
+    if (status === "IN_PLAY" || status === "LIVE") {
+        // If prediction matches the CURRENT live result, show provisional points
+        // Note: actualResult here should be derived from live score in import-bzzoiro.js
+        if (actualResult && pred === actualResult) {
+            return weights[pred] || 0;
+        }
+    }
+    
     return 0;
 }
 
@@ -92,7 +108,7 @@ function processMatches() {
 
         for (const player of players) {
             const prediction = matchPredictions[player];
-            const mScore = scoreMatchPlayer(prediction, weights, actualResult);
+            const mScore = scoreMatchPlayer(prediction, weights, match.result, match.status);
             scores[player] += mScore;
 
             enrichedPreds[player] = {

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-18T22:45:32.714Z",
+  "updatedAt": "2026-06-18T23:00:47.351Z",
   "players": [
     "Markus",
     "Juuso",
@@ -6831,7 +6831,7 @@
       "awayTeam": "Qatar",
       "status": "IN_PLAY",
       "score": {
-        "home": 2,
+        "home": 3,
         "away": 0
       },
       "result": "1",

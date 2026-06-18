@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // DOM Elements
   const tabs = document.querySelectorAll('.tab');
   const tabContents = document.querySelectorAll('.tab-content');
   const updatedAtEl = document.getElementById('updatedAt');
@@ -12,22 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let globalData = null;
 
-  // 1. TAB NAVIGATION
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
       tabs.forEach(t => t.classList.remove('active'));
       tabContents.forEach(c => c.classList.add('hidden'));
-      
       tab.classList.add('active');
       const target = tab.getAttribute('data-tab');
       document.getElementById(target).classList.remove('hidden');
     });
   });
 
-  // 2. FETCH DATA
   async function loadData() {
     try {
-      const res = await fetch('data/matches.json?t=' + new Date().getTime()); 
+      const res = await fetch('data/matches.json?t=' + new Date().getTime());
       if (!res.ok) throw new Error('Dataa ei löytynyt');
       globalData = await res.json();
       renderAll();
@@ -49,11 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAwards();
   }
 
-  // 3. RENDER HEADER & STATS
   function renderUpdatedAt() {
-    if (!globalData?.updatedAt) return;
+    if (!globalData || !globalData.updatedAt) return;
     const date = new Date(globalData.updatedAt);
-    updatedAtEl.textContent = `Päivitetty: ${date.toLocaleDateString('fi-FI')} klo ${date.toLocaleTimeString('fi-FI', {hour: '2-digit', minute:'2-digit'})}`;
+    updatedAtEl.textContent = 'Päivitetty: ' + date.toLocaleDateString('fi-FI') + ' klo ' + date.toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit' });
   }
 
   function renderStats() {
@@ -61,131 +56,96 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalMatches = globalData.matches.length;
     const finishedMatches = globalData.matches.filter(m => m.status === 'FINISHED').length;
     const totalPlayers = globalData.players.length;
-    const topScore = globalData.leaderboard[0]?.points || 0;
-    
-    statsEl.innerHTML = `
-      <div class="card">
-        <div class="card-value">${totalPlayers}</div>
-        <div class="card-label">Pelaajaa</div>
-      </div>
-      <div class="card">
-        <div class="card-value">${finishedMatches} / ${totalMatches}</div>
-        <div class="card-label">Ottelua pelattu</div>
-      </div>
-      <div class="card">
-        <div class="card-value">${topScore.toFixed(1)}</div>
-        <div class="card-label">Kärkipistettä</div>
-      </div>
-    `;
+    const topScore = globalData.leaderboard[0] ? globalData.leaderboard[0].points : 0;
+
+    statsEl.innerHTML = '<div class="card"><div class="card-value">' + totalPlayers + '</div><div class="card-label">Pelaajaa</div></div>' +
+      '<div class="card"><div class="card-value">' + finishedMatches + ' / ' + totalMatches + '</div><div class="card-label">Ottelua pelattu</div></div>' +
+      '<div class="card"><div class="card-value">' + topScore.toFixed(1) + '</div><div class="card-label">Kärkipistettä</div></div>';
   }
 
-  // 4. RENDER LEADERBOARD (FIXED!)
   function renderLeaderboard() {
-    if (!globalData?.leaderboard) return;
-    
+    if (!globalData || !globalData.leaderboard) return;
+
     let html = '';
-    
     globalData.leaderboard.forEach((p, i) => {
       const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : '';
-      
-      // Check if player has any live/provisional points
-      const hasLivePoints = globalData.matches.some(m => 
+      const hasLivePoints = globalData.matches.some(m =>
         (m.status === 'IN_PLAY' || m.status === 'LIVE') &&
-        m.enrichedPredictions?.[p.name]?.matchPoints > 0
+        m.enrichedPredictions && m.enrichedPredictions[p.name] && m.enrichedPredictions[p.name].matchPoints > 0
       );
-      
-      const liveIndicator = hasLivePoints 
-        ? '<span class="live-badge">LIVE</span>' 
-        : '';
-      
-      html += `
-        <div class="leader-row">
-          <span class="rank">${i + 1}. ${medal} ${p.name} ${liveIndicator}</span>
-          <span class="points">${p.points.toFixed(1)} p</span>
-        </div>
-      `;
-    });
-    
-    leaderboardEl.innerHTML = html;
-  } // <-- PROPERLY CLOSED HERE
+      const liveIndicator = hasLivePoints ? '<span class="live-badge">LIVE</span>' : '';
 
-  // 5. RENDER MATCHES
-  function renderMatches(filter = '') {
-    if (!globalData?.matches) return;
-    
+      html += '<div class="leader-row">' +
+        '<span class="rank">' + (i + 1) + '. ' + medal + ' ' + p.name + ' ' + liveIndicator + '</span>' +
+        '<span class="points">' + p.points.toFixed(1) + ' p</span>' +
+        '</div>';
+    });
+
+    leaderboardEl.innerHTML = html;
+  }
+
+  function renderMatches(filter) {
+    if (!globalData || !globalData.matches) return;
+    const search = filter || '';
     const sortedMatches = [...globalData.matches].sort((a, b) => new Date(a.date) - new Date(b.date));
-    
+
     let html = '';
     let visibleCount = 0;
-    
+
     sortedMatches.forEach(m => {
-      const teams = `${m.homeTeam} ${m.awayTeam}`.toLowerCase();
-      if (filter && !teams.includes(filter.toLowerCase())) return;
+      const teams = (m.homeTeam + ' ' + m.awayTeam).toLowerCase();
+      if (search && teams.indexOf(search.toLowerCase()) === -1) return;
       visibleCount++;
-      
+
       const date = new Date(m.date);
       const dateStr = date.toLocaleDateString('fi-FI', { weekday: 'short', day: '2-digit', month: '2-digit' });
       const timeStr = date.toLocaleTimeString('fi-FI', { hour: '2-digit', minute: '2-digit' });
-      
+
       const isFinished = m.status === 'FINISHED';
       const isLive = m.status === 'IN_PLAY' || m.status === 'LIVE';
-      
-      let scoreDisplay;
+
+      let scoreDisplay = '<span>' + timeStr + '</span>';
       if (isFinished && m.score && m.score.home !== null) {
-        scoreDisplay = `<strong style="color:var(--gold2)">${m.score.home} - ${m.score.away}</strong>`;
+        scoreDisplay = '<strong style="color:var(--gold2)">' + m.score.home + ' - ' + m.score.away + '</strong>';
       } else if (isLive && m.score && m.score.home !== null) {
-        scoreDisplay = `<strong style="color:var(--green)">${m.score.home} - ${m.score.away} <span class="live-badge">LIVE</span></strong>`;
-      } else {
-        scoreDisplay = `<span>${timeStr}</span>`;
+        scoreDisplay = '<strong style="color:var(--green)">' + m.score.home + ' - ' + m.score.away + ' <span class="live-badge">LIVE</span></strong>';
       }
-        
+
       const weights = m.weights || { '1': 0, 'X': 0, '2': 0 };
-      
+
       let predsHtml = '';
       globalData.players.forEach(player => {
-        const pred = m.predictions?.[player] || '-';
-        const pts = m.enrichedPredictions?.[player]?.matchPoints || 0;
+        const pred = (m.predictions && m.predictions[player]) ? m.predictions[player] : '-';
+        const pts = (m.enrichedPredictions && m.enrichedPredictions[player]) ? m.enrichedPredictions[player].matchPoints : 0;
         const isCorrect = (isFinished || isLive) && pred === m.result;
-        
+
         const highlight = isCorrect ? 'color:var(--green); font-weight:bold;' : '';
-        const ptsDisplay = pts > 0 ? `<span style="color:var(--gold); margin-left:8px;">+${pts}p</span>` : '';
-        
-        predsHtml += `
-          <div class="pred">
-            <span>${player}</span>
-            <span style="${highlight}">${pred} ${isCorrect && isFinished ? '✅' : ''} ${ptsDisplay}</span>
-          </div>
-        `;
+        const checkmark = isCorrect && isFinished ? ' ✅' : '';
+        const ptsDisplay = pts > 0 ? '<span style="color:var(--gold); margin-left:8px;">+' + pts + 'p</span>' : '';
+
+        predsHtml += '<div class="pred"><span>' + player + '</span><span style="' + highlight + '">' + pred + checkmark + ' ' + ptsDisplay + '</span></div>';
       });
 
-      html += `
-        <details class="match">
-          <summary>
-            <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
-              <strong>${m.homeTeam} - ${m.awayTeam}</strong>
-              ${scoreDisplay}
-            </div>
-            <div style="color:var(--dim); font-size:0.85rem; margin-top:6px;">
-              ${dateStr} &nbsp;|&nbsp; Painot: 1:${weights['1']}p &nbsp; X:${weights['X']}p &nbsp; 2:${weights['2']}p
-            </div>
-          </summary>
-          <div class="predictions">
-            ${predsHtml}
-          </div>
-        </details>
-      `;
+      html += '<details class="match"><summary>' +
+        '<div style="display:flex; justify-content:space-between; align-items:center; width:100%;">' +
+        '<strong>' + m.homeTeam + ' - ' + m.awayTeam + '</strong>' +
+        scoreDisplay +
+        '</div>' +
+        '<div style="color:var(--dim); font-size:0.85rem; margin-top:6px;">' +
+        dateStr + ' | Painot: 1:' + weights['1'] + 'p X:' + weights['X'] + 'p 2:' + weights['2'] + 'p' +
+        '</div></summary>' +
+        '<div class="predictions">' + predsHtml + '</div></details>';
     });
-    
+
     matchesListEl.innerHTML = visibleCount > 0 ? html : '<p style="color:var(--dim); text-align:center;">Ei otteluita hakusanalla.</p>';
   }
 
   teamSearchEl.addEventListener('input', (e) => {
     renderMatches(e.target.value);
   });
-  
-  // 6. RENDER AWARDS (PODIUM)
+
   function renderAwards() {
-    if (!globalData?.podiumPredictions) {
+    if (!globalData || !globalData.podiumPredictions) {
       awardsGridEl.innerHTML = '<p style="color:var(--dim); text-align:center;">Ei palkintopalliveikkauksia.</p>';
       return;
     }
@@ -197,33 +157,29 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     let html = '';
-    
     medals.forEach(medal => {
-      html += `<div class="card" style="border-top: 3px solid ${medal.color};">`;
-      html += `<h3 style="margin-top:0; color:${medal.color};">${medal.label}</h3>`;
-      
+      html += '<div class="card" style="border-top: 3px solid ' + medal.color + ';">';
+      html += '<h3 style="margin-top:0; color:' + medal.color + ';">' + medal.label + '</h3>';
+
       const picks = {};
       globalData.players.forEach(player => {
         const team = globalData.podiumPredictions[player][medal.key];
         if (!picks[team]) picks[team] = [];
         picks[team].push(player);
       });
-      
+
       for (const [team, playersWhoPicked] of Object.entries(picks)) {
-        html += `
-          <div style="margin-bottom: 12px;">
-            <div style="font-weight: 700; font-size: 1.1rem;">${team}</div>
-            <div style="color: var(--dim); font-size: 0.9rem;">${playersWhoPicked.join(', ')}</div>
-          </div>
-        `;
+        html += '<div style="margin-bottom: 12px;">' +
+          '<div style="font-weight: 700; font-size: 1.1rem;">' + team + '</div>' +
+          '<div style="color: var(--dim); font-size: 0.9rem;">' + playersWhoPicked.join(', ') + '</div>' +
+          '</div>';
       }
-      html += `</div>`;
+      html += '</div>';
     });
 
     awardsGridEl.className = 'awards';
     awardsGridEl.innerHTML = html;
   }
 
-  // Initialize
   loadData();
 });

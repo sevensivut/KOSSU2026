@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-18T01:00:49.868Z",
+  "updatedAt": "2026-06-18T01:15:38.422Z",
   "players": [
     "Markus",
     "Juuso",
@@ -2640,10 +2640,10 @@
       }
     },
     {
-      "id": "8358",
+      "id": "8357",
       "date": "2026-06-28T02:00:00+00:00",
-      "homeTeam": "Jordan",
-      "awayTeam": "Argentina",
+      "homeTeam": "Algeria",
+      "awayTeam": "Austria",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -2733,10 +2733,10 @@
       }
     },
     {
-      "id": "8357",
+      "id": "8358",
       "date": "2026-06-28T02:00:00+00:00",
-      "homeTeam": "Algeria",
-      "awayTeam": "Austria",
+      "homeTeam": "Jordan",
+      "awayTeam": "Argentina",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -3198,10 +3198,10 @@
       }
     },
     {
-      "id": "8351",
+      "id": "8352",
       "date": "2026-06-27T03:00:00+00:00",
-      "homeTeam": "Egypt",
-      "awayTeam": "Iran",
+      "homeTeam": "New Zealand",
+      "awayTeam": "Belgium",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -3291,10 +3291,10 @@
       }
     },
     {
-      "id": "8352",
+      "id": "8351",
       "date": "2026-06-27T03:00:00+00:00",
-      "homeTeam": "New Zealand",
-      "awayTeam": "Belgium",
+      "homeTeam": "Egypt",
+      "awayTeam": "Iran",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4500,10 +4500,10 @@
       }
     },
     {
-      "id": "8337",
+      "id": "8338",
       "date": "2026-06-24T22:00:00+00:00",
-      "homeTeam": "Morocco",
-      "awayTeam": "Haiti",
+      "homeTeam": "Scotland",
+      "awayTeam": "Brazil",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4593,10 +4593,10 @@
       }
     },
     {
-      "id": "8338",
+      "id": "8337",
       "date": "2026-06-24T22:00:00+00:00",
-      "homeTeam": "Scotland",
-      "awayTeam": "Brazil",
+      "homeTeam": "Morocco",
+      "awayTeam": "Haiti",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -7201,7 +7201,7 @@
       "date": "2026-06-17T23:00:00+00:00",
       "homeTeam": "Ghana",
       "awayTeam": "Panama",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 1,
         "away": 0

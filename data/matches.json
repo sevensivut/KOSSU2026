@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-19T21:45:31.569Z",
+  "updatedAt": "2026-06-19T22:00:54.857Z",
   "players": [
     "Markus",
     "Juuso",
@@ -15,7 +15,7 @@
     "Matti K"
   ],
   "scores": {
-    "Markus": 20,
+    "Markus": 22.5,
     "Juuso": 16,
     "Pera": 21,
     "Lari": 20,
@@ -25,17 +25,21 @@
     "Tommi": 18.5,
     "Severi": 15,
     "Matti H": 15.5,
-    "Pasi": 20,
+    "Pasi": 22.5,
     "Matti K": 14
   },
   "leaderboard": [
     {
-      "name": "Pera",
-      "points": 21
+      "name": "Markus",
+      "points": 22.5
     },
     {
-      "name": "Markus",
-      "points": 20
+      "name": "Pasi",
+      "points": 22.5
+    },
+    {
+      "name": "Pera",
+      "points": 21
     },
     {
       "name": "Lari",
@@ -43,10 +47,6 @@
     },
     {
       "name": "Elmo",
-      "points": 20
-    },
-    {
-      "name": "Pasi",
       "points": 20
     },
     {
@@ -6550,12 +6550,12 @@
       "date": "2026-06-19T22:00:00+00:00",
       "homeTeam": "Scotland",
       "awayTeam": "Morocco",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "X",
         "Juuso": "2",
@@ -6578,8 +6578,8 @@
       "enrichedPredictions": {
         "Markus": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2.5,
+          "total": 2.5
         },
         "Juuso": {
           "prediction": "2",
@@ -6628,8 +6628,8 @@
         },
         "Pasi": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2.5,
+          "total": 2.5
         },
         "Matti K": {
           "prediction": "1",

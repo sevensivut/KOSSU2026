@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-19T22:00:54.857Z",
+  "updatedAt": "2026-06-19T22:15:31.836Z",
   "players": [
     "Markus",
     "Juuso",
@@ -15,50 +15,54 @@
     "Matti K"
   ],
   "scores": {
-    "Markus": 22.5,
-    "Juuso": 16,
-    "Pera": 21,
-    "Lari": 20,
-    "Erno": 14,
-    "Elmo": 20,
-    "Petri": 18,
-    "Tommi": 18.5,
-    "Severi": 15,
+    "Markus": 20,
+    "Juuso": 17,
+    "Pera": 22,
+    "Lari": 21,
+    "Erno": 15,
+    "Elmo": 21,
+    "Petri": 19,
+    "Tommi": 19.5,
+    "Severi": 16,
     "Matti H": 15.5,
-    "Pasi": 22.5,
+    "Pasi": 20,
     "Matti K": 14
   },
   "leaderboard": [
     {
-      "name": "Markus",
-      "points": 22.5
-    },
-    {
-      "name": "Pasi",
-      "points": 22.5
-    },
-    {
       "name": "Pera",
-      "points": 21
+      "points": 22
     },
     {
       "name": "Lari",
-      "points": 20
+      "points": 21
     },
     {
       "name": "Elmo",
+      "points": 21
+    },
+    {
+      "name": "Markus",
+      "points": 20
+    },
+    {
+      "name": "Pasi",
       "points": 20
     },
     {
       "name": "Tommi",
-      "points": 18.5
+      "points": 19.5
     },
     {
       "name": "Petri",
-      "points": 18
+      "points": 19
     },
     {
       "name": "Juuso",
+      "points": 17
+    },
+    {
+      "name": "Severi",
       "points": 16
     },
     {
@@ -66,12 +70,8 @@
       "points": 15.5
     },
     {
-      "name": "Severi",
-      "points": 15
-    },
-    {
       "name": "Erno",
-      "points": 14
+      "points": 15
     },
     {
       "name": "Matti K",
@@ -6553,9 +6553,9 @@
       "status": "IN_PLAY",
       "score": {
         "home": 0,
-        "away": 0
+        "away": 1
       },
-      "result": "X",
+      "result": "2",
       "predictions": {
         "Markus": "X",
         "Juuso": "2",
@@ -6578,48 +6578,48 @@
       "enrichedPredictions": {
         "Markus": {
           "prediction": "X",
-          "matchPoints": 2.5,
-          "total": 2.5
+          "matchPoints": 0,
+          "total": 0
         },
         "Juuso": {
           "prediction": "2",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         },
         "Pera": {
           "prediction": "2",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         },
         "Lari": {
           "prediction": "2",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         },
         "Erno": {
           "prediction": "2",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         },
         "Elmo": {
           "prediction": "2",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         },
         "Petri": {
           "prediction": "2",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         },
         "Tommi": {
           "prediction": "2",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         },
         "Severi": {
           "prediction": "2",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 1,
+          "total": 1
         },
         "Matti H": {
           "prediction": "1",
@@ -6628,8 +6628,8 @@
         },
         "Pasi": {
           "prediction": "X",
-          "matchPoints": 2.5,
-          "total": 2.5
+          "matchPoints": 0,
+          "total": 0
         },
         "Matti K": {
           "prediction": "1",

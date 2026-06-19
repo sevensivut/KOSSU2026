@@ -994,7 +994,7 @@
       "date": "2026-06-19T01:00:00+00:00",
       "homeTeam": "Mexico",
       "awayTeam": "South Korea",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 1,
         "away": 0

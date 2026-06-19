@@ -1007,7 +1007,7 @@
       "date": "2026-06-18T22:00:00+00:00",
       "homeTeam": "Canada",
       "awayTeam": "Qatar",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 6,
         "away": 0

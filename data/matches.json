@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-19T01:15:31.426Z",
+  "updatedAt": "2026-06-19T01:30:39.708Z",
   "players": [
     "Markus",
     "Juuso",
@@ -3942,10 +3942,10 @@
       }
     },
     {
-      "id": "8344",
+      "id": "8343",
       "date": "2026-06-25T23:00:00+00:00",
-      "homeTeam": "Tunisia",
-      "awayTeam": "Netherlands",
+      "homeTeam": "Japan",
+      "awayTeam": "Sweden",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4035,10 +4035,10 @@
       }
     },
     {
-      "id": "8343",
+      "id": "8344",
       "date": "2026-06-25T23:00:00+00:00",
-      "homeTeam": "Japan",
-      "awayTeam": "Sweden",
+      "homeTeam": "Tunisia",
+      "awayTeam": "Netherlands",
       "status": "SCHEDULED",
       "score": {
         "home": null,

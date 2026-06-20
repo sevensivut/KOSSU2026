@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-20T03:00:46.999Z",
+  "updatedAt": "2026-06-20T03:15:30.565Z",
   "players": [
     "Markus",
     "Juuso",
@@ -26,7 +26,7 @@
     "Severi": 17,
     "Matti H": 16.5,
     "Pasi": 21,
-    "Matti K": 15
+    "Matti K": 18
   },
   "leaderboard": [
     {
@@ -62,6 +62,10 @@
       "points": 18
     },
     {
+      "name": "Matti K",
+      "points": 18
+    },
+    {
       "name": "Severi",
       "points": 17
     },
@@ -72,10 +76,6 @@
     {
       "name": "Erno",
       "points": 16
-    },
-    {
-      "name": "Matti K",
-      "points": 15
     }
   ],
   "matches": [
@@ -6364,12 +6364,12 @@
       "date": "2026-06-20T03:00:00+00:00",
       "homeTeam": "Türkiye",
       "awayTeam": "Paraguay",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 1
       },
-      "result": null,
+      "result": "2",
       "predictions": {
         "Markus": "X",
         "Juuso": "X",
@@ -6447,8 +6447,8 @@
         },
         "Matti K": {
           "prediction": "2",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 3,
+          "total": 3
         }
       }
     },

@@ -942,12 +942,12 @@
       "date": "2026-06-20T03:00:00+00:00",
       "homeTeam": "Türkiye",
       "awayTeam": "Paraguay",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 1
       },
-      "result": null,
+      "result": "2",
       "predictions": {}
     },
     {

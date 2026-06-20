@@ -929,9 +929,9 @@
       "date": "2026-06-20T17:00:00+00:00",
       "homeTeam": "Netherlands",
       "awayTeam": "Sweden",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
-        "home": 4,
+        "home": 5,
         "away": 1
       },
       "result": "1",

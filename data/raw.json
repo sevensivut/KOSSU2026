@@ -916,12 +916,12 @@
       "date": "2026-06-20T20:00:00+00:00",
       "homeTeam": "Germany",
       "awayTeam": "Côte d'Ivoire",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
-        "home": 1,
+        "home": 2,
         "away": 1
       },
-      "result": "X",
+      "result": "1",
       "predictions": {}
     },
     {

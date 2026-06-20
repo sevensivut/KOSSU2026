@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-20T21:30:41.085Z",
+  "updatedAt": "2026-06-20T21:45:34.757Z",
   "players": [
     "Markus",
     "Juuso",
@@ -17,13 +17,13 @@
   "scores": {
     "Markus": 21,
     "Juuso": 19,
-    "Pera": 27,
+    "Pera": 24,
     "Lari": 23,
     "Erno": 16,
     "Elmo": 23,
-    "Petri": 21,
+    "Petri": 23,
     "Tommi": 21.5,
-    "Severi": 17,
+    "Severi": 19,
     "Matti H": 17.5,
     "Pasi": 21,
     "Matti K": 19
@@ -31,7 +31,7 @@
   "leaderboard": [
     {
       "name": "Pera",
-      "points": 27
+      "points": 24
     },
     {
       "name": "Lari",
@@ -39,6 +39,10 @@
     },
     {
       "name": "Elmo",
+      "points": 23
+    },
+    {
+      "name": "Petri",
       "points": 23
     },
     {
@@ -50,15 +54,15 @@
       "points": 21
     },
     {
-      "name": "Petri",
-      "points": 21
-    },
-    {
       "name": "Pasi",
       "points": 21
     },
     {
       "name": "Juuso",
+      "points": 19
+    },
+    {
+      "name": "Severi",
       "points": 19
     },
     {
@@ -68,10 +72,6 @@
     {
       "name": "Matti H",
       "points": 17.5
-    },
-    {
-      "name": "Severi",
-      "points": 17
     },
     {
       "name": "Erno",
@@ -6180,10 +6180,10 @@
       "awayTeam": "Côte d'Ivoire",
       "status": "IN_PLAY",
       "score": {
-        "home": 0,
+        "home": 1,
         "away": 1
       },
-      "result": "2",
+      "result": "X",
       "predictions": {
         "Markus": "1",
         "Juuso": "1",
@@ -6216,8 +6216,8 @@
         },
         "Pera": {
           "prediction": "2",
-          "matchPoints": 3,
-          "total": 3
+          "matchPoints": 0,
+          "total": 0
         },
         "Lari": {
           "prediction": "1",
@@ -6236,8 +6236,8 @@
         },
         "Petri": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Tommi": {
           "prediction": "1",
@@ -6246,8 +6246,8 @@
         },
         "Severi": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Matti H": {
           "prediction": "1",

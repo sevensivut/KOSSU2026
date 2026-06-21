@@ -854,9 +854,9 @@
       "status": "IN_PLAY",
       "score": {
         "home": 2,
-        "away": 1
+        "away": 2
       },
-      "result": "1",
+      "result": "X",
       "predictions": {}
     },
     {

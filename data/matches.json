@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-21T18:00:50.519Z",
+  "updatedAt": "2026-06-21T18:15:34.703Z",
   "players": [
     "Markus",
     "Juuso",
@@ -5899,7 +5899,7 @@
       "date": "2026-06-21T16:00:00+00:00",
       "homeTeam": "Spain",
       "awayTeam": "Saudi Arabia",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 4,
         "away": 0

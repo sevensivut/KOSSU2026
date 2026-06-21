@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-21T18:45:31.865Z",
+  "updatedAt": "2026-06-21T19:00:47.757Z",
   "players": [
     "Markus",
     "Juuso",
@@ -5806,12 +5806,12 @@
       "date": "2026-06-21T19:00:00+00:00",
       "homeTeam": "Belgium",
       "awayTeam": "Iran",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "1",
         "Juuso": "1",

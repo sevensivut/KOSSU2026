@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-21T05:45:31.131Z",
+  "updatedAt": "2026-06-21T06:00:47.246Z",
   "players": [
     "Markus",
     "Juuso",
@@ -5992,7 +5992,7 @@
       "date": "2026-06-21T04:00:00+00:00",
       "homeTeam": "Tunisia",
       "awayTeam": "Japan",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 0,
         "away": 4

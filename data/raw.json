@@ -890,7 +890,7 @@
       "date": "2026-06-21T04:00:00+00:00",
       "homeTeam": "Tunisia",
       "awayTeam": "Japan",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 0,
         "away": 4

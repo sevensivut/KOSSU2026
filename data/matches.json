@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-20T23:45:31.855Z",
+  "updatedAt": "2026-06-21T00:00:54.122Z",
   "players": [
     "Markus",
     "Juuso",
@@ -26,7 +26,7 @@
     "Severi": 17,
     "Matti H": 18.5,
     "Pasi": 22,
-    "Matti K": 20
+    "Matti K": 22
   },
   "leaderboard": [
     {
@@ -54,15 +54,15 @@
       "points": 22
     },
     {
+      "name": "Matti K",
+      "points": 22
+    },
+    {
       "name": "Petri",
       "points": 21
     },
     {
       "name": "Juuso",
-      "points": 20
-    },
-    {
-      "name": "Matti K",
       "points": 20
     },
     {
@@ -6085,12 +6085,12 @@
       "date": "2026-06-21T00:00:00+00:00",
       "homeTeam": "Ecuador",
       "awayTeam": "Curaçao",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "1",
         "Juuso": "1",
@@ -6168,8 +6168,8 @@
         },
         "Matti K": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         }
       }
     },

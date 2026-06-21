@@ -903,12 +903,12 @@
       "date": "2026-06-21T00:00:00+00:00",
       "homeTeam": "Ecuador",
       "awayTeam": "Curaçao",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {}
     },
     {

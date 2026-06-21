@@ -851,7 +851,7 @@
       "date": "2026-06-21T22:00:00+00:00",
       "homeTeam": "Uruguay",
       "awayTeam": "Cabo Verde",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
         "home": 0,
         "away": 0

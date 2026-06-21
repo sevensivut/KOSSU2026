@@ -853,10 +853,10 @@
       "awayTeam": "Cabo Verde",
       "status": "SCHEDULED",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {}
     },
     {

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-21T21:45:33.035Z",
+  "updatedAt": "2026-06-21T22:00:25.568Z",
   "players": [
     "Markus",
     "Juuso",
@@ -24,7 +24,7 @@
     "Petri": 23,
     "Tommi": 24.5,
     "Severi": 19,
-    "Matti H": 19.5,
+    "Matti H": 21.5,
     "Pasi": 24,
     "Matti K": 23
   },
@@ -67,7 +67,7 @@
     },
     {
       "name": "Matti H",
-      "points": 19.5
+      "points": 21.5
     },
     {
       "name": "Erno",
@@ -5715,10 +5715,10 @@
       "awayTeam": "Cabo Verde",
       "status": "SCHEDULED",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "1",
         "Juuso": "1",
@@ -5786,8 +5786,8 @@
         },
         "Matti H": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Pasi": {
           "prediction": "1",

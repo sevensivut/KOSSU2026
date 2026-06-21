@@ -903,7 +903,7 @@
       "date": "2026-06-21T00:00:00+00:00",
       "homeTeam": "Ecuador",
       "awayTeam": "Curaçao",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 0,
         "away": 0

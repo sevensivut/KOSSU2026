@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-21T21:00:45.680Z",
+  "updatedAt": "2026-06-21T21:15:34.743Z",
   "players": [
     "Markus",
     "Juuso",
@@ -5806,7 +5806,7 @@
       "date": "2026-06-21T19:00:00+00:00",
       "homeTeam": "Belgium",
       "awayTeam": "Iran",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 0,
         "away": 0

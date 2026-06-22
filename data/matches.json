@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-22T17:00:57.009Z",
+  "updatedAt": "2026-06-22T17:15:34.981Z",
   "players": [
     "Markus",
     "Juuso",
@@ -21,9 +21,9 @@
     "Lari": 27,
     "Erno": 20,
     "Elmo": 27,
-    "Petri": 24,
+    "Petri": 26,
     "Tommi": 24.5,
-    "Severi": 20,
+    "Severi": 22,
     "Matti H": 21.5,
     "Pasi": 25,
     "Matti K": 23
@@ -42,16 +42,16 @@
       "points": 27
     },
     {
+      "name": "Petri",
+      "points": 26
+    },
+    {
       "name": "Pasi",
       "points": 25
     },
     {
       "name": "Tommi",
       "points": 24.5
-    },
-    {
-      "name": "Petri",
-      "points": 24
     },
     {
       "name": "Markus",
@@ -66,15 +66,15 @@
       "points": 23
     },
     {
+      "name": "Severi",
+      "points": 22
+    },
+    {
       "name": "Matti H",
       "points": 21.5
     },
     {
       "name": "Erno",
-      "points": 20
-    },
-    {
-      "name": "Severi",
       "points": 20
     }
   ],
@@ -5527,12 +5527,12 @@
       "date": "2026-06-22T17:00:00+00:00",
       "homeTeam": "Argentina",
       "awayTeam": "Austria",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "1",
         "Juuso": "1",
@@ -5585,8 +5585,8 @@
         },
         "Petri": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Tommi": {
           "prediction": "1",
@@ -5595,8 +5595,8 @@
         },
         "Severi": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Matti H": {
           "prediction": "1",

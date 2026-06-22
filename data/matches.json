@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-22T22:00:49.649Z",
+  "updatedAt": "2026-06-22T22:15:33.969Z",
   "players": [
     "Markus",
     "Juuso",
@@ -5434,7 +5434,7 @@
       "date": "2026-06-22T21:00:00+00:00",
       "homeTeam": "France",
       "awayTeam": "Iraq",
-      "status": "IN_PLAY",
+      "status": "SCHEDULED",
       "score": {
         "home": 1,
         "away": 0

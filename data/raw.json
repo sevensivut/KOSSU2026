@@ -812,7 +812,7 @@
       "date": "2026-06-22T21:00:00+00:00",
       "homeTeam": "France",
       "awayTeam": "Iraq",
-      "status": "IN_PLAY",
+      "status": "SCHEDULED",
       "score": {
         "home": 1,
         "away": 0

@@ -827,10 +827,10 @@
       "awayTeam": "Austria",
       "status": "IN_PLAY",
       "score": {
-        "home": 0,
+        "home": 1,
         "away": 0
       },
-      "result": "X",
+      "result": "1",
       "predictions": {}
     },
     {

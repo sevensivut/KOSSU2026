@@ -812,12 +812,12 @@
       "date": "2026-06-22T21:00:00+00:00",
       "homeTeam": "France",
       "awayTeam": "Iraq",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 0
       },
-      "result": null,
+      "result": "1",
       "predictions": {}
     },
     {

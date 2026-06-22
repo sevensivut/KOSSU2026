@@ -825,7 +825,7 @@
       "date": "2026-06-22T17:00:00+00:00",
       "homeTeam": "Argentina",
       "awayTeam": "Austria",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 2,
         "away": 0

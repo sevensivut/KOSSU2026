@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-22T19:00:55.686Z",
+  "updatedAt": "2026-06-22T19:15:39.393Z",
   "players": [
     "Markus",
     "Juuso",
@@ -5527,7 +5527,7 @@
       "date": "2026-06-22T17:00:00+00:00",
       "homeTeam": "Argentina",
       "awayTeam": "Austria",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 2,
         "away": 0

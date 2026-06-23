@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-23T04:45:30.694Z",
+  "updatedAt": "2026-06-23T05:00:49.560Z",
   "players": [
     "Markus",
     "Juuso",
@@ -5248,7 +5248,7 @@
       "date": "2026-06-23T03:00:00+00:00",
       "homeTeam": "Jordan",
       "awayTeam": "Algeria",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 1,
         "away": 2

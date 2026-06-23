@@ -786,7 +786,7 @@
       "date": "2026-06-23T03:00:00+00:00",
       "homeTeam": "Jordan",
       "awayTeam": "Algeria",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 1,
         "away": 2

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-23T19:45:44.016Z",
+  "updatedAt": "2026-06-23T20:01:12.467Z",
   "players": [
     "Markus",
     "Juuso",
@@ -5062,12 +5062,12 @@
       "date": "2026-06-23T20:00:00+00:00",
       "homeTeam": "England",
       "awayTeam": "Ghana",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "1",
         "Juuso": "1",

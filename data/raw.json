@@ -760,12 +760,12 @@
       "date": "2026-06-23T20:00:00+00:00",
       "homeTeam": "England",
       "awayTeam": "Ghana",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {}
     },
     {

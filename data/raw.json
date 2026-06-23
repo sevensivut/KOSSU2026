@@ -799,12 +799,12 @@
       "date": "2026-06-23T00:00:00+00:00",
       "homeTeam": "Norway",
       "awayTeam": "Senegal",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {}
     },
     {

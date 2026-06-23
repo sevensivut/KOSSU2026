@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-22T23:45:32.520Z",
+  "updatedAt": "2026-06-23T00:00:53.787Z",
   "players": [
     "Markus",
     "Juuso",
@@ -17,13 +17,13 @@
   "scores": {
     "Markus": 25,
     "Juuso": 25,
-    "Pera": 29,
-    "Lari": 29,
-    "Erno": 22,
+    "Pera": 31,
+    "Lari": 31,
+    "Erno": 24,
     "Elmo": 29,
     "Petri": 25,
     "Tommi": 26.5,
-    "Severi": 21,
+    "Severi": 23,
     "Matti H": 23.5,
     "Pasi": 27,
     "Matti K": 25
@@ -31,11 +31,11 @@
   "leaderboard": [
     {
       "name": "Pera",
-      "points": 29
+      "points": 31
     },
     {
       "name": "Lari",
-      "points": 29
+      "points": 31
     },
     {
       "name": "Elmo",
@@ -66,16 +66,16 @@
       "points": 25
     },
     {
+      "name": "Erno",
+      "points": 24
+    },
+    {
       "name": "Matti H",
       "points": 23.5
     },
     {
-      "name": "Erno",
-      "points": 22
-    },
-    {
       "name": "Severi",
-      "points": 21
+      "points": 23
     }
   ],
   "matches": [
@@ -5341,12 +5341,12 @@
       "date": "2026-06-23T00:00:00+00:00",
       "homeTeam": "Norway",
       "awayTeam": "Senegal",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "1",
         "Juuso": "1",
@@ -5379,18 +5379,18 @@
         },
         "Pera": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Lari": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Erno": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Elmo": {
           "prediction": "1",
@@ -5409,8 +5409,8 @@
         },
         "Severi": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Matti H": {
           "prediction": "1",

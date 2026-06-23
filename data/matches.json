@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-23T22:45:32.605Z",
+  "updatedAt": "2026-06-23T23:00:50.509Z",
   "players": [
     "Markus",
     "Juuso",
@@ -23,10 +23,10 @@
     "Elmo": 31,
     "Petri": 27,
     "Tommi": 29.5,
-    "Severi": 23,
+    "Severi": 25,
     "Matti H": 25.5,
     "Pasi": 30,
-    "Matti K": 27
+    "Matti K": 29
   },
   "leaderboard": [
     {
@@ -50,6 +50,10 @@
       "points": 29.5
     },
     {
+      "name": "Matti K",
+      "points": 29
+    },
+    {
       "name": "Markus",
       "points": 28
     },
@@ -62,20 +66,16 @@
       "points": 27
     },
     {
-      "name": "Matti K",
-      "points": 27
-    },
-    {
       "name": "Matti H",
       "points": 25.5
     },
     {
-      "name": "Erno",
-      "points": 24
+      "name": "Severi",
+      "points": 25
     },
     {
-      "name": "Severi",
-      "points": 23
+      "name": "Erno",
+      "points": 24
     }
   ],
   "matches": [
@@ -4971,10 +4971,10 @@
       "awayTeam": "Croatia",
       "status": "SCHEDULED",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "2",
         "Juuso": "2",
@@ -5037,8 +5037,8 @@
         },
         "Severi": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Matti H": {
           "prediction": "2",
@@ -5052,8 +5052,8 @@
         },
         "Matti K": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         }
       }
     },

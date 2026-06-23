@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-23T16:45:42.553Z",
+  "updatedAt": "2026-06-23T17:00:54.979Z",
   "players": [
     "Markus",
     "Juuso",
@@ -5157,10 +5157,10 @@
       "awayTeam": "Uzbekistan",
       "status": "SCHEDULED",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "1",
         "Juuso": "1",

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-24T21:45:38.307Z",
+  "updatedAt": "2026-06-24T22:00:52.844Z",
   "players": [
     "Markus",
     "Juuso",
@@ -24,9 +24,9 @@
     "Petri": 31,
     "Tommi": 31.5,
     "Severi": 25,
-    "Matti H": 28.5,
+    "Matti H": 30.5,
     "Pasi": 34,
-    "Matti K": 28
+    "Matti K": 30
   },
   "leaderboard": [
     {
@@ -63,11 +63,11 @@
     },
     {
       "name": "Matti H",
-      "points": 28.5
+      "points": 30.5
     },
     {
       "name": "Matti K",
-      "points": 28
+      "points": 30
     },
     {
       "name": "Erno",
@@ -4599,10 +4599,10 @@
       "awayTeam": "Brazil",
       "status": "SCHEDULED",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "1",
         "Juuso": "1",
@@ -4670,8 +4670,8 @@
         },
         "Matti H": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Pasi": {
           "prediction": "1",
@@ -4680,8 +4680,8 @@
         },
         "Matti K": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         }
       }
     },

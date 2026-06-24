@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-24T22:45:32.395Z",
+  "updatedAt": "2026-06-24T23:00:52.506Z",
   "players": [
     "Markus",
     "Juuso",
@@ -24,9 +24,9 @@
     "Petri": 32,
     "Tommi": 32.5,
     "Severi": 25,
-    "Matti H": 29.5,
+    "Matti H": 31.5,
     "Pasi": 35,
-    "Matti K": 29
+    "Matti K": 31
   },
   "leaderboard": [
     {
@@ -63,11 +63,11 @@
     },
     {
       "name": "Matti H",
-      "points": 29.5
+      "points": 31.5
     },
     {
       "name": "Matti K",
-      "points": 29
+      "points": 31
     },
     {
       "name": "Erno",
@@ -4507,7 +4507,7 @@
       "status": "IN_PLAY",
       "score": {
         "home": 0,
-        "away": 1
+        "away": 2
       },
       "result": "2",
       "predictions": {
@@ -4599,10 +4599,10 @@
       "awayTeam": "Haiti",
       "status": "IN_PLAY",
       "score": {
-        "home": 1,
+        "home": 2,
         "away": 2
       },
-      "result": "2",
+      "result": "X",
       "predictions": {
         "Markus": "1",
         "Juuso": "1",
@@ -4670,8 +4670,8 @@
         },
         "Matti H": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Pasi": {
           "prediction": "1",
@@ -4680,8 +4680,8 @@
         },
         "Matti K": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         }
       }
     },

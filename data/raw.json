@@ -685,7 +685,7 @@
       "status": "IN_PLAY",
       "score": {
         "home": 0,
-        "away": 1
+        "away": 2
       },
       "result": "2",
       "predictions": {}
@@ -697,10 +697,10 @@
       "awayTeam": "Haiti",
       "status": "IN_PLAY",
       "score": {
-        "home": 1,
+        "home": 2,
         "away": 2
       },
-      "result": "2",
+      "result": "X",
       "predictions": {}
     },
     {

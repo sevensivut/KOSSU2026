@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-24T22:30:45.813Z",
+  "updatedAt": "2026-06-24T22:45:32.395Z",
   "players": [
     "Markus",
     "Juuso",
@@ -4599,8 +4599,8 @@
       "awayTeam": "Haiti",
       "status": "IN_PLAY",
       "score": {
-        "home": 0,
-        "away": 1
+        "home": 1,
+        "away": 2
       },
       "result": "2",
       "predictions": {

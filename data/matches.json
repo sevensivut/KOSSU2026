@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-24T20:37:32.966Z",
+  "updatedAt": "2026-06-24T20:45:34.382Z",
   "players": [
     "Markus",
     "Juuso",
@@ -3570,10 +3570,10 @@
       }
     },
     {
-      "id": "8348",
+      "id": "8347",
       "date": "2026-06-26T19:00:00+00:00",
-      "homeTeam": "Senegal",
-      "awayTeam": "Iraq",
+      "homeTeam": "Norway",
+      "awayTeam": "France",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -3663,10 +3663,10 @@
       }
     },
     {
-      "id": "8347",
+      "id": "8348",
       "date": "2026-06-26T19:00:00+00:00",
-      "homeTeam": "Norway",
-      "awayTeam": "France",
+      "homeTeam": "Senegal",
+      "awayTeam": "Iraq",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -3756,10 +3756,10 @@
       }
     },
     {
-      "id": "8345",
+      "id": "8346",
       "date": "2026-06-26T02:00:00+00:00",
-      "homeTeam": "Paraguay",
-      "awayTeam": "Australia",
+      "homeTeam": "Türkiye",
+      "awayTeam": "USA",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -3849,10 +3849,10 @@
       }
     },
     {
-      "id": "8346",
+      "id": "8345",
       "date": "2026-06-26T02:00:00+00:00",
-      "homeTeam": "Türkiye",
-      "awayTeam": "USA",
+      "homeTeam": "Paraguay",
+      "awayTeam": "Australia",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4314,10 +4314,10 @@
       }
     },
     {
-      "id": "8339",
+      "id": "8340",
       "date": "2026-06-25T01:00:00+00:00",
-      "homeTeam": "South Africa",
-      "awayTeam": "South Korea",
+      "homeTeam": "Czechia",
+      "awayTeam": "Mexico",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4407,10 +4407,10 @@
       }
     },
     {
-      "id": "8340",
+      "id": "8339",
       "date": "2026-06-25T01:00:00+00:00",
-      "homeTeam": "Czechia",
-      "awayTeam": "Mexico",
+      "homeTeam": "South Africa",
+      "awayTeam": "South Korea",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4500,10 +4500,10 @@
       }
     },
     {
-      "id": "8338",
+      "id": "8337",
       "date": "2026-06-24T22:00:00+00:00",
-      "homeTeam": "Scotland",
-      "awayTeam": "Brazil",
+      "homeTeam": "Morocco",
+      "awayTeam": "Haiti",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4593,10 +4593,10 @@
       }
     },
     {
-      "id": "8337",
+      "id": "8338",
       "date": "2026-06-24T22:00:00+00:00",
-      "homeTeam": "Morocco",
-      "awayTeam": "Haiti",
+      "homeTeam": "Scotland",
+      "awayTeam": "Brazil",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4785,7 +4785,7 @@
       "awayTeam": "Qatar",
       "status": "IN_PLAY",
       "score": {
-        "home": 2,
+        "home": 3,
         "away": 1
       },
       "result": "1",

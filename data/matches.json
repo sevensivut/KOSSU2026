@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-24T22:00:52.844Z",
+  "updatedAt": "2026-06-24T22:03:31.968Z",
   "players": [
     "Markus",
     "Juuso",
@@ -23,7 +23,7 @@
     "Elmo": 34,
     "Petri": 31,
     "Tommi": 31.5,
-    "Severi": 25,
+    "Severi": 27,
     "Matti H": 30.5,
     "Pasi": 34,
     "Matti K": 30
@@ -70,12 +70,12 @@
       "points": 30
     },
     {
-      "name": "Erno",
-      "points": 26
+      "name": "Severi",
+      "points": 27
     },
     {
-      "name": "Severi",
-      "points": 25
+      "name": "Erno",
+      "points": 26
     }
   ],
   "matches": [
@@ -4314,10 +4314,10 @@
       }
     },
     {
-      "id": "8339",
+      "id": "8340",
       "date": "2026-06-25T01:00:00+00:00",
-      "homeTeam": "South Africa",
-      "awayTeam": "South Korea",
+      "homeTeam": "Czechia",
+      "awayTeam": "Mexico",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4407,10 +4407,10 @@
       }
     },
     {
-      "id": "8340",
+      "id": "8339",
       "date": "2026-06-25T01:00:00+00:00",
-      "homeTeam": "Czechia",
-      "awayTeam": "Mexico",
+      "homeTeam": "South Africa",
+      "awayTeam": "South Korea",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4504,12 +4504,12 @@
       "date": "2026-06-24T22:00:00+00:00",
       "homeTeam": "Morocco",
       "awayTeam": "Haiti",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "2",
         "Juuso": "2",
@@ -4572,8 +4572,8 @@
         },
         "Severi": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Matti H": {
           "prediction": "2",
@@ -4597,7 +4597,7 @@
       "date": "2026-06-24T22:00:00+00:00",
       "homeTeam": "Scotland",
       "awayTeam": "Brazil",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
         "home": 0,
         "away": 0

@@ -652,19 +652,6 @@
       "predictions": {}
     },
     {
-      "id": "8339",
-      "date": "2026-06-25T01:00:00+00:00",
-      "homeTeam": "South Africa",
-      "awayTeam": "South Korea",
-      "status": "SCHEDULED",
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "result": null,
-      "predictions": {}
-    },
-    {
       "id": "8340",
       "date": "2026-06-25T01:00:00+00:00",
       "homeTeam": "Czechia",
@@ -678,10 +665,10 @@
       "predictions": {}
     },
     {
-      "id": "8337",
-      "date": "2026-06-24T22:00:00+00:00",
-      "homeTeam": "Morocco",
-      "awayTeam": "Haiti",
+      "id": "8339",
+      "date": "2026-06-25T01:00:00+00:00",
+      "homeTeam": "South Africa",
+      "awayTeam": "South Korea",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -691,11 +678,24 @@
       "predictions": {}
     },
     {
+      "id": "8337",
+      "date": "2026-06-24T22:00:00+00:00",
+      "homeTeam": "Morocco",
+      "awayTeam": "Haiti",
+      "status": "IN_PLAY",
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "result": "X",
+      "predictions": {}
+    },
+    {
       "id": "8338",
       "date": "2026-06-24T22:00:00+00:00",
       "homeTeam": "Scotland",
       "awayTeam": "Brazil",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
         "home": 0,
         "away": 0

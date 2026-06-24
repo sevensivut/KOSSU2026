@@ -574,10 +574,10 @@
       "predictions": {}
     },
     {
-      "id": "8346",
+      "id": "8345",
       "date": "2026-06-26T02:00:00+00:00",
-      "homeTeam": "Türkiye",
-      "awayTeam": "USA",
+      "homeTeam": "Paraguay",
+      "awayTeam": "Australia",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -587,10 +587,10 @@
       "predictions": {}
     },
     {
-      "id": "8345",
+      "id": "8346",
       "date": "2026-06-26T02:00:00+00:00",
-      "homeTeam": "Paraguay",
-      "awayTeam": "Australia",
+      "homeTeam": "Türkiye",
+      "awayTeam": "USA",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -652,10 +652,10 @@
       "predictions": {}
     },
     {
-      "id": "8340",
+      "id": "8339",
       "date": "2026-06-25T01:00:00+00:00",
-      "homeTeam": "Czechia",
-      "awayTeam": "Mexico",
+      "homeTeam": "South Africa",
+      "awayTeam": "South Korea",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -665,10 +665,10 @@
       "predictions": {}
     },
     {
-      "id": "8339",
+      "id": "8340",
       "date": "2026-06-25T01:00:00+00:00",
-      "homeTeam": "South Africa",
-      "awayTeam": "South Korea",
+      "homeTeam": "Czechia",
+      "awayTeam": "Mexico",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -704,6 +704,19 @@
       "predictions": {}
     },
     {
+      "id": "8335",
+      "date": "2026-06-24T19:00:00+00:00",
+      "homeTeam": "Switzerland",
+      "awayTeam": "Canada",
+      "status": "IN_PLAY",
+      "score": {
+        "home": 2,
+        "away": 0
+      },
+      "result": "1",
+      "predictions": {}
+    },
+    {
       "id": "8336",
       "date": "2026-06-24T19:00:00+00:00",
       "homeTeam": "Bosnia & Herzegovina",
@@ -712,19 +725,6 @@
       "score": {
         "home": 2,
         "away": 1
-      },
-      "result": "1",
-      "predictions": {}
-    },
-    {
-      "id": "8335",
-      "date": "2026-06-24T19:00:00+00:00",
-      "homeTeam": "Switzerland",
-      "awayTeam": "Canada",
-      "status": "IN_PLAY",
-      "score": {
-        "home": 1,
-        "away": 0
       },
       "result": "1",
       "predictions": {}

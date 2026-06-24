@@ -470,19 +470,6 @@
       "predictions": {}
     },
     {
-      "id": "8353",
-      "date": "2026-06-27T21:00:00+00:00",
-      "homeTeam": "Croatia",
-      "awayTeam": "Ghana",
-      "status": "SCHEDULED",
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "result": null,
-      "predictions": {}
-    },
-    {
       "id": "8354",
       "date": "2026-06-27T21:00:00+00:00",
       "homeTeam": "Panama",
@@ -496,10 +483,10 @@
       "predictions": {}
     },
     {
-      "id": "8352",
-      "date": "2026-06-27T03:00:00+00:00",
-      "homeTeam": "New Zealand",
-      "awayTeam": "Belgium",
+      "id": "8353",
+      "date": "2026-06-27T21:00:00+00:00",
+      "homeTeam": "Croatia",
+      "awayTeam": "Ghana",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -522,10 +509,10 @@
       "predictions": {}
     },
     {
-      "id": "8349",
-      "date": "2026-06-27T00:00:00+00:00",
-      "homeTeam": "Cabo Verde",
-      "awayTeam": "Saudi Arabia",
+      "id": "8352",
+      "date": "2026-06-27T03:00:00+00:00",
+      "homeTeam": "New Zealand",
+      "awayTeam": "Belgium",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -539,6 +526,19 @@
       "date": "2026-06-27T00:00:00+00:00",
       "homeTeam": "Uruguay",
       "awayTeam": "Spain",
+      "status": "SCHEDULED",
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "result": null,
+      "predictions": {}
+    },
+    {
+      "id": "8349",
+      "date": "2026-06-27T00:00:00+00:00",
+      "homeTeam": "Cabo Verde",
+      "awayTeam": "Saudi Arabia",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -678,10 +678,10 @@
       "predictions": {}
     },
     {
-      "id": "8338",
+      "id": "8337",
       "date": "2026-06-24T22:00:00+00:00",
-      "homeTeam": "Scotland",
-      "awayTeam": "Brazil",
+      "homeTeam": "Morocco",
+      "awayTeam": "Haiti",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -691,10 +691,10 @@
       "predictions": {}
     },
     {
-      "id": "8337",
+      "id": "8338",
       "date": "2026-06-24T22:00:00+00:00",
-      "homeTeam": "Morocco",
-      "awayTeam": "Haiti",
+      "homeTeam": "Scotland",
+      "awayTeam": "Brazil",
       "status": "SCHEDULED",
       "score": {
         "home": null,

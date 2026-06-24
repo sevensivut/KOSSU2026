@@ -1,152 +1,160 @@
 import fs from "fs";
 
 /* =========================================================
- 1. LOAD ALL DATA
+ 1. LOAD DATA
 ========================================================= */
-let raw, predictions, players, podium;
+let raw, predictionsByTeams, players, podium;
 
-try { 
-    raw = JSON.parse(fs.readFileSync("data/raw.json", "utf-8")); 
-    console.log("✅ raw.json is valid"); 
-} catch (e) { 
-    console.error("❌ SYNTAX ERROR in raw.json:", e.message); 
-    process.exit(1); 
-}
+try { raw = JSON.parse(fs.readFileSync("data/raw.json", "utf-8")); } catch (e) { console.error("❌ raw.json:", e.message); process.exit(1); }
+try { predictionsByTeams = JSON.parse(fs.readFileSync("data/predictions-by-teams.json", "utf-8")); } catch (e) { console.error("❌ predictions-by-teams.json:", e.message); process.exit(1); }
+try { players = JSON.parse(fs.readFileSync("data/players.json", "utf-8")); } catch (e) { console.error("❌ players.json:", e.message); process.exit(1); }
+try { podium = JSON.parse(fs.readFileSync("data/podium.json", "utf-8")); } catch (e) { console.error("❌ podium.json:", e.message); process.exit(1); }
 
-try { 
-    predictions = JSON.parse(fs.readFileSync("data/predictions.json", "utf-8")); 
-    console.log("✅ predictions.json is valid"); 
-} catch (e) { 
-    console.error("❌ SYNTAX ERROR in predictions.json:", e.message); 
-    process.exit(1); 
-}
-
-try { 
-    players = JSON.parse(fs.readFileSync("data/players.json", "utf-8")); 
-    console.log("✅ players.json is valid"); 
-} catch (e) { 
-    console.error("❌ SYNTAX ERROR in players.json:", e.message); 
-    process.exit(1); 
-}
-
-try { 
-    podium = JSON.parse(fs.readFileSync("data/podium.json", "utf-8")); 
-    console.log("✅ podium.json is valid"); 
-} catch (e) { 
-    console.error("❌ SYNTAX ERROR in podium.json:", e.message); 
-    process.exit(1); 
-}
-
-console.log(`👥 Loaded ${players.length} players`);
-console.log(`🏁 Loaded ${raw.matches.length} matches`);
-console.log(`🔮 Loaded ${Object.keys(predictions).length} match predictions`);
+console.log(`👥 ${players.length} players | 🏁 ${raw.matches.length} matches | 🔮 ${Object.keys(predictionsByTeams).length} prediction pairs`);
 
 const matches = raw.matches || [];
 
 /* =========================================================
- 2. CHRONOLOGICAL ID MAPPING
+ 2. TEAM NAME NORMALIZATION (API → Finnish)
 ========================================================= */
-const sortedApiMatches = [...matches].sort((a, b) => new Date(a.date) - new Date(b.date));
-const predictionKeys = Object.keys(predictions).sort((a, b) => Number(a) - Number(b));
+const TEAM_ALIASES = {
+  // English → Finnish
+  "south korea": "Etelä-Korea",
+  "korea republic": "Etelä-Korea",
+  "usa": "USA",
+  "united states": "USA",
+  "united states of america": "USA",
+  "côte d'ivoire": "Norsunluurannikko",
+  "cote d'ivoire": "Norsunluurannikko",
+  "ivory coast": "Norsunluurannikko",
+  "cabo verde": "Kap Verde",
+  "cape verde": "Kap Verde",
+  "dr congo": "Kongon dem. tasavalta",
+  "congo dr": "Kongon dem. tasavalta",
+  "democratic republic of the congo": "Kongon dem. tasavalta",
+  "bosnia & herzegovina": "Bosnia ja Hertsegovina",
+  "bosnia-herzegovina": "Bosnia ja Hertsegovina",
+  "bosnia and herzegovina": "Bosnia ja Hertsegovina",
+  "türkiye": "Turkki",
+  "turkey": "Turkki",
+  "czechia": "Tšekki",
+  "czech republic": "Tšekki",
+  "curaçao": "Curaçao",
+  "curacao": "Curaçao",
+  "ir iran": "Iran",
+};
 
-const mappedPredictions = {};
-sortedApiMatches.forEach((match, index) => {
-    const fakeId = predictionKeys[index];
-    if (fakeId && predictions[fakeId]) {
-        mappedPredictions[match.id] = predictions[fakeId];
-    }
-});
-console.log(`🔗 Mapped ${Object.keys(mappedPredictions).length} predictions to real API IDs`);
+function normalizeTeam(name) {
+  if (!name) return "";
+  const lower = name.trim().toLowerCase();
+  return TEAM_ALIASES[lower] || name.trim();
+}
+
+function makeKey(home, away) {
+  return `${normalizeTeam(home)}|${normalizeTeam(away)}`;
+}
 
 /* =========================================================
  3. DYNAMIC WEIGHT CALCULATION
 ========================================================= */
 function calculateWeights(matchPredictions) {
-    let c1 = 0, c2 = 0, cX = 0;
-    for (const player of players) {
-        const p = String(matchPredictions[player] || "").toUpperCase();
-        if (p === "1") c1++;
-        else if (p === "2") c2++;
-        else if (p === "X") cX++;
-    }
-    
-    const counts = [
-        { outcome: "1", count: c1 },
-        { outcome: "2", count: c2 },
-        { outcome: "X", count: cX }
-    ];
-    counts.sort((a, b) => b.count - a.count);
-    
-    const weights = { "1": 0, "2": 0, "X": 0 };
-    let i = 0;
-    while (i < 3) {
-        let j = i;
-        while (j < 3 && counts[j].count === counts[i].count) j++;
-        let sum = 0;
-        for (let k = i + 1; k <= j; k++) sum += k;
-        const avgWeight = sum / (j - i);
-        for (let k = i; k < j; k++) weights[counts[k].outcome] = avgWeight;
-        i = j;
-    }
-    return weights;
+  let c1 = 0, c2 = 0, cX = 0;
+  for (const player of players) {
+    const p = String(matchPredictions[player] || "").toUpperCase();
+    if (p === "1") c1++;
+    else if (p === "2") c2++;
+    else if (p === "X") cX++;
+  }
+
+  const counts = [
+    { outcome: "1", count: c1 },
+    { outcome: "2", count: c2 },
+    { outcome: "X", count: cX }
+  ];
+  counts.sort((a, b) => b.count - a.count);
+
+  const weights = { "1": 0, "2": 0, "X": 0 };
+  let i = 0;
+  while (i < 3) {
+    let j = i;
+    while (j < 3 && counts[j].count === counts[i].count) j++;
+    let sum = 0;
+    for (let k = i + 1; k <= j; k++) sum += k;
+    const avgWeight = sum / (j - i);
+    for (let k = i; k < j; k++) weights[counts[k].outcome] = avgWeight;
+    i = j;
+  }
+  return weights;
 }
 
 /* =========================================================
- 4. SCORING LOGIC (WITH LIVE SUPPORT)
+ 4. SCORING LOGIC
 ========================================================= */
 function scoreMatchPlayer(prediction, weights, actualResult, matchStatus) {
-    if (!prediction) return 0;
-    
-    const pred = String(prediction).toUpperCase();
-    const status = String(matchStatus || "").toUpperCase();
-    
-    // Award points for FINISHED matches
-    if (actualResult && pred === actualResult) {
-        return weights[pred] || 0;
-    }
-    
-    // Award PROVISIONAL points for LIVE matches based on current score
-    if ((status === "IN_PLAY" || status === "LIVE") && actualResult && pred === actualResult) {
-        return weights[pred] || 0;
-    }
-    
-    return 0;
+  if (!prediction) return 0;
+  const pred = String(prediction).toUpperCase();
+  const status = String(matchStatus || "").toUpperCase();
+
+  if (actualResult && pred === actualResult) {
+    return weights[pred] || 0;
+  }
+  if ((status === "IN_PLAY" || status === "LIVE") && actualResult && pred === actualResult) {
+    return weights[pred] || 0;
+  }
+  return 0;
 }
 
 /* =========================================================
- 5. PROCESS MATCHES
+ 5. PROCESS MATCHES (TEAM NAME MATCHING!)
 ========================================================= */
 function processMatches() {
-    const scores = {};
-    for (const player of players) scores[player] = 0;
+  const scores = {};
+  for (const player of players) scores[player] = 0;
 
-    const enrichedMatches = matches.map(match => {
-        const actualResult = match.result; 
-        const matchPredictions = mappedPredictions[match.id] || {};
-        const weights = calculateWeights(matchPredictions);
-        const enrichedPreds = {};
+  let matchedCount = 0;
+  let unmatched = [];
 
-        for (const player of players) {
-            const prediction = matchPredictions[player];
-            const mScore = scoreMatchPlayer(prediction, weights, actualResult, match.status);
-            scores[player] += mScore;
+  const enrichedMatches = matches.map(match => {
+    // Build key from API team names, normalized to Finnish
+    const key = makeKey(match.homeTeam, match.awayTeam);
+    const matchPredictions = predictionsByTeams[key] || {};
 
-            enrichedPreds[player] = {
-                prediction: prediction || null,
-                matchPoints: mScore,
-                total: mScore
-            };
-        }
+    if (Object.keys(matchPredictions).length > 0) {
+      matchedCount++;
+    } else {
+      unmatched.push(`${match.homeTeam} vs ${match.awayTeam} (key: "${key}")`);
+    }
 
-        return {
-            ...match,
-            predictions: matchPredictions,
-            weights: weights,
-            enrichedPredictions: enrichedPreds
-        };
-    });
+    const weights = calculateWeights(matchPredictions);
+    const enrichedPreds = {};
 
-    return { scores, enrichedMatches };
+    for (const player of players) {
+      const prediction = matchPredictions[player];
+      const mScore = scoreMatchPlayer(prediction, weights, match.result, match.status);
+      scores[player] += mScore;
+
+      enrichedPreds[player] = {
+        prediction: prediction || null,
+        matchPoints: mScore,
+        total: mScore
+      };
+    }
+
+    return {
+      ...match,
+      predictions: matchPredictions,
+      weights: weights,
+      enrichedPredictions: enrichedPreds
+    };
+  });
+
+  console.log(`✅ Matched ${matchedCount}/${matches.length} matches by team name`);
+  if (unmatched.length > 0) {
+    console.warn(`⚠️  ${unmatched.length} matches had no predictions:`);
+    unmatched.forEach(u => console.warn(`   - ${u}`));
+  }
+
+  return { scores, enrichedMatches };
 }
 
 /* =========================================================
@@ -155,17 +163,17 @@ function processMatches() {
 const result = processMatches();
 
 const leaderboard = Object.entries(result.scores)
-    .map(([name, points]) => ({ name, points }))
-    .sort((a, b) => b.points - a.points);
+  .map(([name, points]) => ({ name, points }))
+  .sort((a, b) => b.points - a.points);
 
 const output = {
-    updatedAt: new Date().toISOString(),
-    players: players,
-    scores: result.scores,
-    leaderboard: leaderboard,
-    matches: result.enrichedMatches,
-    podiumPredictions: podium,
-    podiumActual: null
+  updatedAt: new Date().toISOString(),
+  players: players,
+  scores: result.scores,
+  leaderboard: leaderboard,
+  matches: result.enrichedMatches,
+  podiumPredictions: podium,
+  podiumActual: null
 };
 
 fs.writeFileSync("data/matches.json", JSON.stringify(output, null, 2));

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-24T19:36:32.817Z",
+  "updatedAt": "2026-06-24T19:45:34.629Z",
   "players": [
     "Markus",
     "Juuso",
@@ -4693,7 +4693,7 @@
       "status": "IN_PLAY",
       "score": {
         "home": 2,
-        "away": 0
+        "away": 1
       },
       "result": "1",
       "predictions": {

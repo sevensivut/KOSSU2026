@@ -734,7 +734,7 @@
       "date": "2026-06-24T02:00:00+00:00",
       "homeTeam": "Colombia",
       "awayTeam": "DR Congo",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 1,
         "away": 0

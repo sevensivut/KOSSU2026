@@ -44,19 +44,33 @@ console.log(`🔮 Loaded ${Object.keys(predictions).length} match predictions`);
 const matches = raw.matches || [];
 
 /* =========================================================
- 2. CHRONOLOGICAL ID MAPPING
+ 2. TEAM-NAME LOOKUP
+    predictions.json is keyed by "HomeTeam|AwayTeam" using
+    Bzzoiro's exact English team names, so no ID or ordering
+    assumptions are needed.
 ========================================================= */
-const sortedApiMatches = [...matches].sort((a, b) => new Date(a.date) - new Date(b.date));
-const predictionKeys = Object.keys(predictions).sort((a, b) => Number(a) - Number(b));
-
 const mappedPredictions = {};
-sortedApiMatches.forEach((match, index) => {
-    const fakeId = predictionKeys[index];
-    if (fakeId && predictions[fakeId]) {
-        mappedPredictions[match.id] = predictions[fakeId];
+let unmatched = 0;
+
+for (const match of matches) {
+    const key     = `${match.homeTeam}|${match.awayTeam}`;
+    const altKey  = `${match.awayTeam}|${match.homeTeam}`;
+    const preds   = predictions[key] ?? predictions[altKey] ?? null;
+
+    if (preds) {
+        mappedPredictions[match.id] = preds;
+    } else if (match.homeTeam && match.awayTeam
+               && !match.homeTeam.startsWith("W")
+               && !match.homeTeam.startsWith("L")
+               && !/^\d/.test(match.homeTeam)
+               && !match.homeTeam.includes("/")) {
+        // Only warn for real teams, not knockout placeholders
+        console.warn(`⚠️  No predictions for: ${key}`);
+        unmatched++;
     }
-});
-console.log(`🔗 Mapped ${Object.keys(mappedPredictions).length} predictions to real API IDs`);
+}
+
+console.log(`🔗 Matched ${Object.keys(mappedPredictions).length} predictions by team name (${unmatched} unmatched)`);
 
 /* =========================================================
  3. DYNAMIC WEIGHT CALCULATION

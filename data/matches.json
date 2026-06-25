@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-25T00:00:55.984Z",
+  "updatedAt": "2026-06-25T00:15:36.479Z",
   "players": [
     "Markus",
     "Juuso",
@@ -4504,7 +4504,7 @@
       "date": "2026-06-24T22:00:00+00:00",
       "homeTeam": "Morocco",
       "awayTeam": "Haiti",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 4,
         "away": 2
@@ -4597,7 +4597,7 @@
       "date": "2026-06-24T22:00:00+00:00",
       "homeTeam": "Scotland",
       "awayTeam": "Brazil",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 0,
         "away": 3

@@ -626,19 +626,6 @@
       "predictions": {}
     },
     {
-      "id": "8342",
-      "date": "2026-06-25T20:00:00+00:00",
-      "homeTeam": "Ecuador",
-      "awayTeam": "Germany",
-      "status": "IN_PLAY",
-      "score": {
-        "home": 1,
-        "away": 1
-      },
-      "result": "X",
-      "predictions": {}
-    },
-    {
       "id": "8341",
       "date": "2026-06-25T20:00:00+00:00",
       "homeTeam": "Curaçao",
@@ -649,6 +636,19 @@
         "away": 1
       },
       "result": "2",
+      "predictions": {}
+    },
+    {
+      "id": "8342",
+      "date": "2026-06-25T20:00:00+00:00",
+      "homeTeam": "Ecuador",
+      "awayTeam": "Germany",
+      "status": "IN_PLAY",
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "result": "X",
       "predictions": {}
     },
     {

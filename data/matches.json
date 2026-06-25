@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-25T19:45:36.318Z",
+  "updatedAt": "2026-06-25T20:00:49.976Z",
   "players": [
     "Markus",
     "Juuso",
@@ -15,31 +15,35 @@
     "Matti K"
   ],
   "scores": {
-    "Markus": 34,
+    "Markus": 36.5,
     "Juuso": 34,
     "Pera": 33,
-    "Lari": 35,
+    "Lari": 37,
     "Erno": 26,
     "Elmo": 37,
     "Petri": 31,
-    "Tommi": 33.5,
+    "Tommi": 35.5,
     "Severi": 25,
     "Matti H": 33.5,
     "Pasi": 34,
-    "Matti K": 30
+    "Matti K": 32.5
   },
   "leaderboard": [
+    {
+      "name": "Lari",
+      "points": 37
+    },
     {
       "name": "Elmo",
       "points": 37
     },
     {
-      "name": "Lari",
-      "points": 35
+      "name": "Markus",
+      "points": 36.5
     },
     {
-      "name": "Markus",
-      "points": 34
+      "name": "Tommi",
+      "points": 35.5
     },
     {
       "name": "Juuso",
@@ -50,10 +54,6 @@
       "points": 34
     },
     {
-      "name": "Tommi",
-      "points": 33.5
-    },
-    {
       "name": "Matti H",
       "points": 33.5
     },
@@ -62,12 +62,12 @@
       "points": 33
     },
     {
-      "name": "Petri",
-      "points": 31
+      "name": "Matti K",
+      "points": 32.5
     },
     {
-      "name": "Matti K",
-      "points": 30
+      "name": "Petri",
+      "points": 31
     },
     {
       "name": "Erno",
@@ -4134,10 +4134,10 @@
       "awayTeam": "Côte d'Ivoire",
       "status": "SCHEDULED",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "X",
         "Juuso": "2",
@@ -4160,8 +4160,8 @@
       "enrichedPredictions": {
         "Markus": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2.5,
+          "total": 2.5
         },
         "Juuso": {
           "prediction": "2",
@@ -4215,8 +4215,8 @@
         },
         "Matti K": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2.5,
+          "total": 2.5
         }
       }
     },
@@ -4225,12 +4225,12 @@
       "date": "2026-06-25T20:00:00+00:00",
       "homeTeam": "Ecuador",
       "awayTeam": "Germany",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "2",
         "Juuso": "2",
@@ -4268,8 +4268,8 @@
         },
         "Lari": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Erno": {
           "prediction": "2",
@@ -4288,8 +4288,8 @@
         },
         "Tommi": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Severi": {
           "prediction": "2",

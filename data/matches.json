@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-25T02:15:32.998Z",
+  "updatedAt": "2026-06-25T02:30:42.538Z",
   "players": [
     "Markus",
     "Juuso",
@@ -15,67 +15,67 @@
     "Matti K"
   ],
   "scores": {
-    "Markus": 34,
-    "Juuso": 35,
-    "Pera": 37,
-    "Lari": 38,
-    "Erno": 30,
-    "Elmo": 36,
-    "Petri": 35,
-    "Tommi": 34.5,
-    "Severi": 27,
-    "Matti H": 29.5,
-    "Pasi": 38,
-    "Matti K": 29
+    "Markus": 32,
+    "Juuso": 33,
+    "Pera": 34,
+    "Lari": 35,
+    "Erno": 27,
+    "Elmo": 37,
+    "Petri": 32,
+    "Tommi": 32.5,
+    "Severi": 25,
+    "Matti H": 28.5,
+    "Pasi": 35,
+    "Matti K": 28
   },
   "leaderboard": [
     {
-      "name": "Lari",
-      "points": 38
-    },
-    {
-      "name": "Pasi",
-      "points": 38
-    },
-    {
-      "name": "Pera",
+      "name": "Elmo",
       "points": 37
     },
     {
-      "name": "Elmo",
-      "points": 36
-    },
-    {
-      "name": "Juuso",
+      "name": "Lari",
       "points": 35
     },
     {
-      "name": "Petri",
+      "name": "Pasi",
       "points": 35
     },
     {
-      "name": "Tommi",
-      "points": 34.5
-    },
-    {
-      "name": "Markus",
+      "name": "Pera",
       "points": 34
     },
     {
-      "name": "Erno",
-      "points": 30
+      "name": "Juuso",
+      "points": 33
+    },
+    {
+      "name": "Tommi",
+      "points": 32.5
+    },
+    {
+      "name": "Markus",
+      "points": 32
+    },
+    {
+      "name": "Petri",
+      "points": 32
     },
     {
       "name": "Matti H",
-      "points": 29.5
+      "points": 28.5
     },
     {
       "name": "Matti K",
-      "points": 29
+      "points": 28
+    },
+    {
+      "name": "Erno",
+      "points": 27
     },
     {
       "name": "Severi",
-      "points": 27
+      "points": 25
     }
   ],
   "matches": [
@@ -2640,10 +2640,10 @@
       }
     },
     {
-      "id": "8357",
+      "id": "8358",
       "date": "2026-06-28T02:00:00+00:00",
-      "homeTeam": "Algeria",
-      "awayTeam": "Austria",
+      "homeTeam": "Jordan",
+      "awayTeam": "Argentina",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -2733,10 +2733,10 @@
       }
     },
     {
-      "id": "8358",
+      "id": "8357",
       "date": "2026-06-28T02:00:00+00:00",
-      "homeTeam": "Jordan",
-      "awayTeam": "Argentina",
+      "homeTeam": "Algeria",
+      "awayTeam": "Austria",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -2826,10 +2826,10 @@
       }
     },
     {
-      "id": "8355",
+      "id": "8356",
       "date": "2026-06-27T23:30:00+00:00",
-      "homeTeam": "Colombia",
-      "awayTeam": "Portugal",
+      "homeTeam": "DR Congo",
+      "awayTeam": "Uzbekistan",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -2919,10 +2919,10 @@
       }
     },
     {
-      "id": "8356",
+      "id": "8355",
       "date": "2026-06-27T23:30:00+00:00",
-      "homeTeam": "DR Congo",
-      "awayTeam": "Uzbekistan",
+      "homeTeam": "Colombia",
+      "awayTeam": "Portugal",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -3012,10 +3012,10 @@
       }
     },
     {
-      "id": "8354",
+      "id": "8353",
       "date": "2026-06-27T21:00:00+00:00",
-      "homeTeam": "Panama",
-      "awayTeam": "England",
+      "homeTeam": "Croatia",
+      "awayTeam": "Ghana",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -3105,10 +3105,10 @@
       }
     },
     {
-      "id": "8353",
+      "id": "8354",
       "date": "2026-06-27T21:00:00+00:00",
-      "homeTeam": "Croatia",
-      "awayTeam": "Ghana",
+      "homeTeam": "Panama",
+      "awayTeam": "England",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -3198,10 +3198,10 @@
       }
     },
     {
-      "id": "8351",
+      "id": "8352",
       "date": "2026-06-27T03:00:00+00:00",
-      "homeTeam": "Egypt",
-      "awayTeam": "Iran",
+      "homeTeam": "New Zealand",
+      "awayTeam": "Belgium",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -3291,10 +3291,10 @@
       }
     },
     {
-      "id": "8352",
+      "id": "8351",
       "date": "2026-06-27T03:00:00+00:00",
-      "homeTeam": "New Zealand",
-      "awayTeam": "Belgium",
+      "homeTeam": "Egypt",
+      "awayTeam": "Iran",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -3570,10 +3570,10 @@
       }
     },
     {
-      "id": "8348",
+      "id": "8347",
       "date": "2026-06-26T19:00:00+00:00",
-      "homeTeam": "Senegal",
-      "awayTeam": "Iraq",
+      "homeTeam": "Norway",
+      "awayTeam": "France",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -3663,10 +3663,10 @@
       }
     },
     {
-      "id": "8347",
+      "id": "8348",
       "date": "2026-06-26T19:00:00+00:00",
-      "homeTeam": "Norway",
-      "awayTeam": "France",
+      "homeTeam": "Senegal",
+      "awayTeam": "Iraq",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4128,10 +4128,10 @@
       }
     },
     {
-      "id": "8342",
+      "id": "8341",
       "date": "2026-06-25T20:00:00+00:00",
-      "homeTeam": "Ecuador",
-      "awayTeam": "Germany",
+      "homeTeam": "Curaçao",
+      "awayTeam": "Côte d'Ivoire",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4221,10 +4221,10 @@
       }
     },
     {
-      "id": "8341",
+      "id": "8342",
       "date": "2026-06-25T20:00:00+00:00",
-      "homeTeam": "Curaçao",
-      "awayTeam": "Côte d'Ivoire",
+      "homeTeam": "Ecuador",
+      "awayTeam": "Germany",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -4320,10 +4320,10 @@
       "awayTeam": "South Korea",
       "status": "IN_PLAY",
       "score": {
-        "home": 0,
+        "home": 1,
         "away": 0
       },
-      "result": "X",
+      "result": "1",
       "predictions": {
         "Markus": "2",
         "Juuso": "2",
@@ -4356,28 +4356,28 @@
         },
         "Pera": {
           "prediction": "X",
-          "matchPoints": 1,
-          "total": 1
-        },
-        "Lari": {
-          "prediction": "X",
-          "matchPoints": 1,
-          "total": 1
-        },
-        "Erno": {
-          "prediction": "X",
-          "matchPoints": 1,
-          "total": 1
-        },
-        "Elmo": {
-          "prediction": "1",
           "matchPoints": 0,
           "total": 0
         },
+        "Lari": {
+          "prediction": "X",
+          "matchPoints": 0,
+          "total": 0
+        },
+        "Erno": {
+          "prediction": "X",
+          "matchPoints": 0,
+          "total": 0
+        },
+        "Elmo": {
+          "prediction": "1",
+          "matchPoints": 3,
+          "total": 3
+        },
         "Petri": {
           "prediction": "X",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Tommi": {
           "prediction": "2",
@@ -4386,8 +4386,8 @@
         },
         "Severi": {
           "prediction": "X",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Matti H": {
           "prediction": "2",
@@ -4396,8 +4396,8 @@
         },
         "Pasi": {
           "prediction": "X",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Matti K": {
           "prediction": "2",
@@ -4414,7 +4414,7 @@
       "status": "IN_PLAY",
       "score": {
         "home": 0,
-        "away": 1
+        "away": 2
       },
       "result": "2",
       "predictions": {
@@ -4500,16 +4500,16 @@
       }
     },
     {
-      "id": "8338",
+      "id": "8337",
       "date": "2026-06-24T22:00:00+00:00",
-      "homeTeam": "Scotland",
-      "awayTeam": "Brazil",
+      "homeTeam": "Morocco",
+      "awayTeam": "Haiti",
       "status": "FINISHED",
       "score": {
-        "home": 0,
-        "away": 3
+        "home": 4,
+        "away": 2
       },
-      "result": "2",
+      "result": "1",
       "predictions": {
         "Markus": "2",
         "Juuso": "2",
@@ -4532,43 +4532,43 @@
       "enrichedPredictions": {
         "Markus": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Juuso": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Pera": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Lari": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Erno": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Elmo": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Petri": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Tommi": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Severi": {
           "prediction": "X",
@@ -4577,32 +4577,32 @@
         },
         "Matti H": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Pasi": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Matti K": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         }
       }
     },
     {
-      "id": "8337",
+      "id": "8338",
       "date": "2026-06-24T22:00:00+00:00",
-      "homeTeam": "Morocco",
-      "awayTeam": "Haiti",
+      "homeTeam": "Scotland",
+      "awayTeam": "Brazil",
       "status": "FINISHED",
       "score": {
-        "home": 4,
-        "away": 2
+        "home": 0,
+        "away": 3
       },
-      "result": "1",
+      "result": "2",
       "predictions": {
         "Markus": "1",
         "Juuso": "1",
@@ -4625,48 +4625,48 @@
       "enrichedPredictions": {
         "Markus": {
           "prediction": "1",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Juuso": {
           "prediction": "1",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Pera": {
           "prediction": "1",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Lari": {
           "prediction": "1",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Erno": {
           "prediction": "1",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Elmo": {
           "prediction": "1",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Petri": {
           "prediction": "1",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Tommi": {
           "prediction": "1",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Severi": {
           "prediction": "1",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Matti H": {
           "prediction": "X",
@@ -4675,8 +4675,8 @@
         },
         "Pasi": {
           "prediction": "1",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Matti K": {
           "prediction": "X",

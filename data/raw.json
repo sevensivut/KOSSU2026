@@ -574,19 +574,6 @@
       "predictions": {}
     },
     {
-      "id": "8345",
-      "date": "2026-06-26T02:00:00+00:00",
-      "homeTeam": "Paraguay",
-      "awayTeam": "Australia",
-      "status": "SCHEDULED",
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "result": null,
-      "predictions": {}
-    },
-    {
       "id": "8346",
       "date": "2026-06-26T02:00:00+00:00",
       "homeTeam": "Türkiye",
@@ -600,16 +587,16 @@
       "predictions": {}
     },
     {
-      "id": "8344",
-      "date": "2026-06-25T23:00:00+00:00",
-      "homeTeam": "Tunisia",
-      "awayTeam": "Netherlands",
-      "status": "IN_PLAY",
+      "id": "8345",
+      "date": "2026-06-26T02:00:00+00:00",
+      "homeTeam": "Paraguay",
+      "awayTeam": "Australia",
+      "status": "SCHEDULED",
       "score": {
-        "home": 0,
-        "away": 2
+        "home": null,
+        "away": null
       },
-      "result": "2",
+      "result": null,
       "predictions": {}
     },
     {
@@ -623,6 +610,19 @@
         "away": 0
       },
       "result": "X",
+      "predictions": {}
+    },
+    {
+      "id": "8344",
+      "date": "2026-06-25T23:00:00+00:00",
+      "homeTeam": "Tunisia",
+      "awayTeam": "Netherlands",
+      "status": "IN_PLAY",
+      "score": {
+        "home": 0,
+        "away": 2
+      },
+      "result": "2",
       "predictions": {}
     },
     {

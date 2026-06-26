@@ -574,19 +574,6 @@
       "predictions": {}
     },
     {
-      "id": "8345",
-      "date": "2026-06-26T02:00:00+00:00",
-      "homeTeam": "Paraguay",
-      "awayTeam": "Australia",
-      "status": "IN_PLAY",
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "result": "X",
-      "predictions": {}
-    },
-    {
       "id": "8346",
       "date": "2026-06-26T02:00:00+00:00",
       "homeTeam": "Türkiye",
@@ -595,6 +582,19 @@
       "score": {
         "home": 2,
         "away": 2
+      },
+      "result": "X",
+      "predictions": {}
+    },
+    {
+      "id": "8345",
+      "date": "2026-06-26T02:00:00+00:00",
+      "homeTeam": "Paraguay",
+      "awayTeam": "Australia",
+      "status": "IN_PLAY",
+      "score": {
+        "home": 0,
+        "away": 0
       },
       "result": "X",
       "predictions": {}

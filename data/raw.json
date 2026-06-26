@@ -552,7 +552,7 @@
       "date": "2026-06-26T19:00:00+00:00",
       "homeTeam": "Senegal",
       "awayTeam": "Iraq",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 5,
         "away": 0

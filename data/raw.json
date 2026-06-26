@@ -548,19 +548,6 @@
       "predictions": {}
     },
     {
-      "id": "8348",
-      "date": "2026-06-26T19:00:00+00:00",
-      "homeTeam": "Senegal",
-      "awayTeam": "Iraq",
-      "status": "SCHEDULED",
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "result": null,
-      "predictions": {}
-    },
-    {
       "id": "8347",
       "date": "2026-06-26T19:00:00+00:00",
       "homeTeam": "Norway",
@@ -574,16 +561,16 @@
       "predictions": {}
     },
     {
-      "id": "8346",
-      "date": "2026-06-26T02:00:00+00:00",
-      "homeTeam": "Türkiye",
-      "awayTeam": "USA",
-      "status": "IN_PLAY",
+      "id": "8348",
+      "date": "2026-06-26T19:00:00+00:00",
+      "homeTeam": "Senegal",
+      "awayTeam": "Iraq",
+      "status": "SCHEDULED",
       "score": {
-        "home": 2,
-        "away": 1
+        "home": null,
+        "away": null
       },
-      "result": "1",
+      "result": null,
       "predictions": {}
     },
     {
@@ -595,6 +582,19 @@
       "score": {
         "home": 0,
         "away": 0
+      },
+      "result": "X",
+      "predictions": {}
+    },
+    {
+      "id": "8346",
+      "date": "2026-06-26T02:00:00+00:00",
+      "homeTeam": "Türkiye",
+      "awayTeam": "USA",
+      "status": "IN_PLAY",
+      "score": {
+        "home": 2,
+        "away": 2
       },
       "result": "X",
       "predictions": {}
@@ -652,19 +652,6 @@
       "predictions": {}
     },
     {
-      "id": "8340",
-      "date": "2026-06-25T01:00:00+00:00",
-      "homeTeam": "Czechia",
-      "awayTeam": "Mexico",
-      "status": "FINISHED",
-      "score": {
-        "home": 0,
-        "away": 3
-      },
-      "result": "2",
-      "predictions": {}
-    },
-    {
       "id": "8339",
       "date": "2026-06-25T01:00:00+00:00",
       "homeTeam": "South Africa",
@@ -675,6 +662,19 @@
         "away": 0
       },
       "result": "1",
+      "predictions": {}
+    },
+    {
+      "id": "8340",
+      "date": "2026-06-25T01:00:00+00:00",
+      "homeTeam": "Czechia",
+      "awayTeam": "Mexico",
+      "status": "FINISHED",
+      "score": {
+        "home": 0,
+        "away": 3
+      },
+      "result": "2",
       "predictions": {}
     },
     {

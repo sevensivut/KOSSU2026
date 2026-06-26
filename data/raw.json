@@ -552,12 +552,12 @@
       "date": "2026-06-26T19:00:00+00:00",
       "homeTeam": "Norway",
       "awayTeam": "France",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 1
       },
-      "result": null,
+      "result": "2",
       "predictions": {}
     },
     {
@@ -565,12 +565,12 @@
       "date": "2026-06-26T19:00:00+00:00",
       "homeTeam": "Senegal",
       "awayTeam": "Iraq",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 1,
+        "away": 0
       },
-      "result": null,
+      "result": "1",
       "predictions": {}
     },
     {

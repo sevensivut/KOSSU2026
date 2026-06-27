@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-26T23:45:31.742Z",
+  "updatedAt": "2026-06-27T00:00:51.759Z",
   "players": [
     "Markus",
     "Juuso",
@@ -15,18 +15,18 @@
     "Matti K"
   ],
   "scores": {
-    "Markus": 39,
+    "Markus": 41,
     "Juuso": 43,
     "Pera": 40,
     "Lari": 41,
-    "Erno": 34,
+    "Erno": 36,
     "Elmo": 42,
-    "Petri": 39,
+    "Petri": 41,
     "Tommi": 39.5,
-    "Severi": 32,
+    "Severi": 34,
     "Matti H": 40.5,
     "Pasi": 41,
-    "Matti K": 34
+    "Matti K": 36
   },
   "leaderboard": [
     {
@@ -38,7 +38,15 @@
       "points": 42
     },
     {
+      "name": "Markus",
+      "points": 41
+    },
+    {
       "name": "Lari",
+      "points": 41
+    },
+    {
+      "name": "Petri",
       "points": 41
     },
     {
@@ -58,24 +66,16 @@
       "points": 39.5
     },
     {
-      "name": "Markus",
-      "points": 39
-    },
-    {
-      "name": "Petri",
-      "points": 39
-    },
-    {
       "name": "Erno",
-      "points": 34
+      "points": 36
     },
     {
       "name": "Matti K",
-      "points": 34
+      "points": 36
     },
     {
       "name": "Severi",
-      "points": 32
+      "points": 34
     }
   ],
   "matches": [
@@ -3483,10 +3483,10 @@
       "awayTeam": "Saudi Arabia",
       "status": "SCHEDULED",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "X",
         "Juuso": "2",
@@ -3509,8 +3509,8 @@
       "enrichedPredictions": {
         "Markus": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Juuso": {
           "prediction": "2",
@@ -3529,8 +3529,8 @@
         },
         "Erno": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Elmo": {
           "prediction": "2",
@@ -3539,8 +3539,8 @@
         },
         "Petri": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Tommi": {
           "prediction": "2",
@@ -3549,8 +3549,8 @@
         },
         "Severi": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Matti H": {
           "prediction": "2",
@@ -3564,8 +3564,8 @@
         },
         "Matti K": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         }
       }
     },

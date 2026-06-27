@@ -513,7 +513,7 @@
       "date": "2026-06-27T03:00:00+00:00",
       "homeTeam": "Egypt",
       "awayTeam": "Iran",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 1,
         "away": 1

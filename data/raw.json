@@ -526,12 +526,12 @@
       "date": "2026-06-27T00:00:00+00:00",
       "homeTeam": "Uruguay",
       "awayTeam": "Spain",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {}
     },
     {
@@ -539,7 +539,7 @@
       "date": "2026-06-27T00:00:00+00:00",
       "homeTeam": "Cabo Verde",
       "awayTeam": "Saudi Arabia",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
         "home": 0,
         "away": 0

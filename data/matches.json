@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-27T00:00:51.759Z",
+  "updatedAt": "2026-06-27T00:15:29.970Z",
   "players": [
     "Markus",
     "Juuso",
@@ -15,11 +15,11 @@
     "Matti K"
   ],
   "scores": {
-    "Markus": 41,
+    "Markus": 43,
     "Juuso": 43,
     "Pera": 40,
-    "Lari": 41,
-    "Erno": 36,
+    "Lari": 43,
+    "Erno": 38,
     "Elmo": 42,
     "Petri": 41,
     "Tommi": 39.5,
@@ -30,20 +30,20 @@
   },
   "leaderboard": [
     {
+      "name": "Markus",
+      "points": 43
+    },
+    {
       "name": "Juuso",
+      "points": 43
+    },
+    {
+      "name": "Lari",
       "points": 43
     },
     {
       "name": "Elmo",
       "points": 42
-    },
-    {
-      "name": "Markus",
-      "points": 41
-    },
-    {
-      "name": "Lari",
-      "points": 41
     },
     {
       "name": "Petri",
@@ -67,7 +67,7 @@
     },
     {
       "name": "Erno",
-      "points": 36
+      "points": 38
     },
     {
       "name": "Matti K",
@@ -3388,12 +3388,12 @@
       "date": "2026-06-27T00:00:00+00:00",
       "homeTeam": "Uruguay",
       "awayTeam": "Spain",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "X",
         "Juuso": "2",
@@ -3416,8 +3416,8 @@
       "enrichedPredictions": {
         "Markus": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Juuso": {
           "prediction": "2",
@@ -3431,13 +3431,13 @@
         },
         "Lari": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Erno": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Elmo": {
           "prediction": "2",
@@ -3481,7 +3481,7 @@
       "date": "2026-06-27T00:00:00+00:00",
       "homeTeam": "Cabo Verde",
       "awayTeam": "Saudi Arabia",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
         "home": 0,
         "away": 0

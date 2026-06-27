@@ -496,6 +496,19 @@
       "predictions": {}
     },
     {
+      "id": "8352",
+      "date": "2026-06-27T03:00:00+00:00",
+      "homeTeam": "New Zealand",
+      "awayTeam": "Belgium",
+      "status": "FINISHED",
+      "score": {
+        "home": 1,
+        "away": 5
+      },
+      "result": "2",
+      "predictions": {}
+    },
+    {
       "id": "8351",
       "date": "2026-06-27T03:00:00+00:00",
       "homeTeam": "Egypt",
@@ -506,19 +519,6 @@
         "away": 1
       },
       "result": "X",
-      "predictions": {}
-    },
-    {
-      "id": "8352",
-      "date": "2026-06-27T03:00:00+00:00",
-      "homeTeam": "New Zealand",
-      "awayTeam": "Belgium",
-      "status": "IN_PLAY",
-      "score": {
-        "home": 0,
-        "away": 3
-      },
-      "result": "2",
       "predictions": {}
     },
     {

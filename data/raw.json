@@ -470,10 +470,10 @@
       "predictions": {}
     },
     {
-      "id": "8353",
+      "id": "8354",
       "date": "2026-06-27T21:00:00+00:00",
-      "homeTeam": "Croatia",
-      "awayTeam": "Ghana",
+      "homeTeam": "Panama",
+      "awayTeam": "England",
       "status": "IN_PLAY",
       "score": {
         "home": 0,
@@ -483,10 +483,10 @@
       "predictions": {}
     },
     {
-      "id": "8354",
+      "id": "8353",
       "date": "2026-06-27T21:00:00+00:00",
-      "homeTeam": "Panama",
-      "awayTeam": "England",
+      "homeTeam": "Croatia",
+      "awayTeam": "Ghana",
       "status": "IN_PLAY",
       "score": {
         "home": 0,

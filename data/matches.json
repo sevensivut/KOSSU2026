@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-28T01:45:28.598Z",
+  "updatedAt": "2026-06-28T02:00:46.893Z",
   "players": [
     "Markus",
     "Juuso",
@@ -2739,10 +2739,10 @@
       "awayTeam": "Argentina",
       "status": "SCHEDULED",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {
         "Markus": "2",
         "Juuso": "2",

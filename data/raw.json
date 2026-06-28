@@ -422,12 +422,12 @@
       "date": "2026-06-28T02:00:00+00:00",
       "homeTeam": "Algeria",
       "awayTeam": "Austria",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {}
     },
     {
@@ -435,7 +435,7 @@
       "date": "2026-06-28T02:00:00+00:00",
       "homeTeam": "Jordan",
       "awayTeam": "Argentina",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
         "home": 0,
         "away": 0

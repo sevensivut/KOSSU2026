@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-28T01:15:32.755Z",
+  "updatedAt": "2026-06-28T01:30:39.772Z",
   "players": [
     "Markus",
     "Juuso",
@@ -2832,7 +2832,7 @@
       "awayTeam": "Uzbekistan",
       "status": "IN_PLAY",
       "score": {
-        "home": 2,
+        "home": 3,
         "away": 1
       },
       "result": "1",
@@ -2923,7 +2923,7 @@
       "date": "2026-06-27T23:30:00+00:00",
       "homeTeam": "Colombia",
       "awayTeam": "Portugal",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
         "home": 0,
         "away": 0

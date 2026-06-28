@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-28T02:30:41.246Z",
+  "updatedAt": "2026-06-28T02:45:31.763Z",
   "players": [
     "Markus",
     "Juuso",
@@ -15,55 +15,59 @@
     "Matti K"
   ],
   "scores": {
-    "Markus": 49,
-    "Juuso": 50,
-    "Pera": 48,
-    "Lari": 44,
-    "Erno": 41,
-    "Elmo": 48,
-    "Petri": 49,
-    "Tommi": 48.5,
+    "Markus": 48,
+    "Juuso": 52,
+    "Pera": 47,
+    "Lari": 46,
+    "Erno": 43,
+    "Elmo": 47,
+    "Petri": 48,
+    "Tommi": 47.5,
     "Severi": 43,
-    "Matti H": 47.5,
-    "Pasi": 47,
-    "Matti K": 42
+    "Matti H": 46.5,
+    "Pasi": 46,
+    "Matti K": 41
   },
   "leaderboard": [
     {
       "name": "Juuso",
-      "points": 50
+      "points": 52
     },
     {
       "name": "Markus",
-      "points": 49
+      "points": 48
     },
     {
       "name": "Petri",
-      "points": 49
+      "points": 48
     },
     {
       "name": "Tommi",
-      "points": 48.5
-    },
-    {
-      "name": "Pera",
-      "points": 48
-    },
-    {
-      "name": "Elmo",
-      "points": 48
-    },
-    {
-      "name": "Matti H",
       "points": 47.5
     },
     {
-      "name": "Pasi",
+      "name": "Pera",
       "points": 47
     },
     {
+      "name": "Elmo",
+      "points": 47
+    },
+    {
+      "name": "Matti H",
+      "points": 46.5
+    },
+    {
       "name": "Lari",
-      "points": 44
+      "points": 46
+    },
+    {
+      "name": "Pasi",
+      "points": 46
+    },
+    {
+      "name": "Erno",
+      "points": 43
     },
     {
       "name": "Severi",
@@ -71,10 +75,6 @@
     },
     {
       "name": "Matti K",
-      "points": 42
-    },
-    {
-      "name": "Erno",
       "points": 41
     }
   ],
@@ -2646,10 +2646,10 @@
       "awayTeam": "Austria",
       "status": "IN_PLAY",
       "score": {
-        "home": 0,
+        "home": 1,
         "away": 1
       },
-      "result": "2",
+      "result": "X",
       "predictions": {
         "Markus": "2",
         "Juuso": "X",
@@ -2672,43 +2672,43 @@
       "enrichedPredictions": {
         "Markus": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Juuso": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Pera": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Lari": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Erno": {
           "prediction": "X",
-          "matchPoints": 0,
-          "total": 0
+          "matchPoints": 2,
+          "total": 2
         },
         "Elmo": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Petri": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Tommi": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Severi": {
           "prediction": "1",
@@ -2717,18 +2717,18 @@
         },
         "Matti H": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Pasi": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         },
         "Matti K": {
           "prediction": "2",
-          "matchPoints": 1,
-          "total": 1
+          "matchPoints": 0,
+          "total": 0
         }
       }
     },
@@ -2740,7 +2740,7 @@
       "status": "IN_PLAY",
       "score": {
         "home": 0,
-        "away": 1
+        "away": 2
       },
       "result": "2",
       "predictions": {

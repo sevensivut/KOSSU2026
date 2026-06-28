@@ -212,7 +212,7 @@
     {
       "id": "8374",
       "date": "2026-07-04T01:30:00+00:00",
-      "homeTeam": "1K",
+      "homeTeam": "Colombia",
       "awayTeam": "Ghana",
       "status": "SCHEDULED",
       "score": {
@@ -252,7 +252,7 @@
       "id": "8371",
       "date": "2026-07-03T03:00:00+00:00",
       "homeTeam": "Switzerland",
-      "awayTeam": "3E/3F/3G/3I/3J",
+      "awayTeam": "Algeria",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -264,7 +264,7 @@
     {
       "id": "8370",
       "date": "2026-07-02T23:00:00+00:00",
-      "homeTeam": "2K",
+      "homeTeam": "Portugal",
       "awayTeam": "Croatia",
       "status": "SCHEDULED",
       "score": {
@@ -278,7 +278,7 @@
       "id": "8369",
       "date": "2026-07-02T19:00:00+00:00",
       "homeTeam": "Spain",
-      "awayTeam": "2J",
+      "awayTeam": "Austria",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -304,7 +304,7 @@
       "id": "8367",
       "date": "2026-07-01T20:00:00+00:00",
       "homeTeam": "Belgium",
-      "awayTeam": "3A/3E/3H/3I/3J",
+      "awayTeam": "Senegal",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -317,7 +317,7 @@
       "id": "8366",
       "date": "2026-07-01T16:00:00+00:00",
       "homeTeam": "England",
-      "awayTeam": "3E/3H/3I/3J/3K",
+      "awayTeam": "DR Congo",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -418,19 +418,6 @@
       "predictions": {}
     },
     {
-      "id": "8358",
-      "date": "2026-06-28T02:00:00+00:00",
-      "homeTeam": "Jordan",
-      "awayTeam": "Argentina",
-      "status": "FINISHED",
-      "score": {
-        "home": 1,
-        "away": 3
-      },
-      "result": "2",
-      "predictions": {}
-    },
-    {
       "id": "8357",
       "date": "2026-06-28T02:00:00+00:00",
       "homeTeam": "Algeria",
@@ -444,16 +431,16 @@
       "predictions": {}
     },
     {
-      "id": "8355",
-      "date": "2026-06-27T23:30:00+00:00",
-      "homeTeam": "Colombia",
-      "awayTeam": "Portugal",
+      "id": "8358",
+      "date": "2026-06-28T02:00:00+00:00",
+      "homeTeam": "Jordan",
+      "awayTeam": "Argentina",
       "status": "FINISHED",
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 1,
+        "away": 3
       },
-      "result": "X",
+      "result": "2",
       "predictions": {}
     },
     {
@@ -467,6 +454,19 @@
         "away": 1
       },
       "result": "1",
+      "predictions": {}
+    },
+    {
+      "id": "8355",
+      "date": "2026-06-27T23:30:00+00:00",
+      "homeTeam": "Colombia",
+      "awayTeam": "Portugal",
+      "status": "FINISHED",
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "result": "X",
       "predictions": {}
     },
     {
@@ -496,19 +496,6 @@
       "predictions": {}
     },
     {
-      "id": "8352",
-      "date": "2026-06-27T03:00:00+00:00",
-      "homeTeam": "New Zealand",
-      "awayTeam": "Belgium",
-      "status": "FINISHED",
-      "score": {
-        "home": 1,
-        "away": 5
-      },
-      "result": "2",
-      "predictions": {}
-    },
-    {
       "id": "8351",
       "date": "2026-06-27T03:00:00+00:00",
       "homeTeam": "Egypt",
@@ -522,14 +509,14 @@
       "predictions": {}
     },
     {
-      "id": "8350",
-      "date": "2026-06-27T00:00:00+00:00",
-      "homeTeam": "Uruguay",
-      "awayTeam": "Spain",
+      "id": "8352",
+      "date": "2026-06-27T03:00:00+00:00",
+      "homeTeam": "New Zealand",
+      "awayTeam": "Belgium",
       "status": "FINISHED",
       "score": {
-        "home": 0,
-        "away": 1
+        "home": 1,
+        "away": 5
       },
       "result": "2",
       "predictions": {}
@@ -548,14 +535,14 @@
       "predictions": {}
     },
     {
-      "id": "8347",
-      "date": "2026-06-26T19:00:00+00:00",
-      "homeTeam": "Norway",
-      "awayTeam": "France",
+      "id": "8350",
+      "date": "2026-06-27T00:00:00+00:00",
+      "homeTeam": "Uruguay",
+      "awayTeam": "Spain",
       "status": "FINISHED",
       "score": {
-        "home": 1,
-        "away": 4
+        "home": 0,
+        "away": 1
       },
       "result": "2",
       "predictions": {}
@@ -574,16 +561,16 @@
       "predictions": {}
     },
     {
-      "id": "8345",
-      "date": "2026-06-26T02:00:00+00:00",
-      "homeTeam": "Paraguay",
-      "awayTeam": "Australia",
+      "id": "8347",
+      "date": "2026-06-26T19:00:00+00:00",
+      "homeTeam": "Norway",
+      "awayTeam": "France",
       "status": "FINISHED",
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 1,
+        "away": 4
       },
-      "result": "X",
+      "result": "2",
       "predictions": {}
     },
     {
@@ -600,14 +587,14 @@
       "predictions": {}
     },
     {
-      "id": "8343",
-      "date": "2026-06-25T23:00:00+00:00",
-      "homeTeam": "Japan",
-      "awayTeam": "Sweden",
+      "id": "8345",
+      "date": "2026-06-26T02:00:00+00:00",
+      "homeTeam": "Paraguay",
+      "awayTeam": "Australia",
       "status": "FINISHED",
       "score": {
-        "home": 1,
-        "away": 1
+        "home": 0,
+        "away": 0
       },
       "result": "X",
       "predictions": {}
@@ -623,6 +610,19 @@
         "away": 3
       },
       "result": "2",
+      "predictions": {}
+    },
+    {
+      "id": "8343",
+      "date": "2026-06-25T23:00:00+00:00",
+      "homeTeam": "Japan",
+      "awayTeam": "Sweden",
+      "status": "FINISHED",
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "result": "X",
       "predictions": {}
     },
     {
@@ -678,19 +678,6 @@
       "predictions": {}
     },
     {
-      "id": "8338",
-      "date": "2026-06-24T22:00:00+00:00",
-      "homeTeam": "Scotland",
-      "awayTeam": "Brazil",
-      "status": "FINISHED",
-      "score": {
-        "home": 0,
-        "away": 3
-      },
-      "result": "2",
-      "predictions": {}
-    },
-    {
       "id": "8337",
       "date": "2026-06-24T22:00:00+00:00",
       "homeTeam": "Morocco",
@@ -704,16 +691,16 @@
       "predictions": {}
     },
     {
-      "id": "8335",
-      "date": "2026-06-24T19:00:00+00:00",
-      "homeTeam": "Switzerland",
-      "awayTeam": "Canada",
+      "id": "8338",
+      "date": "2026-06-24T22:00:00+00:00",
+      "homeTeam": "Scotland",
+      "awayTeam": "Brazil",
       "status": "FINISHED",
       "score": {
-        "home": 2,
-        "away": 1
+        "home": 0,
+        "away": 3
       },
-      "result": "1",
+      "result": "2",
       "predictions": {}
     },
     {
@@ -724,6 +711,19 @@
       "status": "FINISHED",
       "score": {
         "home": 3,
+        "away": 1
+      },
+      "result": "1",
+      "predictions": {}
+    },
+    {
+      "id": "8335",
+      "date": "2026-06-24T19:00:00+00:00",
+      "homeTeam": "Switzerland",
+      "awayTeam": "Canada",
+      "status": "FINISHED",
+      "score": {
+        "home": 2,
         "away": 1
       },
       "result": "1",

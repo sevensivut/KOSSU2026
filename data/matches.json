@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-29T18:15:30.340Z",
+  "updatedAt": "2026-06-29T18:30:41.514Z",
   "players": [
     "Markus",
     "Juuso",
@@ -2486,10 +2486,10 @@
       "awayTeam": "Japan",
       "status": "IN_PLAY",
       "score": {
-        "home": 0,
+        "home": 1,
         "away": 1
       },
-      "result": "2",
+      "result": "X",
       "predictions": {},
       "weights": {
         "1": 2,

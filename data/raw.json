@@ -344,12 +344,12 @@
       "date": "2026-06-30T21:00:00+00:00",
       "homeTeam": "France",
       "awayTeam": "Sweden",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {}
     },
     {
@@ -357,10 +357,10 @@
       "date": "2026-06-30T17:00:00+00:00",
       "homeTeam": "Côte d'Ivoire",
       "awayTeam": "Norway",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
-        "home": 0,
-        "away": 1
+        "home": 1,
+        "away": 2
       },
       "result": "2",
       "predictions": {}

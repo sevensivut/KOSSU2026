@@ -135,7 +135,7 @@
       "id": "8380",
       "date": "2026-07-07T00:00:00+00:00",
       "homeTeam": "W81",
-      "awayTeam": "W82",
+      "awayTeam": "Belgium",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -161,7 +161,7 @@
       "id": "8378",
       "date": "2026-07-06T00:00:00+00:00",
       "homeTeam": "Mexico",
-      "awayTeam": "W80",
+      "awayTeam": "England",
       "status": "SCHEDULED",
       "score": {
         "home": null,
@@ -292,12 +292,12 @@
       "date": "2026-07-02T00:00:00+00:00",
       "homeTeam": "USA",
       "awayTeam": "Bosnia & Herzegovina",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
-        "home": 0,
+        "home": 2,
         "away": 0
       },
-      "result": "X",
+      "result": "1",
       "predictions": {}
     },
     {
@@ -307,10 +307,10 @@
       "awayTeam": "Senegal",
       "status": "FINISHED",
       "score": {
-        "home": 3,
+        "home": 2,
         "away": 2
       },
-      "result": "1",
+      "result": "X",
       "predictions": {}
     },
     {
@@ -418,6 +418,19 @@
       "predictions": {}
     },
     {
+      "id": "8357",
+      "date": "2026-06-28T02:00:00+00:00",
+      "homeTeam": "Algeria",
+      "awayTeam": "Austria",
+      "status": "FINISHED",
+      "score": {
+        "home": 3,
+        "away": 3
+      },
+      "result": "X",
+      "predictions": {}
+    },
+    {
       "id": "8358",
       "date": "2026-06-28T02:00:00+00:00",
       "homeTeam": "Jordan",
@@ -431,14 +444,14 @@
       "predictions": {}
     },
     {
-      "id": "8357",
-      "date": "2026-06-28T02:00:00+00:00",
-      "homeTeam": "Algeria",
-      "awayTeam": "Austria",
+      "id": "8355",
+      "date": "2026-06-27T23:30:00+00:00",
+      "homeTeam": "Colombia",
+      "awayTeam": "Portugal",
       "status": "FINISHED",
       "score": {
-        "home": 3,
-        "away": 3
+        "home": 0,
+        "away": 0
       },
       "result": "X",
       "predictions": {}
@@ -457,16 +470,16 @@
       "predictions": {}
     },
     {
-      "id": "8355",
-      "date": "2026-06-27T23:30:00+00:00",
-      "homeTeam": "Colombia",
-      "awayTeam": "Portugal",
+      "id": "8354",
+      "date": "2026-06-27T21:00:00+00:00",
+      "homeTeam": "Panama",
+      "awayTeam": "England",
       "status": "FINISHED",
       "score": {
         "home": 0,
-        "away": 0
+        "away": 2
       },
-      "result": "X",
+      "result": "2",
       "predictions": {}
     },
     {
@@ -480,19 +493,6 @@
         "away": 1
       },
       "result": "1",
-      "predictions": {}
-    },
-    {
-      "id": "8354",
-      "date": "2026-06-27T21:00:00+00:00",
-      "homeTeam": "Panama",
-      "awayTeam": "England",
-      "status": "FINISHED",
-      "score": {
-        "home": 0,
-        "away": 2
-      },
-      "result": "2",
       "predictions": {}
     },
     {
@@ -574,6 +574,19 @@
       "predictions": {}
     },
     {
+      "id": "8345",
+      "date": "2026-06-26T02:00:00+00:00",
+      "homeTeam": "Paraguay",
+      "awayTeam": "Australia",
+      "status": "FINISHED",
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "result": "X",
+      "predictions": {}
+    },
+    {
       "id": "8346",
       "date": "2026-06-26T02:00:00+00:00",
       "homeTeam": "Türkiye",
@@ -587,16 +600,16 @@
       "predictions": {}
     },
     {
-      "id": "8345",
-      "date": "2026-06-26T02:00:00+00:00",
-      "homeTeam": "Paraguay",
-      "awayTeam": "Australia",
+      "id": "8344",
+      "date": "2026-06-25T23:00:00+00:00",
+      "homeTeam": "Tunisia",
+      "awayTeam": "Netherlands",
       "status": "FINISHED",
       "score": {
-        "home": 0,
-        "away": 0
+        "home": 1,
+        "away": 3
       },
-      "result": "X",
+      "result": "2",
       "predictions": {}
     },
     {
@@ -613,14 +626,14 @@
       "predictions": {}
     },
     {
-      "id": "8344",
-      "date": "2026-06-25T23:00:00+00:00",
-      "homeTeam": "Tunisia",
-      "awayTeam": "Netherlands",
+      "id": "8341",
+      "date": "2026-06-25T20:00:00+00:00",
+      "homeTeam": "Curaçao",
+      "awayTeam": "Côte d'Ivoire",
       "status": "FINISHED",
       "score": {
-        "home": 1,
-        "away": 3
+        "home": 0,
+        "away": 2
       },
       "result": "2",
       "predictions": {}
@@ -639,14 +652,14 @@
       "predictions": {}
     },
     {
-      "id": "8341",
-      "date": "2026-06-25T20:00:00+00:00",
-      "homeTeam": "Curaçao",
-      "awayTeam": "Côte d'Ivoire",
+      "id": "8340",
+      "date": "2026-06-25T01:00:00+00:00",
+      "homeTeam": "Czechia",
+      "awayTeam": "Mexico",
       "status": "FINISHED",
       "score": {
         "home": 0,
-        "away": 2
+        "away": 3
       },
       "result": "2",
       "predictions": {}
@@ -662,19 +675,6 @@
         "away": 0
       },
       "result": "1",
-      "predictions": {}
-    },
-    {
-      "id": "8340",
-      "date": "2026-06-25T01:00:00+00:00",
-      "homeTeam": "Czechia",
-      "awayTeam": "Mexico",
-      "status": "FINISHED",
-      "score": {
-        "home": 0,
-        "away": 3
-      },
-      "result": "2",
       "predictions": {}
     },
     {
@@ -704,19 +704,6 @@
       "predictions": {}
     },
     {
-      "id": "8335",
-      "date": "2026-06-24T19:00:00+00:00",
-      "homeTeam": "Switzerland",
-      "awayTeam": "Canada",
-      "status": "FINISHED",
-      "score": {
-        "home": 2,
-        "away": 1
-      },
-      "result": "1",
-      "predictions": {}
-    },
-    {
       "id": "8336",
       "date": "2026-06-24T19:00:00+00:00",
       "homeTeam": "Bosnia & Herzegovina",
@@ -724,6 +711,19 @@
       "status": "FINISHED",
       "score": {
         "home": 3,
+        "away": 1
+      },
+      "result": "1",
+      "predictions": {}
+    },
+    {
+      "id": "8335",
+      "date": "2026-06-24T19:00:00+00:00",
+      "homeTeam": "Switzerland",
+      "awayTeam": "Canada",
+      "status": "FINISHED",
+      "score": {
+        "home": 2,
         "away": 1
       },
       "result": "1",

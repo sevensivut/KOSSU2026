@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-04T18:00:54.228Z",
+  "updatedAt": "2026-07-04T18:16:24.077Z",
   "players": [
     "Markus",
     "Juuso",
@@ -1284,12 +1284,12 @@
       "date": "2026-07-04T17:00:00+00:00",
       "homeTeam": "Canada",
       "awayTeam": "Morocco",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
         "home": 0,
-        "away": 0
+        "away": 1
       },
-      "result": "X",
+      "result": "2",
       "predictions": {},
       "weights": {
         "1": 2,

@@ -164,10 +164,10 @@
       "awayTeam": "England",
       "status": "SCHEDULED",
       "score": {
-        "home": null,
-        "away": null
+        "home": 2,
+        "away": 3
       },
-      "result": null,
+      "result": "2",
       "predictions": {}
     },
     {
@@ -522,6 +522,19 @@
       "predictions": {}
     },
     {
+      "id": "8350",
+      "date": "2026-06-27T00:00:00+00:00",
+      "homeTeam": "Uruguay",
+      "awayTeam": "Spain",
+      "status": "FINISHED",
+      "score": {
+        "home": 0,
+        "away": 1
+      },
+      "result": "2",
+      "predictions": {}
+    },
+    {
       "id": "8349",
       "date": "2026-06-27T00:00:00+00:00",
       "homeTeam": "Cabo Verde",
@@ -535,14 +548,14 @@
       "predictions": {}
     },
     {
-      "id": "8350",
-      "date": "2026-06-27T00:00:00+00:00",
-      "homeTeam": "Uruguay",
-      "awayTeam": "Spain",
+      "id": "8347",
+      "date": "2026-06-26T19:00:00+00:00",
+      "homeTeam": "Norway",
+      "awayTeam": "France",
       "status": "FINISHED",
       "score": {
-        "home": 0,
-        "away": 1
+        "home": 1,
+        "away": 4
       },
       "result": "2",
       "predictions": {}
@@ -558,19 +571,6 @@
         "away": 0
       },
       "result": "1",
-      "predictions": {}
-    },
-    {
-      "id": "8347",
-      "date": "2026-06-26T19:00:00+00:00",
-      "homeTeam": "Norway",
-      "awayTeam": "France",
-      "status": "FINISHED",
-      "score": {
-        "home": 1,
-        "away": 4
-      },
-      "result": "2",
       "predictions": {}
     },
     {

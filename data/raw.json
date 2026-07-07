@@ -82,7 +82,7 @@
     {
       "id": "8384",
       "date": "2026-07-10T19:00:00+00:00",
-      "homeTeam": "W93",
+      "homeTeam": "Spain",
       "awayTeam": "W94",
       "status": "SCHEDULED",
       "score": {
@@ -138,10 +138,10 @@
       "awayTeam": "Belgium",
       "status": "SCHEDULED",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {}
     },
     {
@@ -149,7 +149,7 @@
       "date": "2026-07-06T19:00:00+00:00",
       "homeTeam": "Portugal",
       "awayTeam": "Spain",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "score": {
         "home": 0,
         "away": 1

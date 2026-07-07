@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-06T22:51:16.508Z",
+  "updatedAt": "2026-07-07T00:01:11.610Z",
   "players": [
     "Markus",
     "Juuso",
@@ -562,7 +562,7 @@
     {
       "id": "8384",
       "date": "2026-07-10T19:00:00+00:00",
-      "homeTeam": "W93",
+      "homeTeam": "Spain",
       "awayTeam": "W94",
       "status": "SCHEDULED",
       "score": {
@@ -886,10 +886,10 @@
       "awayTeam": "Belgium",
       "status": "SCHEDULED",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {},
       "weights": {
         "1": 2,
@@ -964,7 +964,7 @@
       "date": "2026-07-06T19:00:00+00:00",
       "homeTeam": "Portugal",
       "awayTeam": "Spain",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "score": {
         "home": 0,
         "away": 1

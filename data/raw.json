@@ -84,12 +84,12 @@
       "date": "2026-07-10T19:00:00+00:00",
       "homeTeam": "Spain",
       "awayTeam": "Belgium",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "score": {
-        "home": null,
-        "away": null
+        "home": 2,
+        "away": 1
       },
-      "result": null,
+      "result": "1",
       "predictions": {}
     },
     {
@@ -418,19 +418,6 @@
       "predictions": {}
     },
     {
-      "id": "8357",
-      "date": "2026-06-28T02:00:00+00:00",
-      "homeTeam": "Algeria",
-      "awayTeam": "Austria",
-      "status": "FINISHED",
-      "score": {
-        "home": 3,
-        "away": 3
-      },
-      "result": "X",
-      "predictions": {}
-    },
-    {
       "id": "8358",
       "date": "2026-06-28T02:00:00+00:00",
       "homeTeam": "Jordan",
@@ -441,6 +428,19 @@
         "away": 3
       },
       "result": "2",
+      "predictions": {}
+    },
+    {
+      "id": "8357",
+      "date": "2026-06-28T02:00:00+00:00",
+      "homeTeam": "Algeria",
+      "awayTeam": "Austria",
+      "status": "FINISHED",
+      "score": {
+        "home": 3,
+        "away": 3
+      },
+      "result": "X",
       "predictions": {}
     },
     {
@@ -574,19 +574,6 @@
       "predictions": {}
     },
     {
-      "id": "8346",
-      "date": "2026-06-26T02:00:00+00:00",
-      "homeTeam": "Türkiye",
-      "awayTeam": "USA",
-      "status": "FINISHED",
-      "score": {
-        "home": 3,
-        "away": 2
-      },
-      "result": "1",
-      "predictions": {}
-    },
-    {
       "id": "8345",
       "date": "2026-06-26T02:00:00+00:00",
       "homeTeam": "Paraguay",
@@ -597,6 +584,19 @@
         "away": 0
       },
       "result": "X",
+      "predictions": {}
+    },
+    {
+      "id": "8346",
+      "date": "2026-06-26T02:00:00+00:00",
+      "homeTeam": "Türkiye",
+      "awayTeam": "USA",
+      "status": "FINISHED",
+      "score": {
+        "home": 3,
+        "away": 2
+      },
+      "result": "1",
       "predictions": {}
     },
     {
@@ -626,19 +626,6 @@
       "predictions": {}
     },
     {
-      "id": "8341",
-      "date": "2026-06-25T20:00:00+00:00",
-      "homeTeam": "Curaçao",
-      "awayTeam": "Côte d'Ivoire",
-      "status": "FINISHED",
-      "score": {
-        "home": 0,
-        "away": 2
-      },
-      "result": "2",
-      "predictions": {}
-    },
-    {
       "id": "8342",
       "date": "2026-06-25T20:00:00+00:00",
       "homeTeam": "Ecuador",
@@ -649,6 +636,19 @@
         "away": 1
       },
       "result": "1",
+      "predictions": {}
+    },
+    {
+      "id": "8341",
+      "date": "2026-06-25T20:00:00+00:00",
+      "homeTeam": "Curaçao",
+      "awayTeam": "Côte d'Ivoire",
+      "status": "FINISHED",
+      "score": {
+        "home": 0,
+        "away": 2
+      },
+      "result": "2",
       "predictions": {}
     },
     {
@@ -678,19 +678,6 @@
       "predictions": {}
     },
     {
-      "id": "8337",
-      "date": "2026-06-24T22:00:00+00:00",
-      "homeTeam": "Morocco",
-      "awayTeam": "Haiti",
-      "status": "FINISHED",
-      "score": {
-        "home": 4,
-        "away": 2
-      },
-      "result": "1",
-      "predictions": {}
-    },
-    {
       "id": "8338",
       "date": "2026-06-24T22:00:00+00:00",
       "homeTeam": "Scotland",
@@ -704,14 +691,14 @@
       "predictions": {}
     },
     {
-      "id": "8336",
-      "date": "2026-06-24T19:00:00+00:00",
-      "homeTeam": "Bosnia & Herzegovina",
-      "awayTeam": "Qatar",
+      "id": "8337",
+      "date": "2026-06-24T22:00:00+00:00",
+      "homeTeam": "Morocco",
+      "awayTeam": "Haiti",
       "status": "FINISHED",
       "score": {
-        "home": 3,
-        "away": 1
+        "home": 4,
+        "away": 2
       },
       "result": "1",
       "predictions": {}
@@ -724,6 +711,19 @@
       "status": "FINISHED",
       "score": {
         "home": 2,
+        "away": 1
+      },
+      "result": "1",
+      "predictions": {}
+    },
+    {
+      "id": "8336",
+      "date": "2026-06-24T19:00:00+00:00",
+      "homeTeam": "Bosnia & Herzegovina",
+      "awayTeam": "Qatar",
+      "status": "FINISHED",
+      "score": {
+        "home": 3,
         "away": 1
       },
       "result": "1",

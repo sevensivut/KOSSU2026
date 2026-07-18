@@ -21,8 +21,8 @@
       "awayTeam": "England",
       "status": "IN_PLAY",
       "score": {
-        "home": 0,
-        "away": 2
+        "home": 3,
+        "away": 4
       },
       "result": "2",
       "predictions": {}

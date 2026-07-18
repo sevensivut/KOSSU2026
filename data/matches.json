@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-18T21:33:47.949Z",
+  "updatedAt": "2026-07-18T22:31:34.723Z",
   "players": [
     "Markus",
     "Juuso",
@@ -166,8 +166,8 @@
       "awayTeam": "England",
       "status": "IN_PLAY",
       "score": {
-        "home": 0,
-        "away": 2
+        "home": 3,
+        "away": 4
       },
       "result": "2",
       "predictions": {},

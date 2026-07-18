@@ -19,10 +19,10 @@
       "date": "2026-07-18T21:00:00+00:00",
       "homeTeam": "France",
       "awayTeam": "England",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "score": {
-        "home": 3,
-        "away": 4
+        "home": 4,
+        "away": 6
       },
       "result": "2",
       "predictions": {}

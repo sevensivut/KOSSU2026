@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-19T18:38:08.946Z",
+  "updatedAt": "2026-07-19T19:51:52.019Z",
   "players": [
     "Markus",
     "Juuso",
@@ -84,12 +84,12 @@
       "date": "2026-07-19T19:00:00+00:00",
       "homeTeam": "Spain",
       "awayTeam": "Argentina",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {},
       "weights": {
         "1": 2,

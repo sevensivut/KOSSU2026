@@ -6,12 +6,12 @@
       "date": "2026-07-19T19:00:00+00:00",
       "homeTeam": "Spain",
       "awayTeam": "Argentina",
-      "status": "SCHEDULED",
+      "status": "IN_PLAY",
       "score": {
-        "home": null,
-        "away": null
+        "home": 0,
+        "away": 0
       },
-      "result": null,
+      "result": "X",
       "predictions": {}
     },
     {
